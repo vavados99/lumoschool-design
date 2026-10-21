@@ -1,0 +1,394 @@
+/* Стили Люмо, вырезаны из globals-старый.css: строки 472-780, 895-935, 1560-1600. Цветовые переменные (--cyan, --lumo-cyan и т.п.) — в начале globals-старый.css */
+.lumo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lumo-body {
+  position: relative;
+  width: var(--lumo-w, 200px);
+  height: calc(var(--lumo-w, 200px) * 1.1);
+  border-radius: 50% 50% 47% 47% / 55% 55% 47% 47%;
+  background:
+    radial-gradient(58% 46% at 36% 24%, rgba(255, 255, 255, 0.95), rgba(224, 246, 255, 0.35) 38%, transparent 62%),
+    linear-gradient(158deg, #6fe0ff 0%, #67c6ff 40%, #b98bff 78%, #c86bff 100%);
+  box-shadow:
+    inset 0 -22px 36px rgba(200, 107, 255, 0.4),
+    inset 0 16px 28px rgba(255, 255, 255, 0.55),
+    inset 14px 0 26px rgba(120, 190, 255, 0.3),
+    0 0 60px rgba(79, 216, 255, 0.5),
+    0 24px 44px -12px rgba(20, 24, 61, 0.28);
+  animation: lumo-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Премиальный «мокрый» блик сверху — стилизует стеклянную каплю */
+.lumo-gloss {
+  position: absolute;
+  top: 6%;
+  left: 18%;
+  width: 46%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
+  filter: blur(2px);
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+
+/* Мягкие щёчки-румянец — добавляют «детскости» и живости */
+.lumo-cheek {
+  position: absolute;
+  top: 52%;
+  width: 13%;
+  height: 8%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 120, 170, 0.5), rgba(255, 120, 170, 0) 72%);
+  pointer-events: none;
+}
+.lumo-cheek.l { left: 21%; }
+.lumo-cheek.r { left: 66%; }
+
+/* дыхание внешнего контура — «аура» */
+.lumo-body::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--lumo-w, 200px) * -0.09);
+  border-radius: inherit;
+  border: 1px solid rgba(217, 240, 255, 0.25);
+  animation: lumo-breathe 3.5s ease-in-out infinite;
+}
+
+/* глаза — овалы тёмного стекла с белой искрой; следят за курсором через --ex/--ey */
+.lumo-eye {
+  position: absolute;
+  width: 16.5%;
+  height: 22%;
+  top: 33%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #ffffff 0%, #7fd4f2 18%, #1b3a5c 52%, #10203a 100%);
+  box-shadow: 0 0 9px rgba(217, 240, 255, 0.6), inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+  transform: translate(var(--ex, 0px), var(--ey, 0px)) scaleY(1);
+  transition: transform 120ms ease-out;
+}
+.lumo-eye::after {
+  content: '';
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  top: 12%;
+  left: 14%;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0.98;
+}
+.lumo-eye.l { left: 29%; }
+.lumo-eye.r { left: 54.5%; }
+
+.lumo-blink .lumo-eye {
+  transform: translate(var(--ex, 0px), var(--ey, 0px)) scaleY(0.12);
+  transition: transform 90ms ease-out;
+}
+
+.lumo-smile {
+  position: absolute;
+  width: 30%;
+  height: 15%;
+  left: 35%;
+  top: 58%;
+  border-bottom: 3.5px solid rgba(10, 15, 28, 0.6);
+  border-radius: 0 0 60% 60% / 0 0 100% 100%;
+}
+
+/* искры вокруг Люмо */
+.lumo-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lumo-cyan);
+  box-shadow: 0 0 10px 2px rgba(79, 216, 255, 0.8);
+  animation: lumo-spark 2.6s ease-in-out infinite;
+}
+
+/* ============================================================
+   Пилот «2.5D-слои» (2026-08-02): тело/глаза/улыбка — премиум PNG
+   вместо CSS-градиентов, но на тех же классах-крючках (.lumo-eye/
+   .lumo-smile), поэтому вся JS-анимация (--ex/--ey, blink/wink/
+   nudge/swoosh/cheer) продолжает работать без изменений. Новые
+   классы только гасят унаследованный фон/тени/бордер CSS-версии и
+   задают object-fit — позиция/размер по-прежнему приходят от
+   .lumo-eye/.lumo-smile/.lumo-body.
+   ============================================================ */
+/* Ревизия Кодекса (пилот 2026-08-02): .lumo-body несёт СВОЙ градиентный
+   фон+тени («капля» на чистом CSS) — без этого модификатора старый фон
+   и inset-тени проступали бы сквозь прозрачные края PNG-тела, давая
+   «двойное тело». Затрагивает ТОЛЬКО .lumo-body--premium, дефолтный
+   .lumo-body (без premiumLayers) не тронут. */
+.lumo-body--premium {
+  background: none;
+  box-shadow: none;
+}
+
+.lumo-body-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.lumo-eye-img {
+  background: none;
+  box-shadow: none;
+  object-fit: contain;
+  pointer-events: none;
+}
+/* Искра-блик уже нарисована внутри картинки глаза — гасим CSS-искру,
+   чтобы не дублировать её поверх готового арта (::after на <img> к
+   тому же не гарантированно рендерится браузерами — гасим явно). */
+.lumo-eye-img::after {
+  content: none;
+}
+
+.lumo-smile-img {
+  border-bottom: none;
+  border-radius: 0;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* слот под будущий арт из генераций */
+.lumo-art {
+  width: var(--lumo-w, 200px);
+  height: auto;
+  animation: lumo-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Люмо в герое: на телефоне компактнее, чтобы заголовок был виден сразу */
+@media (max-width: 1023px) {
+  .lumo--hero {
+    --lumo-w: 148px !important;
+  }
+}
+
+/* пузырь-реплика Люмо */
+.lumo-bubble {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 16px 16px 16px 4px;
+  background: #FFFFFF;
+  border: 1px solid var(--edge);
+  box-shadow: 0 8px 20px -8px rgba(20, 24, 61, 0.18);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  max-width: 34ch;
+}
+.lumo-bubble--in {
+  animation: bubble-in 240ms ease-out both;
+}
+/* пузырь «засыпает» через несколько секунд, чтобы не перекрывать контент;
+   animation: none — иначе удержание кадра bubble-in перебивает затухание */
+.lumo-bubble--sleep {
+  animation: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 280ms ease-out, transform 280ms ease-out;
+  pointer-events: none;
+}
+
+@keyframes lumo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes lumo-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+@keyframes lumo-spark {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Люмо — живое тело, доработка (2026-07-08). Всё новое — только
+   transform/opacity/filter, короткие one-shot анимации через смену
+   класса (не бесконечные), совместимо с уже существующими
+   lumo-float/lumo-breathe/lumo-blink на .lumo-body. Полностью
+   отключается в prefers-reduced-motion (см. общий блок ниже).
+   ============================================================ */
+
+/* Простой (idle): лёгкое любопытное покачивание корпуса — независимо
+   от дыхания/парения внутреннего тела, крутится сам .lumo-обёртка,
+   поэтому анимации не конфликтуют (разные элементы = разные transform). */
+.lumo {
+  animation: lumo-sway 8.5s ease-in-out infinite;
+  transform-origin: 50% 88%;
+}
+@keyframes lumo-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.3deg); }
+}
+
+/* Подмигивание правым глазом — реакция на наведение/тап по самому Люмо */
+.lumo-wink .lumo-eye.r {
+  transform: translate(var(--ex, 0px), var(--ey, 0px)) scaleY(0.12);
+  transition: transform 90ms ease-out;
+}
+
+/* Лёгкий «нырок навстречу» при наведении/тапе — Люмо заметил тебя.
+   Селектор точечно переопределяет animation на .lumo-body, поэтому на
+   время нырка временно замещает lumo-float/lumo-breathe, а не спорит с ними. */
+.lumo-nudge .lumo-body {
+  animation: lumo-nudge 260ms cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+@keyframes lumo-nudge {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.045); }
+  100% { transform: scale(1); }
+}
+
+/* Быстрая прокрутка — материал слегка «сносит», как ткань под ветром.
+   Тоже точечная подмена animation на время one-shot эффекта. */
+.lumo-swoosh .lumo-body {
+  animation: lumo-swoosh 220ms ease-out 1;
+}
+@keyframes lumo-swoosh {
+  0% { transform: translateY(0) scaleX(1) scaleY(1); }
+  50% { transform: translateY(2px) scaleX(0.94) scaleY(1.06); }
+  100% { transform: translateY(0) scaleX(1) scaleY(1); }
+}
+
+/* Ритуал успеха — праздничный «хоп» + широкая улыбка + искры-салют.
+   Редко и метко: включается ТОЛЬКО на крупных вехах (см. LumoSpirit.tsx),
+   не на каждый мелкий верный ответ — иначе обесценится. */
+.lumo-cheer .lumo-body {
+  animation: lumo-hop 620ms cubic-bezier(0.22, 1, 0.36, 1) 1;
+}
+@keyframes lumo-hop {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-20px) scale(1.06); }
+  55%  { transform: translateY(-4px) scale(0.97); }
+  78%  { transform: translateY(-9px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+.lumo-cheer .lumo-smile {
+  animation: lumo-smile-wide 620ms ease-out 1;
+}
+@keyframes lumo-smile-wide {
+  0%, 100% { transform: scaleX(1) scaleY(1); }
+  40% { transform: scaleX(1.25) scaleY(1.4); }
+}
+.lumo-cheer-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber, #FFB800);
+  box-shadow: 0 0 10px 2px rgba(255, 184, 0, 0.7);
+  animation: lumo-cheer-spark-fly 700ms ease-out both;
+  pointer-events: none;
+}
+@keyframes lumo-cheer-spark-fly {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--sx, 0px), var(--sy, -30px)) scale(1); }
+}
+
+/* --- Живые кромки стекла: блик пробегает по карточке при наведении --- */
+.glass-live {
+  overflow: hidden;
+}
+
+.lumo-companion {
+  display: none;
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 40;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 240ms ease-out, transform 240ms ease-out;
+}
+@media (min-width: 1024px) {
+  .lumo-companion {
+    display: flex;
+  }
+}
+/* Пузырь спутника плывёт над контентом — фон непрозрачный белый, чтобы текст читался чётко
+   поверх любой секции под ним (было плотное тёмное пятно — держалось на чёрной сцене) */
+.lumo-companion .lumo-bubble {
+  background: #FFFFFF;
+  border-color: var(--edge);
+  box-shadow: 0 14px 32px -10px rgba(20, 24, 61, 0.28);
+}
+/* Инлайн-реплика секции: на широких экранах её говорит спутник — прячем дубль */
+@media (min-width: 1024px) {
+  .lumo-bubble--inline {
+    display: none;
+  }
+}
+.lumo-companion--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Панорама города (связка «Город = живой прогресс», docs/research/прорывы-синтез.md
+   часть 4 п.1): силуэты зданий-«стекла» + окна-уроки. Анонимная витринная панорама
+   (CityProgress) убрана с главной страницы 2026-07-08 (план чистки витрины) — классы
+   остаются в деле в кабинете ребёнка (JourneyPath — личный мини-город). --- */
+.city-tower {
+
+  animation-duration: 14s;
+}
+
+/* Летящие награды-реакции: сердечко/угощение/звёздочка/Z над Люмо. */
+.lumo-play-float {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  margin-left: -15px;
+  pointer-events: none;
+  animation: lumo-play-fly 1.5s ease-out both;
+}
+@keyframes lumo-play-fly {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.5) rotate(-12deg); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--fx, 0px), -130px) scale(1.5) rotate(10deg); }
+}
+.lumo-play-zzz {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--cyan);
+  text-shadow: 0 2px 10px rgba(20, 24, 61, 0.15);
+}
+
+/* Реплика-праздник над сценой — честная фраза персонажа, без выдуманных
+   очков: дофамин даёт живой Люмо, а не фейковый счётчик. */
+.lumo-play-toast {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--ink);
+  border: 1px solid var(--edge);
+  box-shadow: 0 10px 24px -10px rgba(20, 24, 61, 0.25);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: lumo-play-toast-in 240ms ease-out both;
+}
+@keyframes lumo-play-toast-in {

@@ -1,0 +1,71 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><title>LUMOSCHOOL · 1 Призма</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Onest:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0B0A2E}
+body{width:1512px;font-family:'Onest',sans-serif;color:#fff}
+.hero{position:relative;width:1512px;height:830px;overflow:hidden;background:radial-gradient(1100px 720px at 40% 52%,#1E1880 0%,#120E52 46%,#07061F 100%)}
+svg{position:absolute;left:0;top:0}
+.bar{position:absolute;left:56px;right:56px;top:34px;display:flex;align-items:center;justify-content:space-between;z-index:3;font-size:15px}
+.logo{font-family:'Unbounded';font-weight:600;letter-spacing:.08em;font-size:18px}
+nav{display:flex;gap:34px;color:#CFCDFB}
+.cta{background:#fff;color:#0B0A2E;border-radius:99px;padding:12px 22px;font-weight:800}
+.lead{position:absolute;left:56px;top:466px;z-index:3;font:500 18px 'Onest';color:#DAD8FF;max-width:440px;line-height:1.4}
+h1{position:absolute;left:56px;top:548px;font-family:'Unbounded';font-weight:600;font-size:80px;line-height:1.03;letter-spacing:-.035em;z-index:3}
+h1 em{font-style:normal;background:linear-gradient(90deg,#FFE14D,#FF9A2E,#FF4D5E,#9B6BFF,#4B86FF,#1FE6B5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{position:absolute;left:56px;top:742px;z-index:3;background:#FFE14D;color:#0B0A2E;font:800 18px 'Onest';border-radius:99px;padding:16px 30px}
+.mono{position:absolute;font:500 14px 'JetBrains Mono';letter-spacing:.12em;color:#B9B6FF;z-index:3}
+</style></head><body>
+<section class="hero">
+<svg id="s" width="1512" height="830" viewBox="0 0 1512 830"></svg>
+<div class="bar"><div class="logo">LUMOSCHOOL</div><nav><span>Уроки</span><span>Для дітей</span><span>Для дорослих</span><span>Ціни</span></nav><div class="cta">Пробний урок</div></div>
+<div class="mono" style="left:56px;top:96px">ОДИН ПРОМІНЬ · ШІСТЬ МОВ</div>
+<div class="lead">Школа англійської для тих, хто вдома і за кордоном. Живі уроки в малих групах.</div>
+<h1>Англійська —<br><em>це світло.</em></h1>
+<div class="btn">Увімкнути перший урок →</div>
+<div class="mono" style="left:960px;top:790px;width:510px;text-align:right;white-space:nowrap">ТОРКНИСЬ ПРОМЕНЯ — ЗМІНИТЬСЯ МОВА САЙТУ</div>
+</section>
+<section id="strip"></section>
+<script src="../shared/weather.js"></script>
+<script>
+const rays=[
+ {n:'Čeština',c:'#A77BFF',t:'#C4A8FF',y:250},{n:'English',c:'#5B92FF',t:'#8DB4FF',y:350},{n:'Русский',c:'#2CF0BE',t:'#7FF7D6',y:450},
+ {n:'Українська',c:'#FFE14D',t:'#FFE14D',y:550,a:1},{n:'Deutsch',c:'#FF9A2E',t:'#FFBE7A',y:650},{n:'Polski',c:'#FF4D5E',t:'#FF8E99',y:750}];
+const ox=826,oy=430,X=1512;
+let g='',poly='',lab='',dust='';
+rays.forEach((r,i)=>{
+ const w=r.a?24:13;
+ g+=`<linearGradient id="rg${i}" gradientUnits="userSpaceOnUse" x1="${ox}" y1="${oy}" x2="${X}" y2="${r.y}"><stop offset="0" stop-color="${r.c}" stop-opacity="0"/><stop offset=".16" stop-color="${r.c}" stop-opacity=".95"/><stop offset="1" stop-color="${r.c}" stop-opacity="${r.a?1:.72}"/></linearGradient>`;
+ poly+=`<polygon points="${ox},${oy-3} ${X+40},${r.y-w*1.6} ${X+40},${r.y+w*1.6} ${ox},${oy+3}" fill="url(#rg${i})" filter="url(#b12)" style="mix-blend-mode:screen" opacity=".85"/>`;
+ poly+=`<polygon points="${ox},${oy-1.5} ${X+40},${r.y-w/2.4} ${X+40},${r.y+w/2.4} ${ox},${oy+1.5}" fill="url(#rg${i})" style="mix-blend-mode:screen"/>`;
+ lab+=`<text ${r.a?'id="actlab" ':''}x="1470" y="${r.y-(r.a?30:24)}" text-anchor="end" font-family="Unbounded" font-weight="${r.a?700:500}" font-size="${r.a?42:28}" fill="${r.t}" stroke="#0B0A2E" stroke-width="14" paint-order="stroke" stroke-linejoin="round">${r.n}</text>`;
+});
+let s=1337; const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647};
+for(let i=0;i<90;i++){const x=rnd()*590,y=400+(rnd()-.5)*70*(x/590+.2);dust+=`<circle cx="${x}" cy="${y}" r="${.6+rnd()*1.8}" fill="#fff" opacity="${.25+rnd()*.6}"/>`}
+for(let i=0;i<60;i++){const x=900+rnd()*560,y=120+rnd()*600;dust+=`<circle cx="${x}" cy="${y}" r="${.5+rnd()*1.3}" fill="#fff" opacity="${.12+rnd()*.3}"/>`}
+document.getElementById('s').innerHTML=`<defs>
+<filter id="b12" x="-10%" y="-60%" width="120%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+<filter id="b6"><feGaussianBlur stdDeviation="6"/></filter><filter id="b30" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="30"/></filter>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".34"/><stop offset=".5" stop-color="#A79CFF" stop-opacity=".10"/><stop offset="1" stop-color="#fff" stop-opacity=".24"/></linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#8F86FF"/><stop offset="1" stop-color="#fff"/></linearGradient>
+<linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".5" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff"/></linearGradient>
+<radialGradient id="flare"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+${g}</defs>
+<ellipse cx="700" cy="400" rx="520" ry="150" transform="rotate(-14 700 400)" fill="none" stroke="#fff" stroke-opacity=".07"/>
+<ellipse cx="700" cy="400" rx="380" ry="260" transform="rotate(18 700 400)" fill="none" stroke="#fff" stroke-opacity=".05"/>
+<circle cx="700" cy="400" r="260" fill="#5C45FF" opacity=".28" filter="url(#b30)"/>
+<polygon points="0,395 591,399 591,401 0,405" fill="url(#beam)" filter="url(#b6)" opacity=".9"/>
+<polygon points="0,398.5 591,399.5 591,400.5 0,401.5" fill="#fff"/>
+${dust}
+${poly}
+<polygon points="700,210 540,490 860,490" fill="url(#glass)" stroke="url(#edge)" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="700,210 640,490 760,490" fill="#fff" opacity=".06"/>
+<polyline points="591,400 826,430" stroke="#fff" stroke-width="5" opacity=".9" filter="url(#b6)"/>
+<polyline points="591,400 826,430" stroke="#fff" stroke-width="2"/>
+<circle cx="591" cy="400" r="70" fill="url(#flare)" opacity=".8"/>
+<circle cx="826" cy="430" r="110" fill="url(#flare)"/>
+<polyline points="700,210 540,490 860,490 700,210" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/>
+${lab}`;
+document.fonts.ready.then(()=>{const bb=document.getElementById('actlab').getBBox(),cy=bb.y+bb.height/2;document.getElementById('s').insertAdjacentHTML('beforeend',`<circle cx="${bb.x-34}" cy="${cy}" r="10" fill="#FFE14D"/><circle cx="${bb.x-34}" cy="${cy}" r="20" fill="none" stroke="#FFE14D" stroke-width="2" opacity=".7"/>`)});
+weatherStrip(document.getElementById('strip'),{bg:'#0B0A2E',card:'#17136A',fg:'#fff',accent:'#FFE14D',accent2:'#1FE6B5',font:'Unbounded',btnfg:'#0B0A2E',sig:k=>`<div style="position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg,#A77BFF,#5B92FF,#2CF0BE,#FFE14D,#FF9A2E,#FF4D5E)"></div>`});
+</script></body></html>

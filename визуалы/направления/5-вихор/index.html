@@ -1,0 +1,46 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><title>LUMOSCHOOL · 5 Вихор</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,700;1,900&family=Onest:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#1530FF}
+body{width:1512px;font-family:'Onest',sans-serif;color:#fff}
+.hero{position:relative;width:1512px;height:830px;overflow:hidden;background:radial-gradient(900px 700px at 50% 50%,#3A58FF 0%,#1530FF 50%,#0A18B8 100%)}
+.w{position:absolute;white-space:nowrap;line-height:1;transform:translate(-50%,-50%)}
+.disc{position:absolute;left:756px;top:415px;width:400px;height:400px;margin:-200px 0 0 -200px;border-radius:50%;background:#0A0A14;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 0 0 10px rgba(255,255,255,.14),0 0 120px 30px rgba(10,10,40,.6)}
+.disc small{font:600 16px 'Unbounded';letter-spacing:.22em;color:#C8FF2E}
+.disc h1{font:italic 900 50px/1.02 'Playfair Display';margin:16px 0 22px;letter-spacing:-.01em}
+.disc a{background:#C8FF2E;color:#0A0A14;font:800 17px 'Onest';border-radius:99px;padding:14px 26px}
+.bar{position:absolute;left:56px;right:56px;top:32px;display:flex;justify-content:space-between;align-items:center;z-index:6;font:700 15px 'Onest'}
+.logo{font:600 18px 'Unbounded';letter-spacing:.08em}
+.cap{position:absolute;left:56px;bottom:30px;font:500 14px 'JetBrains Mono';letter-spacing:.14em;z-index:6;background:#0A0A14;padding:8px 12px}
+</style></head><body>
+<section class="hero" id="h">
+<div class="bar"><div class="logo">LUMOSCHOOL</div><div style="display:flex;gap:30px;background:#0A0A14;padding:10px 22px;border-radius:99px"><span>Уроки</span><span>Діти</span><span>Дорослі</span><span>Ціни</span><span style="color:#C8FF2E">UA ▾</span></div></div>
+<div class="disc"><small>LUMOSCHOOL</small><h1>Увійди<br>в розмову</h1><a>Пробний урок →</a></div>
+<div class="cap">ТОРКНИСЬ СЛОВА — ЗМІНИТЬСЯ МОВА САЙТУ</div>
+</section>
+<section id="strip"></section>
+<script src="../shared/weather.js"></script>
+<script>
+const L={UA:['Привіт','Дякую','Як справи?','Говори','Ще раз','Чудово'],PL:['Cześć','Dziękuję','Jak się masz?','Mów','Jeszcze raz','Świetnie'],EN:['Hello','Thank you','How are you?','Speak','Once more','Great'],DE:['Hallo','Danke',"Wie geht's?",'Sprich','Nochmal','Super'],CS:['Ahoj','Děkuji','Jak se máš?','Mluv','Ještě jednou','Skvělé'],RU:['Привет','Спасибо','Как дела?','Говори','Ещё раз','Отлично']};
+const order=['UA','PL','EN','DE','CS','RU'],col={UA:'#C8FF2E',PL:'#FF6B4A',EN:'#FFFFFF',DE:'#FF9BD5',CS:'#5CF2FF',RU:'#C7A6FF'};
+const h=document.getElementById('h'),cx=756,cy=415;
+const placed=[];
+function hit(a,b){return a.x1<b.x2+16&&a.x2>b.x1-16&&a.y1<b.y2+12&&a.y2>b.y1-12}
+for(let i=0;i<300;i++){
+ const lang=order[i%6],ph=L[lang][Math.floor(i/6)%6];
+ const ang=i*0.58, r=255+i*5.2+i*i*0.045;
+ const x=cx+Math.cos(ang)*r*1.18, y=cy+Math.sin(ang)*r*0.86;
+ let fs=Math.min(250,24+(r-255)*0.1); if(lang==='RU')fs*=0.82;
+ const serif=i%3===0, w=fs*ph.length*(serif?0.5:0.68);
+ const bx={x1:x-w/2,x2:x+w/2,y1:y-fs/2,y2:y+fs/2};
+ if(bx.y1<92||bx.y2>800||bx.x2<-40||bx.x1>1552) continue;
+ if(bx.x1<470&&bx.y2>760) continue;
+ const dx=Math.max(0,Math.abs(x-cx)-w/2),dy=Math.max(0,Math.abs(y-cy)-fs/2); if(Math.hypot(dx,dy)<222) continue;
+ if(placed.some(q=>hit(q,bx))) continue; placed.push(bx);
+ const el=document.createElement('div');el.className='w';
+ el.style.cssText=`left:${x}px;top:${y}px;font:${serif?'italic 900':'600'} ${fs}px '${serif?'Playfair Display':'Unbounded'}';color:${col[lang]};opacity:${lang==='UA'?1:lang==='RU'?.7:.9};transform:translate(-50%,-50%) rotate(${Math.sin(ang*1.3)*9}deg);z-index:${Math.round(10-fs/30)}`;
+ el.textContent=ph;h.appendChild(el);
+}
+weatherStrip(document.getElementById('strip'),{bg:'#1530FF',card:'#2748FF',fg:'#fff',accent:'#C8FF2E',accent2:'#FF6B4A',font:'Unbounded',btnfg:'#0A0A14',sig:k=>`<div style="position:absolute;right:16px;bottom:8px;font:italic 900 40px 'Playfair Display';color:#C8FF2E;transform:rotate(-6deg)">${k==='kids'?'Привіт':k==='teens'?'Cześć':'Hello'}</div>`});
+</script></body></html>

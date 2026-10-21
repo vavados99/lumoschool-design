@@ -1,0 +1,201 @@
+[
+ {
+  "n": 1,
+  "name": "speak",
+  "url": "https://www.speak.com",
+  "status": 200,
+  "title": "Speak - The language learning app that gets you speaking",
+  "ok": true,
+  "sec": 20.9
+ },
+ {
+  "n": 2,
+  "name": "duolingo",
+  "url": "https://www.duolingo.com",
+  "status": 200,
+  "title": "Duolingo - The world’s most popular way to learn",
+  "ok": true,
+  "sec": 18.8
+ },
+ {
+  "n": 3,
+  "name": "preply",
+  "url": "https://preply.com/en",
+  "status": 200,
+  "title": "Preply: Learn with the best online language tutors on app & web",
+  "ok": true,
+  "sec": 10.6
+ },
+ {
+  "n": 4,
+  "name": "lingoda",
+  "url": "https://www.lingoda.com/en",
+  "status": 200,
+  "title": "Live Online Language Classes with Certified Teachers – Save 15% + Free Trial | Lingoda",
+  "ok": true,
+  "sec": 7.7
+ },
+ {
+  "n": 5,
+  "name": "babbel",
+  "url": "https://www.babbel.com",
+  "status": 200,
+  "title": "Learn a Language Online - Fast & Effective | Babbel",
+  "ok": true,
+  "sec": 7.4
+ },
+ {
+  "n": 6,
+  "name": "praktika",
+  "url": "https://praktika.ai",
+  "status": 200,
+  "title": "Praktika - Learn and speak new languages with AI tutors",
+  "ok": true,
+  "sec": 7.2
+ },
+ {
+  "n": 7,
+  "name": "italki",
+  "url": "https://www.italki.com/en",
+  "status": 200,
+  "title": "🌐 italki - Best Language Learning with Certified Tutors & Group Courses",
+  "ok": true,
+  "sec": 19.2
+ },
+ {
+  "n": 8,
+  "name": "brilliant",
+  "url": "https://brilliant.org",
+  "status": 200,
+  "title": "Brilliant | Your Personal Tutor for Math and Coding",
+  "ok": true,
+  "sec": 14.3
+ },
+ {
+  "n": 9,
+  "name": "whyzero",
+  "url": "https://why.zero.university",
+  "status": 200,
+  "title": "Zero — Human Infrastructure to Get Hired",
+  "ok": true,
+  "sec": 27.7
+ },
+ {
+  "n": 10,
+  "name": "sit-campus",
+  "url": "https://www.singaporetech.edu.sg/openhouse/virtual-campus-tour",
+  "status": 200,
+  "title": "",
+  "ok": true,
+  "sec": 5.6
+ },
+ {
+  "n": 11,
+  "name": "westbourne",
+  "url": "https://www.westbournegrammar.com",
+  "status": 200,
+  "title": "Westbourne Grammar",
+  "ok": true,
+  "sec": 97.7
+ },
+ {
+  "n": 12,
+  "name": "awwwards-masterclass",
+  "url": "https://awwwards.com/masterclasses",
+  "status": 404,
+  "title": "Error 404 (Not Found)",
+  "ok": true,
+  "sec": 14.9
+ },
+ {
+  "n": 13,
+  "name": "linear",
+  "url": "https://linear.app",
+  "status": 200,
+  "title": "Linear – The system for product development",
+  "ok": true,
+  "sec": 12.0
+ },
+ {
+  "n": 14,
+  "name": "stripe",
+  "url": "https://stripe.com",
+  "status": 200,
+  "title": "Stripe | Financial Infrastructure to Grow Your Revenue",
+  "ok": true,
+  "sec": 17.5
+ },
+ {
+  "n": 15,
+  "name": "cal",
+  "url": "https://cal.com",
+  "status": 200,
+  "title": "Cal.com | Scheduling Software for Online Bookings",
+  "ok": true,
+  "sec": 7.2
+ },
+ {
+  "n": 16,
+  "name": "raycast",
+  "url": "https://www.raycast.com",
+  "status": 200,
+  "title": "Raycast - Your shortcut to everything",
+  "ok": false,
+  "error": "Page.screenshot: Timeout 30000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n",
+  "sec": 79.4
+ },
+ {
+  "n": 17,
+  "name": "tldraw",
+  "url": "https://tldraw.com",
+  "status": 200,
+  "title": "tldraw • very good free whiteboard",
+  "ok": true,
+  "sec": 13.1
+ },
+ {
+  "n": 18,
+  "name": "notion",
+  "url": "https://www.notion.com",
+  "status": 200,
+  "title": "The AI workspace that works for you. | Notion",
+  "ok": true,
+  "sec": 8.6
+ },
+ {
+  "n": 19,
+  "name": "masterclass",
+  "url": "https://www.masterclass.com",
+  "status": 200,
+  "title": "MasterClass Online Classes",
+  "ok": true,
+  "sec": 12.7
+ },
+ {
+  "n": 20,
+  "name": "busuu",
+  "url": "https://www.busuu.com/en",
+  "status": 403,
+  "title": "",
+  "ok": true,
+  "sec": 4.9
+ },
+ {
+  "n": 21,
+  "name": "cambly",
+  "url": "https://www.cambly.com/english",
+  "status": 200,
+  "title": "English Tutors Online - Cambly",
+  "ok": true,
+  "sec": 8.0
+ },
+ {
+  "n": 22,
+  "name": "memrise",
+  "url": "https://www.memrise.com",
+  "status": 200,
+  "title": "Learn a language. Memrise is authentic, useful & personalised.",
+  "ok": true,
+  "sec": 9.1
+ }
+]

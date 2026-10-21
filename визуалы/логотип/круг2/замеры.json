@@ -1,0 +1,401 @@
+{
+ "шрифт": "Golos Text, wght 600 (шрифт сайта, прототипы-люмо/B5-тьма/fonts), трекинг -0.02em, без кернинга GPOS",
+ "цвета": {
+  "тёмный_фон": "#1E1424",
+  "светлый_фон": "#FBEFDF",
+  "оранж_тёмный": "#FF7A45",
+  "оранж_светлый": "#DF5520",
+  "чернила": "#2A1A2E"
+ },
+ "контраст_WCAG": {
+  "оранж #FF7A45 на тёмном #1E1424": 6.88,
+  "оранж #FF7A45 на белом #FFFFFF (вкладка)": 2.59,
+  "оранж #FF7A45 на светлом #FBEFDF (старый)": 2.28,
+  "оранж #DF5520 на светлом #FBEFDF": 3.39,
+  "оранж #DF5520 на белом #FFFFFF": 3.85,
+  "оранж #DF5520 на тёмном #1E1424": 4.62,
+  "вырез кремовый на #DF5520 (огонёк на светлом)": 3.39,
+  "вырез кремовый на #FF7A45 (огонёк на тёмном)": 2.28,
+  "глаза #2A1A2E на #FF7A45 (тёмный)": 6.32,
+  "глаза #2A1A2E на #DF5520 (светлый)": 4.25,
+  "вордмарк #FBEFDF на тёмном": 15.68,
+  "вордмарк #2A1A2E на светлом": 14.4,
+  "v2 L #FBEFDF на тёмном": 15.68,
+  "v2 L #2A1A2E на светлом": 14.4,
+  "v2 огонёк #DF5520 на светлом": 3.39
+ },
+ "угол_кончика_градусы": {
+  "было (круг 1)": 4.1,
+  "стало": 12.1,
+  "прибавка": 8.0
+ },
+ "диакритика_нет_глифов": [],
+ "читаемость": {
+  "Силуэт Люмо (главный)": {
+   "dark": {
+    "32px": {
+     "ink_px": 340,
+     "parts": 1,
+     "main_color": "#FF7A45",
+     "details": [
+      {
+       "px": 34,
+       "contrast_vs_main": 2.02
+      },
+      {
+       "px": 32,
+       "contrast_vs_main": 5.32
+      },
+      {
+       "px": 32,
+       "contrast_vs_main": 5.32
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 4.65
+      }
+     ],
+     "antialias_share": 0.29
+    },
+    "16px_мастер": {
+     "ink_px": 113,
+     "parts": 1,
+     "main_color": "#FF7A45",
+     "details": [
+      {
+       "px": 4,
+       "contrast_vs_main": 6.32
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 6.32
+      }
+     ],
+     "antialias_share": 0.07
+    },
+    "16px_ужатая_32": {
+     "ink_px": 94,
+     "parts": 1,
+     "main_color": "#FF7A45",
+     "details": [
+      {
+       "px": 29,
+       "contrast_vs_main": 1.63
+      },
+      {
+       "px": 5,
+       "contrast_vs_main": 2.55
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 3.01
+      }
+     ],
+     "antialias_share": 0.31
+    }
+   },
+   "light": {
+    "32px": {
+     "ink_px": 357,
+     "parts": 1,
+     "main_color": "#DF5520",
+     "details": [
+      {
+       "px": 36,
+       "contrast_vs_main": 2.73
+      },
+      {
+       "px": 31,
+       "contrast_vs_main": 3.86
+      },
+      {
+       "px": 31,
+       "contrast_vs_main": 3.86
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 2.53
+      }
+     ],
+     "antialias_share": 0.13
+    },
+    "16px_мастер": {
+     "ink_px": 121,
+     "parts": 1,
+     "main_color": "#DF5520",
+     "details": [
+      {
+       "px": 4,
+       "contrast_vs_main": 4.25
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 4.25
+      }
+     ],
+     "antialias_share": 0.0
+    },
+    "16px_ужатая_32": {
+     "ink_px": 97,
+     "parts": 1,
+     "main_color": "#DF5520",
+     "details": [
+      {
+       "px": 30,
+       "contrast_vs_main": 1.25
+      },
+      {
+       "px": 5,
+       "contrast_vs_main": 1.8
+      },
+      {
+       "px": 5,
+       "contrast_vs_main": 2.12
+      }
+     ],
+     "antialias_share": 0.2
+    }
+   }
+  },
+  "Капля-L": {
+   "dark": {
+    "32px": {
+     "ink_px": 304,
+     "parts": 1,
+     "main_color": "#FF7A45",
+     "details": [
+      {
+       "px": 107,
+       "contrast_vs_main": 4.87
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 4.65
+      }
+     ],
+     "antialias_share": 0.14
+    },
+    "16px_мастер": {
+     "ink_px": 101,
+     "parts": 1,
+     "main_color": "#FF7A45",
+     "details": [
+      {
+       "px": 20,
+       "contrast_vs_main": 6.88
+      }
+     ],
+     "antialias_share": 0.0
+    },
+    "16px_ужатая_32": {
+     "ink_px": 83,
+     "parts": 1,
+     "main_color": "#FF7A45",
+     "details": [
+      {
+       "px": 24,
+       "contrast_vs_main": 5.42
+      },
+      {
+       "px": 5,
+       "contrast_vs_main": 2.55
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 3.01
+      }
+     ],
+     "antialias_share": 0.23
+    }
+   },
+   "light": {
+    "32px": {
+     "ink_px": 304,
+     "parts": 1,
+     "main_color": "#DF5520",
+     "details": [
+      {
+       "px": 107,
+       "contrast_vs_main": 2.64
+      },
+      {
+       "px": 4,
+       "contrast_vs_main": 2.53
+      }
+     ],
+     "antialias_share": 0.14
+    },
+    "16px_мастер": {
+     "ink_px": 101,
+     "parts": 1,
+     "main_color": "#DF5520",
+     "details": [
+      {
+       "px": 20,
+       "contrast_vs_main": 3.39
+      }
+     ],
+     "antialias_share": 0.0
+    },
+    "16px_ужатая_32": {
+     "ink_px": 84,
+     "parts": 1,
+     "main_color": "#DF5520",
+     "details": [
+      {
+       "px": 24,
+       "contrast_vs_main": 2.8
+      },
+      {
+       "px": 5,
+       "contrast_vs_main": 1.8
+      },
+      {
+       "px": 5,
+       "contrast_vs_main": 2.12
+      }
+     ],
+     "antialias_share": 0.19
+    }
+   }
+  },
+  "L + огонёк (запас, фавикон)": {
+   "dark": {
+    "32px": {
+     "ink_px": 442,
+     "parts": 2,
+     "main_color": "#FBEFDF",
+     "details": [
+      {
+       "px": 136,
+       "contrast_vs_main": 2.74
+      },
+      {
+       "px": 76,
+       "contrast_vs_main": 5.01
+      },
+      {
+       "px": 20,
+       "contrast_vs_main": 7.35
+      }
+     ],
+     "antialias_share": 0.15
+    },
+    "16px_мастер": {
+     "ink_px": 86,
+     "parts": 2,
+     "main_color": "#FBEFDF",
+     "details": [
+      {
+       "px": 20,
+       "contrast_vs_main": 2.28
+      }
+     ],
+     "antialias_share": 0.0
+    },
+    "16px_ужатая_32": {
+     "ink_px": 127,
+     "parts": 1,
+     "main_color": "#FBEFDF",
+     "details": [
+      {
+       "px": 58,
+       "contrast_vs_main": 3.46
+      },
+      {
+       "px": 27,
+       "contrast_vs_main": 4.58
+      }
+     ],
+     "antialias_share": 0.3
+    }
+   },
+   "light": {
+    "32px": {
+     "ink_px": 443,
+     "parts": 2,
+     "main_color": "#2A1A2E",
+     "details": [
+      {
+       "px": 137,
+       "contrast_vs_main": 4.78
+      },
+      {
+       "px": 76,
+       "contrast_vs_main": 6.45
+      },
+      {
+       "px": 20,
+       "contrast_vs_main": 8.54
+      }
+     ],
+     "antialias_share": 0.15
+    },
+    "16px_мастер": {
+     "ink_px": 86,
+     "parts": 2,
+     "main_color": "#2A1A2E",
+     "details": [
+      {
+       "px": 20,
+       "contrast_vs_main": 4.25
+      }
+     ],
+     "antialias_share": 0.0
+    },
+    "16px_ужатая_32": {
+     "ink_px": 127,
+     "parts": 1,
+     "main_color": "#2A1A2E",
+     "details": [
+      {
+       "px": 58,
+       "contrast_vs_main": 5.0
+      },
+      {
+       "px": 27,
+       "contrast_vs_main": 6.0
+      }
+     ],
+     "antialias_share": 0.3
+    }
+   }
+  }
+ },
+ "kb": {
+  "favicon-v2.svg": 1.24,
+  "favicon-v5-plate.svg": 1.16,
+  "favicon-v5.svg": 1.1,
+  "lumo-v1-mark-mono.svg": 0.48,
+  "lumo-v1-mark-onlight.svg": 0.48,
+  "lumo-v1-mark.svg": 0.48,
+  "lumo-v1-mark16-mono.svg": 1.31,
+  "lumo-v1-mark16-onlight.svg": 1.31,
+  "lumo-v1-mark16.svg": 1.31,
+  "lumo-v1-wordmark-mono.svg": 5.37,
+  "lumo-v1-wordmark-onlight.svg": 5.37,
+  "lumo-v1-wordmark.svg": 5.37,
+  "lumo-v2-mark-mono.svg": 0.37,
+  "lumo-v2-mark-onlight.svg": 0.37,
+  "lumo-v2-mark.svg": 0.37,
+  "lumo-v2-mark16-mono.svg": 1.3,
+  "lumo-v2-mark16-onlight.svg": 1.3,
+  "lumo-v2-mark16.svg": 1.3,
+  "lumo-v2-wordmark-mono.svg": 5.26,
+  "lumo-v2-wordmark-onlight.svg": 5.26,
+  "lumo-v2-wordmark.svg": 5.26,
+  "lumo-v5-avatar.svg": 1.01,
+  "lumo-v5-mark-mono.svg": 0.73,
+  "lumo-v5-mark-onlight.svg": 0.77,
+  "lumo-v5-mark.svg": 0.77,
+  "lumo-v5-mark16-mono.svg": 1.09,
+  "lumo-v5-mark16-onlight.svg": 1.15,
+  "lumo-v5-mark16.svg": 1.15,
+  "lumo-v5-wordmark-mono.svg": 5.62,
+  "lumo-v5-wordmark-onlight.svg": 5.66,
+  "lumo-v5-wordmark.svg": 5.66,
+  "lumoschool-wordmark-text-mono.svg": 4.79,
+  "lumoschool-wordmark-text-onlight.svg": 4.79,
+  "lumoschool-wordmark-text.svg": 4.79
+ }
+}

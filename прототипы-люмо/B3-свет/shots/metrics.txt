@@ -1,0 +1,124 @@
+# B3-свет metrics (playwright chromium, served over http://127.0.0.1:8763). shiftPx = max |Δ| of #stage and svg#lumo bounding rect across 6 emotions; cls = layout-shift sum; minFont = [px, element]
+[
+ {
+  "vp": "desktop",
+  "win": 1440,
+  "pageW": 1440,
+  "bodyW": 1440,
+  "inputNull": true,
+  "demoTabsVisible": "none",
+  "shiftPx": 0,
+  "cls": 0,
+  "minFont": [
+   18,
+   "A.brand:LUMOSCHOOL"
+  ],
+  "errors": [],
+  "geom": {
+   "cta": [
+    642,
+    714,
+    64,
+    372
+   ],
+   "lumo": [
+    183,
+    843
+   ],
+   "h1": [
+    64,
+    834,
+    238,
+    501
+   ],
+   "h1lines": 3
+  }
+ },
+ {
+  "vp": "m844",
+  "win": 390,
+  "pageW": 390,
+  "bodyW": 390,
+  "inputNull": true,
+  "demoTabsVisible": "none",
+  "shiftPx": 0,
+  "cls": 0,
+  "minFont": [
+   16,
+   "A.brand:LUMOSCHOOL"
+  ],
+  "errors": [],
+  "geom": {
+   "cta": [
+    715,
+    775,
+    20,
+    370
+   ],
+   "lumo": [
+    385,
+    715
+   ],
+   "h1": [
+    20,
+    370,
+    70,
+    204
+   ],
+   "h1lines": 3
+  }
+ },
+ {
+  "vp": "m667",
+  "win": 390,
+  "pageW": 390,
+  "bodyW": 390,
+  "inputNull": true,
+  "demoTabsVisible": "none",
+  "shiftPx": 0,
+  "cls": 0,
+  "minFont": [
+   16,
+   "A.brand:LUMOSCHOOL"
+  ],
+  "errors": [],
+  "geom": {
+   "cta": [
+    538,
+    598,
+    20,
+    370
+   ],
+   "lumo": [
+    307,
+    534
+   ],
+   "h1": [
+    20,
+    370,
+    70,
+    204
+   ],
+   "h1lines": 3
+  }
+ },
+ {
+  "clickCycle": [
+   "joy",
+   "curious",
+   "think",
+   "celebrate",
+   "sleepy",
+   "idle",
+   "joy"
+  ],
+  "timer_0_7s_15s": [
+   "idle",
+   "curious",
+   "sleepy"
+  ],
+  "gazeRight": "translate(150.60 260.19)",
+  "gazeLeftBottom": "translate(147.37 262.55)",
+  "demoTabsInDemo": "flex"
+ }
+]

@@ -1,0 +1,89 @@
+== desktop 1440x900 uk ==
+  [rest] scrollWidth 1440 / body 1440 vs окно 1440 OK; высота 4715; мин.шрифт 16px ('1')
+  контраст текста (пиксели): мин 6.32 ('Запросити експорт', button, (42, 26, 46)); ниже 4.5: 0 из 150
+    худшие: 6.32 'Запросити експорт' button (42, 26, 46)
+    худшие: 6.32 'Надіслати' button (42, 26, 46)
+    худшие: 6.71 'Над чим працюємо' h4 (138, 47, 62)
+    худшие: 6.71 'Рівень A1\xa0→\xa0A2' h4 (138, 47, 62)
+  [kid2] scrollWidth 1440 / body 1440 vs окно 1440 OK; высота 4677; мин.шрифт 16px ('1')
+  [диалог] мин.шрифт 18px; контраст мин 6.32 ('Залишити як є'); <4.5: 0 из 7
+  [диалог] фокус на «Залишити як є»: True
+  [диалог] Esc закрывает: True
+  [после отзыва] эмоция think; тумблер aria-checked=false
+  [final] scrollWidth 1440 / body 1440 vs окно 1440 OK; высота 4846; мин.шрифт 16px ('1')
+  сдвиг блока Люмо при смене эмоции (rest:rest, consents:wait, dialog:think, progress:joy, messages:wait): box 0 px, say 0 px, nav 0 px
+  активный пункт навигации при скролле к разделам: ['schedule', 'consents', 'progress', 'messages', 'data']
+  CLS за сценарий: 0.0000
+  ошибки/предупреждения консоли: 0 []; внешние запросы: 0 []
+== desktop 1440x900 en ==
+  [rest] scrollWidth 1440 / body 1440 vs окно 1440 OK; высота 4724; мин.шрифт 16px ('1')
+  контраст текста (пиксели): мин 6.32 ('Request export', button, (42, 26, 46)); ниже 4.5: 0 из 150
+    худшие: 6.32 'Request export' button (42, 26, 46)
+    худшие: 6.32 'Send' button (42, 26, 46)
+    худшие: 6.71 'Level A1\xa0→\xa0A2' h4 (138, 47, 62)
+    худшие: 6.71 'What already works' h4 (138, 47, 62)
+  [kid2] scrollWidth 1440 / body 1440 vs окно 1440 OK; высота 4659; мин.шрифт 16px ('1')
+  [диалог] мин.шрифт 18px; контраст мин 6.32 ('Keep as is'); <4.5: 0 из 7
+  [диалог] фокус на «Залишити як є»: True
+  [диалог] Esc закрывает: True
+  [после отзыва] эмоция think; тумблер aria-checked=false
+  [final] scrollWidth 1440 / body 1440 vs окно 1440 OK; высота 4828; мин.шрифт 16px ('1')
+  сдвиг блока Люмо при смене эмоции (rest:rest, consents:wait, dialog:think, progress:joy, messages:wait): box 0 px, say 0 px, nav 0 px
+  активный пункт навигации при скролле к разделам: ['schedule', 'consents', 'progress', 'messages', 'data']
+  CLS за сценарий: 0.0000
+  ошибки/предупреждения консоли: 0 []; внешние запросы: 0 []
+== phone 390x844 uk ==
+  [rest] scrollWidth 390 / body 390 vs окно 390 OK; высота 6822; мин.шрифт 16px ('1')
+  контраст текста (пиксели): мин 6.32 ('Запросити експорт', button, (42, 26, 46)); ниже 4.5: 0 из 139
+    худшие: 6.32 'Запросити експорт' button (42, 26, 46)
+    худшие: 6.32 'Надіслати' button (42, 26, 46)
+    худшие: 6.56 'Тут усе про навчання ваших діт' em (255, 217, 168)
+    худшие: 6.71 'Над чим працюємо' h4 (138, 47, 62)
+  [kid2] scrollWidth 390 / body 390 vs окно 390 OK; высота 6857; мин.шрифт 16px ('1')
+  [диалог] мин.шрифт 18px; контраст мин 6.32 ('Залишити як є'); <4.5: 0 из 7
+  [диалог] фокус на «Залишити як є»: True
+  [диалог] Esc закрывает: True
+  [после отзыва] эмоция think; тумблер aria-checked=false
+  [final] scrollWidth 390 / body 390 vs окно 390 OK; высота 7116; мин.шрифт 16px ('1')
+  сдвиг блока Люмо при смене эмоции (rest:rest, consents:wait, dialog:think, progress:joy, messages:wait): box 0 px, say 0 px, nav 0 px
+  активный пункт навигации при скролле к разделам: ['schedule', 'consents', 'progress', 'messages', 'data']
+  CLS за сценарий: 0.0093
+  ошибки/предупреждения консоли: 0 []; внешние запросы: 0 []
+== phone 390x844 en ==
+  [rest] scrollWidth 390 / body 390 vs окно 390 OK; высота 6584; мин.шрифт 16px ('1')
+  контраст текста (пиксели): мин 4.73 ('Olya: the next lesson is alrea', span, (251, 239, 223)); ниже 4.5: 0 из 139
+    худшие: 4.73 'Olya: the next lesson is alrea' span (251, 239, 223)
+    худшие: 4.81 'Wed 21' div (255, 217, 168)
+    худшие: 6.32 'Request export' button (42, 26, 46)
+    худшие: 6.32 'Send' button (42, 26, 46)
+  [kid2] scrollWidth 390 / body 390 vs окно 390 OK; высота 6648; мин.шрифт 16px ('1')
+  [диалог] мин.шрифт 18px; контраст мин 6.32 ('Keep as is'); <4.5: 0 из 7
+  [диалог] фокус на «Залишити як є»: True
+  [диалог] Esc закрывает: True
+  [после отзыва] эмоция think; тумблер aria-checked=false
+  [final] scrollWidth 390 / body 390 vs окно 390 OK; высота 6853; мин.шрифт 16px ('1')
+  сдвиг блока Люмо при смене эмоции (rest:rest, consents:wait, dialog:think, progress:joy, messages:wait): box 0 px, say 0 px, nav 0 px
+  активный пункт навигации при скролле к разделам: ['schedule', 'consents', 'progress', 'messages', 'data']
+  CLS за сценарий: 0.0031
+  ошибки/предупреждения консоли: 0 []; внешние запросы: 0 []
+== пары цветов (WCAG) ==
+  14.35:1 OK  (нужно 4.5) ink on panel
+   9.73:1 OK  (нужно 4.5) ink2 on panel
+  10.63:1 OK  (нужно 4.5) ink2 on page bg
+   8.69:1 OK  (нужно 4.5) ink2 on panel2 (nav/кнопки)
+  12.20:1 OK  (нужно 4.5) gold on panel
+  10.89:1 OK  (нужно 4.5) gold on panel2
+   6.32:1 OK  (нужно 4.5) button text on accent
+  12.24:1 OK  (нужно 4.5) button text on gold (UK/EN)
+   8.04:1 OK  (нужно 4.5) bad on bad-bg
+   9.72:1 OK  (нужно 4.5) bad-ink on bad (значок/пилюля)
+   9.60:1 OK  (нужно 4.5) bad on panel (кнопка «Відкликати»)
+  13.34:1 OK  (нужно 4.5) paper-ink on paper
+   7.20:1 OK  (нужно 4.5) paper-ink2 on paper
+   6.71:1 OK  (нужно 4.5) paper accent #8A2F3E on paper
+  10.63:1 OK  (нужно 4.5) placeholder ink2 on textarea
+   7.49:1 OK  (нужно 4.5) me-bubble date #5A3A3A on gold
+   6.29:1 OK  (нужно 3.0) [не текст] accent switch vs panel
+   9.73:1 OK  (нужно 3.0) [не текст] ink2 border vs panel
+  13.33:1 OK  (нужно 3.0) [не текст] gold border vs page
+  пар ниже порога: 0

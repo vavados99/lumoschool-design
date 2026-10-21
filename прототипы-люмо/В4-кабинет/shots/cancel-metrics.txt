@@ -1,0 +1,28 @@
+== desktop 1440x900 uk ==
+ диалог открыт: {"focus": "Залишити", "focusIsKeep": true, "bookings": 2, "keep": {"rect": [885, 569, 130, 48], "bg": "rgb(255, 122, 69)", "color": "rgb(42, 26, 46)", "border": "rgb(42, 26, 46)", "fs": "18px"}, "yes": {"rect": [1027, 569, 176, 48], "bg": "rgba(0, 0, 0, 0)", "color": "rgb(251, 239, 223)", "border": "rgb(214, 195, 206)", "fs": "18px"}, "dlg": [885, 432, 427, 185], "note": "Місце звільниться для інших учнів. Безкоштовно скасувати можна до чт, 22 жовт., 07:00, пізніше урок вважається проведеним.", "emo": "think", "sw": [1440, 1440], "inView": true}
+ после Enter: {'bookings': 2, 'dialog': False, 'focus': 'Скасувати запис'}
+ после Escape: броней 2 диалог False
+ Tab с «Залишити» -> Так, скасувати
+ явный клик «Скасувати»: броней 1
+ CLS 0.0000; ошибок консоли 0 []
+== desktop 1440x900 en ==
+ диалог открыт: {"focus": "Keep it", "focusIsKeep": true, "bookings": 2, "keep": {"rect": [885, 569, 103, 48], "bg": "rgb(255, 122, 69)", "color": "rgb(42, 26, 46)", "border": "rgb(42, 26, 46)", "fs": "18px"}, "yes": {"rect": [1000, 569, 143, 48], "bg": "rgba(0, 0, 0, 0)", "color": "rgb(251, 239, 223)", "border": "rgb(214, 195, 206)", "fs": "18px"}, "dlg": [885, 432, 427, 185], "note": "The seat will be freed for other students. Free cancellation is possible until Thu 22 Oct, 07:00; after that the lesson counts as taken.", "emo": "think", "sw": [1440, 1440], "inView": true}
+ после Enter: {'bookings': 2, 'dialog': False, 'focus': 'Cancel booking'}
+ после Escape: броней 2 диалог False
+ Tab с «Залишити» -> Yes, cancel
+ явный клик «Скасувати»: броней 1
+ CLS 0.0000; ошибок консоли 0 []
+== phone 390x844 uk ==
+ диалог открыт: {"focus": "Залишити", "focusIsKeep": true, "bookings": 2, "keep": {"rect": [17, 708, 356, 52], "bg": "rgb(255, 122, 69)", "color": "rgb(42, 26, 46)", "border": "rgb(42, 26, 46)", "fs": "18px"}, "yes": {"rect": [17, 772, 356, 52], "bg": "rgba(0, 0, 0, 0)", "color": "rgb(251, 239, 223)", "border": "rgb(214, 195, 206)", "fs": "18px"}, "dlg": [0, 537, 390, 307], "note": "Місце звільниться для інших учнів. Безкоштовно скасувати можна до чт, 22 жовт., 07:00, пізніше урок вважається проведеним.", "emo": "think", "sw": [390, 390], "inView": true}
+ после Enter: {'bookings': 2, 'dialog': False, 'focus': 'Скасувати запис'}
+ после Escape: броней 2 диалог False
+ Tab с «Залишити» -> Так, скасувати
+ явный клик «Скасувати»: броней 1
+ CLS 0.0000; ошибок консоли 0 []
+== phone 390x844 en ==
+ диалог открыт: {"focus": "Keep it", "focusIsKeep": true, "bookings": 2, "keep": {"rect": [17, 708, 356, 52], "bg": "rgb(255, 122, 69)", "color": "rgb(42, 26, 46)", "border": "rgb(42, 26, 46)", "fs": "18px"}, "yes": {"rect": [17, 772, 356, 52], "bg": "rgba(0, 0, 0, 0)", "color": "rgb(251, 239, 223)", "border": "rgb(214, 195, 206)", "fs": "18px"}, "dlg": [0, 537, 390, 307], "note": "The seat will be freed for other students. Free cancellation is possible until Thu 22 Oct, 07:00; after that the lesson counts as taken.", "emo": "think", "sw": [390, 390], "inView": true}
+ после Enter: {'bookings': 2, 'dialog': False, 'focus': 'Cancel booking'}
+ после Escape: броней 2 диалог False
+ Tab с «Залишити» -> Yes, cancel
+ явный клик «Скасувати»: броней 1
+ CLS 0.1550; ошибок консоли 0 []

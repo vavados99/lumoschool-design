@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMOSCHOOL — англійська з Люмо</title>
+<meta name="description" content="Прототип B5 «Темрява»: темна сцена, де світло від живого Люмо — головний герой. Люмо стежить за поглядом і міняє настрій екрана.">
+<meta name="theme-color" content="#1E1424">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/playfair-display-cyrillic-wght-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/playfair-display-cyrillic-wght-italic.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/golos-text-cyrillic-wght-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/golos-text-latin-wght-normal.woff2">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="hero" id="hero" data-emo="idle">
+    <div class="light" id="light" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ===== шапка ===== -->
+  <header class="top">
+    <a class="brand" href="#hero" aria-label="LUMOSCHOOL"><i aria-hidden="true"></i>LUMOSCHOOL</a>
+    <div class="top-r">
+    <a class="trial-q" id="trialQ" href="#trial">Пробний урок</a>
+    <div class="lang" id="lang">
+      <button type="button" class="lang-btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="langList" aria-label="Мова сайту">
+        <span id="langCode">UA</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="lang-list" id="langList" role="listbox" tabindex="-1" hidden aria-label="Мова сайту">
+        <li role="option" data-lang="uk" aria-selected="true"><b>UA</b> Українська</li>
+        <li role="option" data-lang="pl" aria-selected="false"><b>PL</b> Polski</li>
+        <li role="option" data-lang="en" aria-selected="false"><b>EN</b> English</li>
+        <li role="option" data-lang="de" aria-selected="false"><b>DE</b> Deutsch</li>
+        <li role="option" data-lang="cs" aria-selected="false"><b>CS</b> Čeština</li>
+        <li role="option" data-lang="ru" aria-selected="false"><b>RU</b> Русский</li>
+      </ul>
+    </div>
+    </div>
+  </header>
+
+  <!-- ===== заголовок: один блок ===== -->
+  <section class="headline">
+    <h1 class="h1" id="h1" aria-label="Англійська з другом, що світиться">
+      <span class="ln" id="h1a" aria-hidden="true">Англійська з другом,</span>
+      <span class="ln ln-glow" id="h1b" aria-hidden="true">що світиться</span>
+    </h1>
+    <p class="lead" id="lead"><span id="leadMain">Онлайн-уроки для дітей, підлітків і дорослих.</span></p>
+  </section>
+
+  <!-- ===== сцена: Люмо ===== -->
+  <div class="stage" id="stage">
+    <p class="bubble" id="bubble" role="status" aria-live="polite"><span id="bubbleText">Натисни на мене</span></p>
+    <div class="pool" id="pool" aria-hidden="true"></div>
+    
+    <svg class="lumo" id="lumo" viewBox="0 0 400 500" role="img" aria-label="Люмо — живий друг, що світиться" focusable="false">
+      <defs>
+        <clipPath id="bodyClip"><path id="bodyClipPath" d="M222 22C238 42 262 98 296 150C338 218 358 292 346 360C334 430 282 478 200 478C118 478 66 430 54 360C42 292 62 218 104 154C140 100 184 66 204 38C210 28 216 20 222 22Z"/></clipPath>
+        <clipPath id="eyeClipL"><ellipse cx="0" cy="0" rx="31" ry="39"/></clipPath>
+        <clipPath id="mouthClip"><path id="mouthClipPath" d=""/></clipPath>
+        <!-- тіло: корал → маджента #D9558F → фіолет #6A3F7E, без сірого -->
+        <linearGradient id="bodyGrad" gradientUnits="userSpaceOnUse" x1="200" y1="22" x2="200" y2="478"><stop offset="0" stop-color="#B4503F"/><stop offset=".09" stop-color="#E5625E"/><stop offset=".3" stop-color="#F5767C"/><stop offset=".52" stop-color="#D9558F"/><stop offset=".78" stop-color="#94487F"/><stop offset="1" stop-color="#6A3F7E"/></linearGradient>
+        <!-- плавники: той самий градієнт -->
+        <linearGradient id="finGrad" x1="0" y1="-18" x2="0" y2="86" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#CC538B"/><stop offset=".5" stop-color="#B04E87"/><stop offset="1" stop-color="#8E4681"/></linearGradient>
+        <linearGradient id="tipRim" gradientUnits="userSpaceOnUse" x1="0" y1="22" x2="0" y2="190"><stop offset="0" stop-color="#FFE3B8" stop-opacity=".9"/><stop offset="1" stop-color="#FFE3B8" stop-opacity="0"/></linearGradient>
+        <radialGradient id="sideShade" gradientUnits="userSpaceOnUse" cx="200" cy="270" r="230"><stop offset=".62" stop-color="#3A1548" stop-opacity="0"/><stop offset="1" stop-color="#3A1548" stop-opacity=".42"/></radialGradient>
+        <linearGradient id="rimGrad" gradientUnits="userSpaceOnUse" x1="0" y1="22" x2="0" y2="478"><stop offset="0" stop-color="#FFE3B8"/><stop offset=".5" stop-color="#FF9A6E"/><stop offset="1" stop-color="#D9558F"/></linearGradient>
+        <radialGradient id="irisGrad" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#9A5290"/><stop offset=".6" stop-color="#5E2F6E"/><stop offset="1" stop-color="#3A1A45"/></radialGradient>
+        <radialGradient id="browLight" gradientUnits="userSpaceOnUse" cx="208" cy="170" r="150"><stop offset="0" stop-color="#FFC48E" stop-opacity=".7"/><stop offset=".5" stop-color="#FF9A66" stop-opacity=".25"/><stop offset="1" stop-color="#FF9A66" stop-opacity="0"/></radialGradient>
+        <filter id="b1" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation=".8"/></filter>
+        <filter id="b2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>
+        <filter id="b4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="b6" x="-80%" y="-60%" width="260%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="b8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+        <filter id="b16" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+        <filter id="b34" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="34"/></filter>
+      </defs>
+
+      <circle id="ring" cx="200" cy="270" r="234" fill="#FFF4E0" fill-opacity="0" stroke="#FFF4E0" stroke-width="7" opacity="0" filter="url(#b2)"/>
+      <g id="rig">
+        <!-- плавники: градієнт тіла + контровий світловий кант з зовнішнього боку -->
+        <g id="armL"><ellipse class="finShade" cx="0" cy="-2" rx="16" ry="30" fill="#2A1A2E" opacity=".35" filter="url(#b6)"/><path class="finBody" d="M0 -18C30 -18 32 62 0 86C-32 62 -30 -18 0 -18Z" fill="url(#finGrad)" stroke="#FFB48A" stroke-width="1" stroke-opacity=".8"/><path class="finRim" d="M0 -16C-28 -16 -30 60 0 84" fill="none" stroke="url(#rimGrad)" stroke-width="4" stroke-linecap="round" filter="url(#b1)" opacity=".7"/></g>
+        <g id="armR"><ellipse class="finShade" cx="0" cy="-2" rx="16" ry="30" fill="#2A1A2E" opacity=".35" filter="url(#b6)"/><path class="finBody" d="M0 -18C30 -18 32 62 0 86C-32 62 -30 -18 0 -18Z" fill="url(#finGrad)" stroke="#FFB48A" stroke-width="1" stroke-opacity=".8"/><path class="finRim" d="M0 -16C28 -16 30 60 0 84" fill="none" stroke="url(#rimGrad)" stroke-width="4" stroke-linecap="round" filter="url(#b1)" opacity=".7"/></g>
+
+        <g id="squash">
+          <g id="tilt">
+            <path id="aura" d="M222 22C238 42 262 98 296 150C338 218 358 292 346 360C334 430 282 478 200 478C118 478 66 430 54 360C42 292 62 218 104 154C140 100 184 66 204 38C210 28 216 20 222 22Z" fill="none" stroke="#2A1030" stroke-width="24" stroke-linejoin="round" filter="url(#b16)" opacity=".6"/>
+            <path id="halo" d="M222 22C238 42 262 98 296 150C338 218 358 292 346 360C334 430 282 478 200 478C118 478 66 430 54 360C42 292 62 218 104 154C140 100 184 66 204 38C210 28 216 20 222 22Z" fill="#FFC890" filter="url(#b34)" opacity=".4"/>
+            <path d="M222 22C238 42 262 98 296 150C338 218 358 292 346 360C334 430 282 478 200 478C118 478 66 430 54 360C42 292 62 218 104 154C140 100 184 66 204 38C210 28 216 20 222 22Z" fill="url(#bodyGrad)"/>
+            <path id="tipOutline" d="M222 22C238 42 262 98 296 150C338 218 358 292 346 360C334 430 282 478 200 478C118 478 66 430 54 360C42 292 62 218 104 154C140 100 184 66 204 38C210 28 216 20 222 22Z" fill="none" stroke="url(#tipRim)" stroke-width="1.5" stroke-linejoin="round" opacity=".9"/>
+            <g clip-path="url(#bodyClip)">
+              <rect x="0" y="0" width="400" height="500" fill="url(#sideShade)"/>
+              <ellipse cx="200" cy="360" rx="150" ry="110" fill="#D9558F" filter="url(#b34)" opacity=".3" style="mix-blend-mode:screen"/>
+              <circle id="innerGlow" cx="206" cy="150" r="100" fill="#FF8A66" filter="url(#b34)" opacity=".5" style="mix-blend-mode:screen"/>
+              <circle id="innerGlow2" cx="206" cy="150" r="56" fill="#FFB27E" filter="url(#b16)" opacity=".7"/>
+              <path id="rimCrisp" d="M222 22C238 42 262 98 296 150C338 218 358 292 346 360C334 430 282 478 200 478C118 478 66 430 54 360C42 292 62 218 104 154C140 100 184 66 204 38C210 28 216 20 222 22Z" fill="none" stroke="url(#rimGrad)" stroke-width="6" filter="url(#b2)" opacity=".8"/>
+              <!-- огонёк під поверхнею: лише м'які розмиті форми, без контуру -->
+              <g id="coreG" transform="translate(206 150)">
+                <path id="coreDisc" d="M0 -46C16 -22 28 -6 28 14C28 32 15 44 0 44C-15 44 -28 32 -28 14C-28 -6 -16 -22 0 -46Z" fill="#FF9A66" filter="url(#b8)"/>
+                <path id="coreMid" d="M0 -28C10 -13 17 -2 17 12C17 24 9 30 0 30C-9 30 -17 24 -17 12C-17 -2 -10 -13 0 -28Z" fill="#FFD9A8" filter="url(#b4)"/>
+                <path id="coreHot" transform="scale(.93)" d="M0 -46C12 -24 20 -8 20 14C20 31 11 44 0 44C-11 44 -20 31 -20 14C-20 -8 -12 -24 0 -46Z" fill="#FFF4E0" filter="url(#b1)"/>
+              </g>
+            </g>
+
+            <g clip-path="url(#bodyClip)"><g id="face">
+              <ellipse id="cheekL" cx="0" cy="0" rx="22" ry="12" fill="#FF8FA0" filter="url(#b4)" opacity="0"/>
+              <ellipse id="cheekR" cx="0" cy="0" rx="22" ry="12" fill="#FF8FA0" filter="url(#b4)" opacity="0"/>
+              <!-- брови: м'які, у тому ж стилі, що й тіло -->
+              <g id="browL"><path d="M-24 0Q0 -7 24 0" fill="none" stroke="#4E1740" stroke-opacity=".92" stroke-width="10" stroke-linecap="round"/><path d="M-19 -3Q0 -9.5 19 -3" fill="none" stroke="#FFC8A0" stroke-opacity=".55" stroke-width="1" stroke-linecap="round"/></g>
+              <g id="browR"><path d="M-24 0Q0 -7 24 0" fill="none" stroke="#4E1740" stroke-opacity=".92" stroke-width="10" stroke-linecap="round"/><path d="M-19 -3Q0 -9.5 19 -3" fill="none" stroke="#FFC8A0" stroke-opacity=".55" stroke-width="1" stroke-linecap="round"/></g>
+              <!-- очі: один круглий блік (≈18 % діаметра ока) -->
+              <g id="eyeL"><g id="eyeLin">
+                <ellipse rx="31" ry="39" fill="#2A1030"/>
+                <circle id="irisL" r="22" fill="url(#irisGrad)"/>
+                <circle class="hl" cx="10" cy="-14" r="6.3" fill="#FFF4E4"/>
+                <g clip-path="url(#eyeClipL)">
+                  <g id="lidL"><path d="M-44 -90H44V0Q0 12 -44 0Z" fill="#CA528D"/></g>
+                  <g id="lowL"><path d="M-44 0Q0 -9 44 0V120H-44Z" fill="#CA528D"/></g>
+                </g>
+              </g></g>
+              <g id="eyeR"><g id="eyeRin">
+                <ellipse rx="31" ry="39" fill="#2A1030"/>
+                <circle id="irisR" r="22" fill="url(#irisGrad)"/>
+                <circle class="hl" cx="10" cy="-14" r="6.3" fill="#FFF4E4"/>
+                <g clip-path="url(#eyeClipL)">
+                  <g id="lidR"><path d="M-44 -90H44V0Q0 12 -44 0Z" fill="#CA528D"/></g>
+                  <g id="lowR"><path d="M-44 0Q0 -9 44 0V120H-44Z" fill="#CA528D"/></g>
+                </g>
+              </g></g>
+              <path id="happyL" d="M-28 10Q0 -34 28 10" fill="none" stroke="#3A1238" stroke-width="9" stroke-linecap="round" opacity="0"/>
+              <path id="happyR" d="M-28 10Q0 -34 28 10" fill="none" stroke="#3A1238" stroke-width="9" stroke-linecap="round" opacity="0"/>
+              <path id="sleepL" d="M-27 -6Q0 22 27 -6" fill="none" stroke="#3A1238" stroke-opacity=".9" stroke-width="7" stroke-linecap="round" opacity="0" filter="url(#b1)"/>
+              <path id="sleepR" d="M-27 -6Q0 22 27 -6" fill="none" stroke="#3A1238" stroke-opacity=".9" stroke-width="7" stroke-linecap="round" opacity="0" filter="url(#b1)"/>
+              <!-- рот -->
+              <g id="mouthG">
+                <path id="mouthFill" d="" fill="#2A0F25" stroke="none"/>
+                <ellipse id="tongue" cx="0" cy="0" rx="14" ry="6" fill="#FF8FA0" clip-path="url(#mouthClip)" opacity="0"/>
+                <path id="mouthLine" d="" fill="none" stroke="#3A1238" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#b1)"/>
+              </g>
+            </g></g>
+            <g clip-path="url(#bodyClip)"><circle id="browGlow" cx="208" cy="170" r="150" fill="url(#browLight)" style="mix-blend-mode:screen" opacity=".6"/></g>
+          </g>
+        </g>
+
+        <!-- сон: Z інтерфейсним гротеском -->
+        <g id="zzz" opacity="0" font-family="'Golos Text',system-ui,sans-serif" font-weight="700" fill="#E8C6A8">
+          <text x="296" y="130" font-size="30">z</text><text x="322" y="92" font-size="40">z</text><text x="346" y="46" font-size="52">z</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ===== головна дія ===== -->
+  <section class="meet" id="meet">
+    <a class="cta" id="cta" href="#trial"><span id="ctaT">Записатись на урок</span></a>
+  </section>
+
+  <!-- ===== низ: підказка + перемикач настрою (допомога для перегляду прототипу) ===== -->
+  <footer class="base">
+    <a class="cue" id="cue" href="#next"><span id="cueT">Прокрути — він помітить</span>
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v13M3.5 9.5L9 15l5.5-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <div class="moods" id="moods" role="group" aria-label="Настрій Люмо (для перегляду прототипу)">
+      <span class="moods-l" id="moodsL">Настрій</span>
+      <button type="button" data-emo="idle" aria-pressed="true">Спокій</button>
+      <button type="button" data-emo="joy" aria-pressed="false">Радість</button>
+      <button type="button" data-emo="curious" aria-pressed="false">Цікавість</button>
+      <button type="button" data-emo="think" aria-pressed="false">Роздум</button>
+      <button type="button" data-emo="celebrate" aria-pressed="false">Свято</button>
+      <button type="button" data-emo="sleepy" aria-pressed="false">Сон</button>
+    </div>
+  </footer>
+
+  <canvas class="fx" id="fx" aria-hidden="true"></canvas>
+</main>
+
+<section class="next" id="next">
+  <p class="kicker">Далі</p>
+  <p class="next-t">Тут почнеться решта сторінки. Цей прототип — лише перший екран.</p>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

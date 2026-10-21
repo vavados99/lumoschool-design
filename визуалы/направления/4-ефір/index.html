@@ -1,0 +1,63 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><title>LUMOSCHOOL · 4 Ефір</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Onest:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#FF8A1F}
+body{width:1512px;font-family:'Onest',sans-serif;color:#1A0F0A}
+.hero{position:relative;width:1512px;height:830px;overflow:hidden;background:linear-gradient(135deg,#FF5A1F 0%,#FF8A1F 58%,#FFB02E 100%)}
+.noise{position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;z-index:1}
+.bar{position:absolute;left:70px;right:70px;top:34px;display:flex;justify-content:space-between;align-items:center;z-index:3;font:700 15px 'Onest'}
+.logo{font:800 18px 'Unbounded';letter-spacing:.05em}
+h1{position:absolute;left:66px;top:76px;font:800 112px/1 'Unbounded';letter-spacing:-.05em;z-index:3}
+.live{position:absolute;left:640px;top:104px;display:flex;align-items:center;gap:14px;z-index:3;font:700 20px 'JetBrains Mono';letter-spacing:.18em}
+.lamp{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFB4A8,#FF1F1F 55%,#8C0000);box-shadow:0 0 0 4px #1A0F0A,0 0 30px 8px rgba(255,40,20,.8)}
+.sub{position:absolute;left:70px;top:206px;font:700 19px 'JetBrains Mono';letter-spacing:.1em;z-index:3}
+.radio{position:absolute;left:96px;top:262px;width:1010px;height:520px;background:linear-gradient(180deg,#FCF4E2,#EBDCBA);border:6px solid #1A0F0A;border-radius:44px;box-shadow:14px 14px 0 #1A0F0A;z-index:2}
+.grille{position:absolute;left:36px;top:36px;width:230px;height:440px;border-radius:26px;background:#E8D8B6;border:4px solid #1A0F0A;background-image:radial-gradient(#1A0F0A 3.4px,transparent 4px);background-size:20px 20px;background-position:8px 8px}
+.dial{position:absolute;left:300px;top:36px;width:480px;height:170px;border-radius:18px;background:#2B1509;border:5px solid #1A0F0A;overflow:hidden;box-shadow:inset 0 0 40px 6px rgba(255,170,60,.55)}
+.dial:after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.12) 26%,transparent 46%);pointer-events:none}
+.keys{position:absolute;left:300px;top:246px;display:flex;gap:12px}
+.keys div{width:64px;height:64px;border-radius:50%;border:4px solid #1A0F0A;background:#F7ECD6;display:flex;align-items:center;justify-content:center;font:800 17px 'Unbounded';box-shadow:0 6px 0 #1A0F0A}
+.keys .on{background:#FF5A1F;color:#fff;box-shadow:0 2px 0 #1A0F0A;transform:translateY(4px)}
+.knob{position:absolute;width:150px;height:150px;border-radius:50%;background:conic-gradient(from 0deg,#2a2a2a,#6a6a6a,#1b1b1b,#7a7a7a,#262626,#6a6a6a,#1b1b1b,#7a7a7a,#2a2a2a);border:5px solid #1A0F0A;box-shadow:0 10px 0 #1A0F0A}
+.knob:after{content:'';position:absolute;left:50%;top:10px;width:8px;height:44px;margin-left:-4px;background:#FF5A1F;border-radius:4px}
+.cap{position:absolute;font:700 15px 'JetBrains Mono';letter-spacing:.14em;text-align:center}
+.prog{position:absolute;left:1160px;top:300px;width:300px;background:#fff;padding:26px 24px 44px;font:500 15px/1.5 'JetBrains Mono';transform:rotate(3deg);z-index:5;filter:drop-shadow(4px 6px 0 #1A0F0A);clip-path:polygon(0 0,100% 0,100% 96%,95% 100%,90% 96%,85% 100%,80% 96%,75% 100%,70% 96%,65% 100%,60% 96%,55% 100%,50% 96%,45% 100%,40% 96%,35% 100%,30% 96%,25% 100%,20% 96%,15% 100%,10% 96%,5% 100%,0 96%)}
+.prog h3{font:800 20px 'Unbounded';letter-spacing:-.02em;margin-bottom:12px}
+.prog p{margin:7px 0;border-bottom:1px dashed #1A0F0A55;padding-bottom:7px}
+.prog b{display:inline-block;min-width:54px}
+.stampred{position:absolute;right:-6px;top:150px;border:4px solid #E21B1B;color:#E21B1B;font:800 22px 'Unbounded';padding:4px 10px;transform:rotate(-12deg);background:rgba(255,255,255,.7)}
+.btn{position:absolute;right:70px;top:64px;z-index:3;background:#1A0F0A;color:#F7ECD6;font:800 18px 'Onest';border-radius:99px;padding:16px 28px}
+</style></head><body>
+<section class="hero">
+<svg class="noise" width="1512" height="830"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="9"/><feColorMatrix values="0 0 0 0 .3  0 0 0 0 .1  0 0 0 0 0  0 0 0 .5 -.1"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<div class="bar"><div class="logo">LUMOSCHOOL FM</div><div style="display:flex;gap:30px"><span>Уроки</span><span>Діти</span><span>Дорослі</span><span>Ціни</span></div></div>
+<h1>Ти в ефірі.</h1>
+<div class="live" style="left:972px;top:120px"><div class="lamp"></div>LIVE</div>
+<div class="btn" style="top:134px;right:70px;z-index:6">Налаштуватись →</div>
+<div class="sub">УРОКИ АНГЛІЙСЬКОЇ НАЖИВО · ШІСТЬ МОВ ЕФІРУ</div>
+<svg style="position:absolute;left:0;top:0;z-index:1" width="1512" height="830"><line x1="1030" y1="268" x2="1150" y2="178" stroke="#1A0F0A" stroke-width="7" stroke-linecap="round"/><circle cx="1154" cy="175" r="11" fill="#12C8B0" stroke="#1A0F0A" stroke-width="5"/></svg>
+<div class="radio">
+ <div class="grille"></div>
+ <div class="dial"><svg id="dial" width="470" height="160" viewBox="0 0 470 160"></svg></div>
+ <div style="position:absolute;left:300px;top:222px;width:16px;height:16px;border-radius:50%;background:#12C8B0;box-shadow:0 0 10px 3px #12C8B0;border:3px solid #1A0F0A"></div>
+ <div class="keys"><div class="on">UA</div><div>PL</div><div>EN</div><div>DE</div><div>CS</div><div>RU</div></div>
+ <div class="cap" style="left:300px;top:420px;width:480px;font-size:15px;text-align:left">● МОВА САЙТУ: УКРАЇНСЬКА</div>
+ <div class="knob" style="left:820px;top:60px"></div><div class="cap" style="left:820px;top:224px;width:150px">МОВА</div>
+ <div class="knob" style="left:820px;top:270px;transform:rotate(70deg)"></div><div class="cap" style="left:820px;top:434px;width:150px">РІВЕНЬ</div>
+</div>
+<div class="prog"><h3>ПРОГРАМА<br>ПЕРЕДАЧ</h3>
+ <p><b>16:00</b> Діти 7–10<br>«Моя родина»</p><p><b>18:00</b> Підлітки<br>«Speak up»</p>
+ <p style="position:relative"><b>19:00</b> Дорослі B1<br>Розмовний клуб<span class="stampred">В ЕФІРІ</span></p><p><b>20:30</b> A2 · «Подорож»</p></div>
+</section>
+<section id="strip"></section>
+<script src="../shared/weather.js"></script>
+<script>
+let t='';const W=470;
+for(let i=0;i<=100;i++){const x=20+i*(W-40)/100,big=i%10===0,mid=i%5===0;t+=`<line x1="${x}" y1="${big?92:mid?100:106}" x2="${x}" y2="116" stroke="#FFD9A0" stroke-width="${big?3:1.5}" opacity="${big?1:.7}"/>`;if(big)t+=`<text x="${x}" y="140" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="14" fill="#FFD9A0">${88+i/5}</text>`}
+const st=[['UA',90],['PL',150],['EN',215],['DE',280],['CS',340],['RU',405]];
+st.forEach((s,i)=>{t+=`<text x="${s[1]}" y="78" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="${i?20:26}" fill="${i?'#FFD9A0':'#fff'}" opacity="${i?.8:1}">${s[0]}</text>`});
+t+=`<line x1="90" y1="88" x2="90" y2="158" stroke="#FF2A1F" stroke-width="3"/><circle cx="90" cy="88" r="6" fill="#FF2A1F"/><text x="20" y="30" font-family="Unbounded" font-weight="600" font-size="13" fill="#FFD9A0">LUMO FM</text>`;
+document.getElementById('dial').innerHTML=t;
+weatherStrip(document.getElementById('strip'),{bg:'#FF8A1F',card:'#F7ECD6',fg:'#1A0F0A',accent:'#FF5A1F',accent2:'#FFB02E',font:'Unbounded',btnfg:'#fff',sig:k=>`<div style="position:absolute;right:16px;top:${k==='kids'?'auto':'16px'};bottom:${k==='kids'?'16px':'auto'};width:16px;height:16px;border-radius:50%;background:#FF2A1F;box-shadow:0 0 12px 3px rgba(255,40,20,.7);border:3px solid #1A0F0A"></div>`});
+</script></body></html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMOSCHOOL — англійська з Люмо</title>
+<meta name="description" content="Прототип Б «Емоції на дотик»: живий Люмо реагує на дотик, погляд, прокрутку, паузу та ім'я гостя.">
+<meta name="theme-color" content="#F1EBDF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/layer-body.webp" type="image/webp">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ ГОЛОВНИЙ ЕКРАН ============ -->
+<header class="hero" id="hero">
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- кільце-орбіта: обертається разом із прокруткою -->
+  <svg class="orbit" viewBox="0 0 800 800" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#4FD8FF"/><stop offset="1" stop-color="#C86BFF"/>
+      </linearGradient>
+      
+    </defs>
+    <circle cx="400" cy="400" r="352" fill="none" stroke="url(#lg)" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/>
+    <circle cx="400" cy="400" r="392" fill="none" stroke="currentColor" stroke-opacity=".18" stroke-width="1"/>
+  </svg>
+
+  <div class="brand" aria-label="LUMOSCHOOL">LUMO<span>SCHOOL</span></div>
+
+  <nav class="lang" aria-label="Language">
+    <button type="button" data-lang="uk" aria-pressed="true">UK</button>
+    <button type="button" data-lang="pl" aria-pressed="false">PL</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    <button type="button" data-lang="cs" aria-pressed="false">CS</button>
+    <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+  </nav>
+
+  <h1 class="h1">
+    <span class="w w1" data-i18n="h1a">Англійська</span>
+    <span class="w w2" data-i18n="h1b">з другом,</span>
+    <span class="w w3" data-i18n="h1c">що світиться</span>
+  </h1>
+
+  <!-- Люмо створюється в app.js -->
+  <div class="lumo-anchor" id="lumoHero"></div>
+  <p class="bubble" id="bubble" role="status" aria-live="polite"><span class="bubble-text"></span></p>
+
+  <form class="namebox" id="nameForm" autocomplete="off">
+    <label for="guestName" data-i18n="nameLabel">Назви себе, як хочеш</label>
+    <div class="namerow">
+      <input id="guestName" name="guestName" type="text" maxlength="24" spellcheck="false" autocapitalize="words" data-i18n-ph="namePh" placeholder="ім’я або прізвисько">
+      <button type="submit" data-i18n="nameBtn">Привітатись</button>
+    </div>
+  </form>
+
+  <a class="cue" href="#theatre" data-i18n="cue"><span>Прокрути — він помітить</span><i aria-hidden="true">↓</i></a>
+</header>
+
+<!-- ============ БЛОК: ПОВЕДІНКА ПРИ ПРОКРУТЦІ ============ -->
+<section class="theatre" id="theatre" aria-labelledby="thTitle">
+  <div class="th-sticky">
+    <div class="grain" aria-hidden="true"></div>
+    <p class="th-kicker" data-i18n="thKicker">Поведінка при прокрутці</p>
+    <h2 class="th-title" id="thTitle" data-i18n="thTitle">Гортай — і він живе поруч</h2>
+
+    <ol class="steps" id="steps">
+      <li class="step" data-step="0"><b>01</b><span data-i18n="st0">Підводить погляд</span></li>
+      <li class="step" data-step="1"><b>02</b><span data-i18n="st1">Думає разом із тобою</span></li>
+      <li class="step" data-step="2"><b>03</b><span data-i18n="st2">Підстрибує від радості</span></li>
+      <li class="step" data-step="3"><b>04</b><span data-i18n="st3">Тихо засинає на паузі</span></li>
+    </ol>
+
+    <div class="lumo-anchor lumo-anchor--small" id="lumoTheatre"></div>
+    <p class="bubble bubble--theatre" id="bubble2" role="status" aria-live="off"><span class="bubble-text"></span></p>
+
+    <div class="th-progress" aria-hidden="true"><i id="thBar"></i></div>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMOSCHOOL · Кабінет</title>
+<meta name="theme-color" content="#1E1424">
+<link rel="stylesheet" href="fonts.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page" id="page" data-emo="rest">
+  <div class="light" id="light" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="brand" href="#" aria-label="LUMOSCHOOL"><img class="logo" src="assets/lumoschool-logo.svg" alt="LUMOSCHOOL" width="222" height="40"></a>
+    <div class="top-r">
+      <div class="seg" role="group" data-i-aria="tzAria" aria-label="Часовий пояс">
+        <button type="button" data-tz="Europe/Warsaw" aria-pressed="true" data-i="tzW">Варшава</button>
+        <button type="button" data-tz="Europe/Kyiv" aria-pressed="false" data-i="tzK">Київ</button>
+      </div>
+      <div class="seg" role="group" data-i-aria="langAria" aria-label="Мова інтерфейсу">
+        <button type="button" data-lang="uk" aria-pressed="true">UA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hello">
+    <div class="hero-l">
+      <p class="date" id="dateLine"></p>
+      <h1 id="hello"></h1>
+      <p class="hero-sub" id="heroSub"></p>
+
+      <article class="next" id="next" aria-labelledby="nextH">
+        <p class="eyebrow" id="nextH" data-i="nextH">Найближчий урок</p>
+        <div class="next-main">
+          <div class="next-info">
+            <p class="next-title" id="nextTitle"></p>
+            <p class="next-meta" id="nextMeta"></p>
+          </div>
+        </div>
+        <div class="next-go">
+          <div class="count" role="timer" aria-live="off">
+            <time id="count">00:00:00</time>
+            <span id="countCap"></span>
+          </div>
+          <span class="go-arrow" aria-hidden="true">→</span>
+          <a class="btn-main" id="enter" href="../В3-комната/index.html" aria-disabled="true" tabindex="-1"></a>
+        </div>
+        <p class="note" id="enterNote"></p>
+      </article>
+    </div>
+
+    <aside class="lamp" id="lamp">
+      <button type="button" class="lumo-btn" id="lumoBtn" aria-haspopup="true" aria-expanded="false" data-i-aria="lumoAria" aria-label="Люмо. Натисніть, щоб змінити стан (демо)">
+      <svg class="lumo" id="lumo" viewBox="0 0 200 250" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E5625E"/><stop offset=".35" stop-color="#F5767C"/><stop offset=".6" stop-color="#D9558F"/><stop offset="1" stop-color="#6A3F7E"/></linearGradient>
+          <radialGradient id="core" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF1D6"/><stop offset=".35" stop-color="#FFD39B"/><stop offset=".7" stop-color="#FFA97E" stop-opacity=".55"/><stop offset="1" stop-color="#F5767C" stop-opacity="0"/></radialGradient>
+          <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5767C"/><stop offset=".4" stop-color="#FF9A8E"/><stop offset=".75" stop-color="#E56FA3"/><stop offset="1" stop-color="#B04E87"/></linearGradient>
+          <clipPath id="clip"><path id="bodyP" d="M111 11C119 21 131 49 148 75C169 109 179 146 173 180C167 215 141 239 100 239C59 239 33 215 27 180C21 146 31 109 52 77C70 50 92 33 102 19C105 14 108 10 111 11Z"/></clipPath>
+        </defs>
+        <g class="fin fin-l"><path d="M0 -9C15 -9 16 31 0 43C-16 31 -15 -9 0 -9Z" fill="#B04E87" stroke="#FFB48A" stroke-opacity=".7"/></g>
+        <g class="fin fin-r"><path d="M0 -9C15 -9 16 31 0 43C-16 31 -15 -9 0 -9Z" fill="#B04E87" stroke="#FFB48A" stroke-opacity=".7"/></g>
+        <g class="body">
+          <path d="M111 11C119 21 131 49 148 75C169 109 179 146 173 180C167 215 141 239 100 239C59 239 33 215 27 180C21 146 31 109 52 77C70 50 92 33 102 19C105 14 108 10 111 11Z" fill="url(#bg)"/>
+          <g clip-path="url(#clip)">
+            <circle class="core" cx="103" cy="78" r="62" fill="url(#core)"/>
+            <path d="M111 11C119 21 131 49 148 75C169 109 179 146 173 180C167 215 141 239 100 239C59 239 33 215 27 180C21 146 31 109 52 77C70 50 92 33 102 19C105 14 108 10 111 11Z" fill="none" stroke="url(#rim)" stroke-width="4" opacity=".55"/>
+          </g>
+          <g class="face">
+            <g class="eyes">
+              <g class="eye eye-l"><ellipse cx="78" cy="148" rx="14" ry="18" fill="#FFF4E0"/><circle class="pupil" cx="78" cy="150" r="8.5" fill="#3A1A45"/><circle class="pupil-hi" cx="81" cy="146" r="2.6" fill="#fff"/></g>
+              <g class="eye eye-r"><ellipse cx="122" cy="148" rx="14" ry="18" fill="#FFF4E0"/><circle class="pupil" cx="122" cy="150" r="8.5" fill="#3A1A45"/><circle class="pupil-hi" cx="125" cy="146" r="2.6" fill="#fff"/></g>
+              
+            </g>
+            <g class="joyeyes"><path d="M64 152Q78 132 92 152M108 152Q122 132 136 152" fill="none" stroke="#3A1A45" stroke-width="6" stroke-linecap="round"/></g>
+            <g class="mouths">
+              <path class="m m-listen" d="M88 190Q100 198 112 190" fill="none" stroke="#3A1A45" stroke-width="5" stroke-linecap="round"/>
+              <path class="m m-think" d="M92 193H110" fill="none" stroke="#3A1A45" stroke-width="5" stroke-linecap="round"/>
+              <path class="m m-joy" d="M80 184Q100 214 120 184Z" fill="#3A1A45" stroke="#3A1A45" stroke-width="4" stroke-linejoin="round"/>
+              <path class="m m-rest" d="M89 190Q100 197 111 190" fill="none" stroke="#3A1A45" stroke-width="4.5" stroke-linecap="round"/>
+            </g>
+            <g class="cheeks"><circle cx="58" cy="176" r="9" fill="#FF8A66" opacity=".55"/><circle cx="142" cy="176" r="9" fill="#FF8A66" opacity=".55"/></g>
+          </g>
+        </g>
+        <g class="dots"><circle cx="146" cy="38" r="3.5"/><circle cx="156" cy="26" r="5"/><g class="cloud"><path d="M158 8a12 12 0 0 1 8-12a15 15 0 0 1 26-3a13 13 0 0 1 8 16a10 10 0 0 1-8 10H168a11 11 0 0 1-10-11z"/><circle class="th" cx="170" cy="4" r="3"/><circle class="th" cx="181" cy="4" r="3"/><circle class="th" cx="192" cy="4" r="3"/></g></g>
+      </svg>
+      </button>
+      <div class="lamp-say" aria-live="polite">
+        <p class="lamp-state" id="lampState"></p>
+        <p class="lamp-sub" id="lampSub"></p>
+      </div>
+      <div class="demo" id="demo" role="group" data-i-aria="demoAria" aria-label="Стан Люмо (демо)" hidden>
+        <p class="demo-h" data-i="demoDay">День</p>
+        <button type="button" data-day="far" aria-pressed="true" data-i="dFar">Урок за 2 год</button>
+        <button type="button" data-day="near" aria-pressed="false" data-i="dNear">Урок за 8 хв</button>
+        <p class="demo-h" data-i="demoEmo">Люмо</p>
+        <button type="button" data-emo="rest" aria-pressed="true" data-i="eRest">Відпочиває</button>
+        <button type="button" data-emo="wait" aria-pressed="false" data-i="eWait">Чекає урок</button>
+        <button type="button" data-emo="joy" aria-pressed="false" data-i="eJoy">Радіє</button>
+        <button type="button" data-emo="think" aria-pressed="false" data-i="eThink">Думає</button>
+      </div>
+    </aside>
+  </section>
+
+  <nav class="jump" aria-label="Розділи" id="jump">
+    <a href="#book" data-i="bookH">Запис на урок</a>
+    <a href="#mine" data-i="mineH">Мої записи</a>
+    <a href="#mats" data-i="matsH">Матеріали</a>
+    <a href="#prog" data-i="progH">Прогрес</a>
+  </nav>
+
+  <main class="grid">
+    <section class="panel" id="book" aria-labelledby="bookT">
+      <h2 id="bookT" data-i="bookH">Запис на урок</h2>
+      <p class="panel-note" id="bookNote"></p>
+      <ul class="slots" id="slots"></ul>
+    </section>
+
+    <section class="panel" id="mine" aria-labelledby="mineT">
+      <h2 id="mineT" data-i="mineH">Мої записи</h2>
+      <p class="rule" data-i="rule">Безкоштовно скасувати можна не пізніше ніж за 12 годин до початку. Пізніше урок вважається проведеним.</p>
+      <p class="status" id="status" role="status"></p>
+      <ul class="mine" id="mine-list"></ul>
+    </section>
+
+    <section class="panel" id="mats" aria-labelledby="matsT">
+      <h2 id="matsT" data-i="matsH">Матеріали до уроків</h2>
+      <ul class="mats" id="mats-list"></ul>
+    </section>
+
+    <section class="panel" id="prog" aria-labelledby="progT">
+      <h2 id="progT" data-i="progH">Прогрес</h2>
+      <p class="level"><span class="level-k" data-i="levelK">Ваш рівень</span><b>B1</b><span id="levelW"></span></p>
+      <ol class="cefr" id="cefr" aria-label="CEFR"></ol>
+      <h3 data-i="doneH">Що вже виходить</h3>
+      <ul class="plain" id="doneL"></ul>
+      <h3 data-i="nextUp">Що далі</h3>
+      <ul class="plain" id="nextL"></ul>
+      <p class="rule" data-i="progNote">Нотатки оновлює викладач після кожного місяця занять.</p>
+    </section>
+  </main>
+
+  <div class="sticky" id="sticky" hidden>
+    <div class="st-info"><b id="stTitle"></b><span id="stWhen"></span></div>
+    <a class="btn-main" id="enter2" href="../В3-комната/index.html" aria-disabled="true" tabindex="-1"></a>
+  </div>
+
+  <footer class="foot"><p data-i="privacy">Тут видно лише ваші дані. Інших учнів і контакти викладачів ви не бачите: у викладача відображається тільки ім’я та роль.</p></footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

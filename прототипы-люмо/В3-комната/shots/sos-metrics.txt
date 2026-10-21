@@ -1,0 +1,82 @@
+== desktop 1440x900 uk ==
+ оранжевая заливка вне SOS: ['check:Перевірити']
+  из эмоции listen: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции think: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции joy: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции rest: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+ экран А: {"step": "choose", "dlg": [480, 185, 480, 530], "vw": 1440, "vh": 900, "sw": 1440, "backdrop": ["rgba(20, 12, 24, 0.7)", "blur(10px)"], "text": "Що трапилось? | Урок для інших триватиме. Дорослий почує тебе одразу. | Щось не працює | Мені незручно чи страшно | Інше | Покликати дорослого | Вийти з уроку | Залишитись"}
+  мин. шрифт в диалоге: 18
+  страница: scrollWidth 1440 против окна 1440
+  худший контраст текста в диалоге (А): 9.77:1
+  главная кнопка [510, 526, 420, 56] bg rgb(92, 225, 230) текст rgb(42, 26, 46); «Вийти» [510, 637, 170, 48] bg rgba(0, 0, 0, 0) border rgb(214, 195, 206)
+  зазор главная→«Вийти»: 55 px; цвет SOS отличается от оранжевого: aqua rgb(92, 225, 230) vs акцент rgb(255, 122, 69)
+ экран Б: {"step": "called", "emo": "sos", "lamp": "Люмо поруч / Дорослий уже йде до тебе.", "text": "Тебе почули, дорослий іде | Лишайся на місці. Урок для інших триває. | Добре | Тебе почули, дорослий іде.", "focus": "sosOk", "dlg": [480, 349, 480, 203], "sw": 1440}
+  слово «демо/demo» в диалоге Б: False; экран А (с кнопкой вызова) виден на Б: False
+  видимые кнопки на Б: ['Добре']
+  мин. шрифт Б: 18
+  худший контраст текста Б: 14.40:1
+ после закрытия: emo rest
+ CLS 0.0153; ошибок консоли 0 []; внешних запросов 0
+ оранжевая заливка при открытом SOS (вся страница): ['check:Перевірити']
+== desktop 1440x900 en ==
+ оранжевая заливка вне SOS: ['check:Check']
+  из эмоции listen: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции think: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции joy: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции rest: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+ экран А: {"step": "choose", "dlg": [480, 185, 480, 530], "vw": 1440, "vh": 900, "sw": 1440, "backdrop": ["rgba(20, 12, 24, 0.7)", "blur(10px)"], "text": "What happened? | The lesson goes on for the others. A grown-up will hear you right away. | Something does not work | I feel uneasy or scared | Something else | Call a grown-up | Leave the lesson | Stay"}
+  мин. шрифт в диалоге: 18
+  страница: scrollWidth 1440 против окна 1440
+  худший контраст текста в диалоге (А): 9.77:1
+  главная кнопка [510, 526, 420, 56] bg rgb(92, 225, 230) текст rgb(42, 26, 46); «Вийти» [510, 637, 190, 48] bg rgba(0, 0, 0, 0) border rgb(214, 195, 206)
+  зазор главная→«Вийти»: 55 px; цвет SOS отличается от оранжевого: aqua rgb(92, 225, 230) vs акцент rgb(255, 122, 69)
+ экран Б: {"step": "called", "emo": "sos", "lamp": "Lumo is here / A grown-up is on the way.", "text": "We heard you, a grown-up is coming | Stay where you are. The lesson goes on for the others. | OK | We heard you, a grown-up is coming.", "focus": "sosOk", "dlg": [480, 317, 480, 266], "sw": 1440}
+  слово «демо/demo» в диалоге Б: False; экран А (с кнопкой вызова) виден на Б: False
+  видимые кнопки на Б: ['OK']
+  мин. шрифт Б: 18
+  худший контраст текста Б: 14.40:1
+ после закрытия: emo rest
+ CLS 0.0000; ошибок консоли 0 []; внешних запросов 0
+ оранжевая заливка при открытом SOS (вся страница): ['check:Check']
+== phone 390x844 uk ==
+ оранжевая заливка вне SOS: ['check:Перевірити']
+  из эмоции listen: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции think: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции joy: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции rest: room.emo=sos; Люмо: Люмо поруч / Ти не сам. Можна покликати дорослого.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+ экран А: {"step": "choose", "dlg": [0, 333, 390, 511], "vw": 390, "vh": 844, "sw": 390, "backdrop": ["rgba(20, 12, 24, 0.7)", "blur(10px)"], "text": "Що трапилось? | Урок для інших триватиме. Дорослий почує тебе одразу. | Щось не працює | Мені незручно чи страшно | Інше | Покликати дорослого | Вийти з уроку | Залишитись"}
+  мин. шрифт в диалоге: 18
+  страница: scrollWidth 390 против окна 390
+  худший контраст текста в диалоге (А): 9.77:1
+  главная кнопка [16, 665, 358, 56] bg rgb(92, 225, 230) текст rgb(42, 26, 46); «Вийти» [16, 772, 170, 48] bg rgba(0, 0, 0, 0) border rgb(214, 195, 206)
+  зазор главная→«Вийти»: 51 px; цвет SOS отличается от оранжевого: aqua rgb(92, 225, 230) vs акцент rgb(255, 122, 69)
+  панель снизу: низ 844 из 844, ширина 390 из 390
+ экран Б: {"step": "called", "emo": "sos", "lamp": "Люмо поруч / Дорослий уже йде до тебе.", "text": "Тебе почули, дорослий іде | Лишайся на місці. Урок для інших триває. | Добре | Тебе почули, дорослий іде.", "focus": "sosOk", "dlg": [0, 630, 390, 214], "sw": 390}
+  слово «демо/demo» в диалоге Б: False; экран А (с кнопкой вызова) виден на Б: False
+  видимые кнопки на Б: ['Добре']
+  мин. шрифт Б: 18
+  худший контраст текста Б: 14.40:1
+ после закрытия: emo rest
+ CLS 0.0000; ошибок консоли 0 []; внешних запросов 0
+ оранжевая заливка при открытом SOS (вся страница): ['check:Перевірити']
+== phone 390x844 en ==
+ оранжевая заливка вне SOS: ['check:Check']
+  из эмоции listen: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции think: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции joy: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+  из эмоции rest: room.emo=sos; Люмо: Lumo is here / You are not alone. You can call a grown-up.; сдвиг Люмо при входе в SOS 0.00 px; фокус sosOwner
+ экран А: {"step": "choose", "dlg": [0, 333, 390, 511], "vw": 390, "vh": 844, "sw": 390, "backdrop": ["rgba(20, 12, 24, 0.7)", "blur(10px)"], "text": "What happened? | The lesson goes on for the others. A grown-up will hear you right away. | Something does not work | I feel uneasy or scared | Something else | Call a grown-up | Leave the lesson | Stay"}
+  мин. шрифт в диалоге: 18
+  страница: scrollWidth 390 против окна 390
+  худший контраст текста в диалоге (А): 9.77:1
+  главная кнопка [16, 665, 358, 56] bg rgb(92, 225, 230) текст rgb(42, 26, 46); «Вийти» [16, 772, 190, 48] bg rgba(0, 0, 0, 0) border rgb(214, 195, 206)
+  зазор главная→«Вийти»: 51 px; цвет SOS отличается от оранжевого: aqua rgb(92, 225, 230) vs акцент rgb(255, 122, 69)
+  панель снизу: низ 844 из 844, ширина 390 из 390
+ экран Б: {"step": "called", "emo": "sos", "lamp": "Lumo is here / A grown-up is on the way.", "text": "We heard you, a grown-up is coming | Stay where you are. The lesson goes on for the others. | OK | We heard you, a grown-up is coming.", "focus": "sosOk", "dlg": [0, 597, 390, 247], "sw": 390}
+  слово «демо/demo» в диалоге Б: False; экран А (с кнопкой вызова) виден на Б: False
+  видимые кнопки на Б: ['OK']
+  мин. шрифт Б: 18
+  худший контраст текста Б: 14.40:1
+ после закрытия: emo rest
+ CLS 0.0000; ошибок консоли 0 []; внешних запросов 0
+ оранжевая заливка при открытом SOS (вся страница): ['check:Check']

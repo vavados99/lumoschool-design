@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMOSCHOOL · Кабінет викладача</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page" id="page" data-emo="wait" data-demo="open">
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="#today" aria-label="LUMOSCHOOL"><img class="logo" src="assets/lumo-v5r7-wordmark.svg" alt="LUMOSCHOOL" width="222" height="43"></a>
+    <button type="button" class="avatar" id="avatarBtn" aria-expanded="false" aria-controls="menu"></button>
+    <div class="menu" id="menu">
+      <div class="who" id="who"></div>
+      <div class="mgrp"><span class="mlab" id="tzLab"></span><div class="seg" role="group" id="tzSeg" aria-labelledby="tzLab"></div></div>
+      <div class="mgrp"><span class="mlab" id="lgLab"></span><div class="seg" role="group" aria-labelledby="lgLab">
+        <button type="button" data-lang="uk" aria-pressed="true">UK</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div></div>
+      <details class="dev" id="dev">
+        <summary id="devSum"></summary>
+        <div class="dev-body"><span class="mlab" id="devLab"></span><div class="seg" role="group" id="devSeg" aria-labelledby="devLab"></div></div>
+      </details>
+    </div>
+  </header>
+
+  <nav class="nav" id="nav" aria-label="Sections"></nav>
+
+  <main class="main" id="main" tabindex="-1">
+
+    <!-- Головний блок: сьогоднішній день викладача. Єдине джерело світла — Люмо всередині картки уроку. -->
+    <section class="today" id="today" aria-labelledby="todayH">
+      <div class="lesson-card" id="lessonCard"></div>
+      <div class="day" id="day"></div>
+    </section>
+
+    <section class="sec" id="week" aria-labelledby="weekH"></section>
+    <section class="sec" id="groups" aria-labelledby="groupsH"></section>
+    <section class="sec" id="plan" aria-labelledby="planH"></section>
+    <section class="sec" id="notes" aria-labelledby="notesH"></section>
+    <section class="sec" id="swap" aria-labelledby="swapH"></section>
+
+    <footer class="foot" id="foot"></footer>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

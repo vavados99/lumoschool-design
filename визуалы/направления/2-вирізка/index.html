@@ -1,0 +1,69 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><title>LUMOSCHOOL · 2 Вирізка</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Rubik+Mono+One&family=Oswald:wght@500;700&family=Unbounded:wght@500;700;800&family=Caveat:wght@600;700&family=Onest:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#EFE6D2}
+body{width:1512px;font-family:'Onest',sans-serif;color:#111}
+.hero{position:relative;width:1512px;height:830px;overflow:hidden;background:#EFE6D2}
+.paper{position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 40%,rgba(255,255,255,.5),rgba(120,90,40,.16));z-index:0}
+.noise{position:absolute;inset:0;opacity:.5;z-index:1;mix-blend-mode:multiply;pointer-events:none}
+.bar{position:absolute;left:0;right:0;top:0;height:52px;background:#111;color:#EFE6D2;display:flex;align-items:center;justify-content:space-between;padding:0 40px;font:500 13px 'JetBrains Mono';letter-spacing:.1em;z-index:5}
+.tape{position:absolute;width:120px;height:36px;background:rgba(255,226,120,.72);box-shadow:0 1px 0 rgba(0,0,0,.08);z-index:6;mix-blend-mode:multiply}
+.card{position:absolute;width:340px;height:196px;background:#fff;padding:22px 26px;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.25)) drop-shadow(0 14px 16px rgba(0,0,0,.18));background-image:repeating-linear-gradient(transparent 0 33px,#9DB7E8 33px 34px);background-position:0 54px}
+.card:before{content:'';position:absolute;left:54px;top:0;bottom:0;width:2px;background:#E4322B;opacity:.7}
+.card b{display:block;font:italic 900 54px/1 'Playfair Display';margin-left:28px}
+.card i{position:absolute;right:18px;top:10px;font:700 13px 'JetBrains Mono';font-style:normal;letter-spacing:.12em;color:#444}
+</style></head><body>
+<section class="hero" id="h">
+<div class="paper"></div>
+<svg class="noise" width="1512" height="830"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" seed="4"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .55 -.12"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<div class="bar"><span>LUMOSCHOOL · ШКОЛА АНГЛІЙСЬКОЇ</span><span>УРОКИ &nbsp;&nbsp; ДІТИ &nbsp;&nbsp; ДОРОСЛІ &nbsp;&nbsp; ЦІНИ &nbsp;&nbsp; УВІЙТИ</span></div>
+</section>
+<section id="strip"></section>
+<script src="../shared/weather.js"></script>
+<script>
+const hero=document.getElementById('h');
+let s=77; const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647};
+function torn(w,h,j=5){const p=[],n=Math.max(5,Math.round(w/24)),m=Math.max(5,Math.round(h/24));
+ for(let i=0;i<=n;i++)p.push([i*w/n,rnd()*j]);for(let i=1;i<=m;i++)p.push([w-rnd()*j,i*h/m]);
+ for(let i=n-1;i>=0;i--)p.push([i*w/n,h-rnd()*j]);for(let i=m-1;i>0;i--)p.push([rnd()*j,i*h/m]);
+ return 'polygon('+p.map(a=>a[0].toFixed(1)+'px '+a[1].toFixed(1)+'px').join(',')+')'}
+function tornCircle(w,h,j=5){const p=[],n=46;for(let i=0;i<n;i++){const a=i/n*Math.PI*2,rx=w/2-rnd()*j,ry=h/2-rnd()*j;p.push([w/2+Math.cos(a)*rx,h/2+Math.sin(a)*ry])}
+ return 'polygon('+p.map(a=>a[0].toFixed(1)+'px '+a[1].toFixed(1)+'px').join(',')+')'}
+function piece(o){const d=document.createElement('div');
+ d.style.cssText=`position:absolute;left:${o.x}px;top:${o.y}px;width:${o.w}px;height:${o.h}px;transform:rotate(${o.rot}deg);z-index:${o.z||3};filter:drop-shadow(2px 3px 0 rgba(0,0,0,.28)) drop-shadow(0 14px 14px rgba(0,0,0,.2))`;
+ const i=document.createElement('div');
+ i.style.cssText=`width:100%;height:100%;background:${o.bg};color:${o.color};display:flex;align-items:center;justify-content:center;font-family:'${o.font}';font-weight:${o.weight||700};font-size:${o.size}px;line-height:1;${o.italic?'font-style:italic;':''}${o.ls?'letter-spacing:'+o.ls+';':''}clip-path:${o.round?tornCircle(o.w,o.h):torn(o.w,o.h)};padding-bottom:${o.pb||0}px`;
+ i.innerHTML=o.text;d.appendChild(i);hero.appendChild(d)}
+// LUMO
+piece({x:58,y:84,w:196,h:268,rot:-4,bg:'#fff',color:'#111',font:'Playfair Display',weight:900,size:290,text:'L',pb:18});
+piece({x:262,y:62,w:206,h:252,rot:3,bg:'#E4322B',color:'#fff',font:'Rubik Mono One',weight:400,size:200,text:'U'});
+piece({x:476,y:96,w:276,h:252,rot:-2,bg:'#FFD21F',color:'#111',font:'Unbounded',weight:800,size:196,text:'M'});
+piece({x:760,y:54,w:236,h:236,rot:5,bg:'#1F3BFF',color:'#fff',font:'Playfair Display',weight:900,italic:1,size:260,text:'O',round:1,pb:16});
+// SCHOOL
+piece({x:70,y:384,w:122,h:154,rot:2,bg:'#111',color:'#FFD21F',font:'Oswald',weight:700,size:150,text:'S'});
+piece({x:198,y:398,w:124,h:142,rot:-3,bg:'#fff',color:'#E4322B',font:'Playfair Display',weight:900,size:132,text:'C'});
+piece({x:330,y:374,w:134,h:152,rot:2,bg:'#1FA971',color:'#fff',font:'Unbounded',weight:800,size:104,text:'H'});
+piece({x:470,y:402,w:132,h:132,rot:-4,bg:'#FF7AB6',color:'#111',font:'Rubik Mono One',weight:400,size:104,text:'O',round:1});
+piece({x:608,y:380,w:122,h:154,rot:3,bg:'#fff',color:'#1F3BFF',font:'Oswald',weight:700,size:152,text:'O'});
+piece({x:736,y:398,w:122,h:142,rot:-2,bg:'#E4322B',color:'#fff',font:'Playfair Display',weight:900,italic:1,size:138,text:'L'});
+// handwritten
+const hw=document.createElement('div');hw.style.cssText="position:absolute;left:84px;top:562px;font:700 50px/1.05 'Caveat';transform:rotate(-2deg);z-index:4;width:760px";
+hw.innerHTML='школа англійської, де говорять<br>з першого уроку <svg width="300" height="26" style="vertical-align:-14px"><path d="M2 14 Q 20 2 40 14 T 80 14 T 120 14 T 160 14 T 200 14 T 240 14 T 290 12" stroke="#E4322B" stroke-width="5" fill="none" stroke-linecap="round"/></svg>';hero.appendChild(hw);
+// cut line + scissors
+hero.insertAdjacentHTML('beforeend',`<svg style="position:absolute;left:0;top:0;z-index:4" width="1512" height="830"><line x1="40" y1="546" x2="800" y2="546" stroke="#111" stroke-width="2" stroke-dasharray="10 9" opacity=".6"/><g transform="translate(820 546) rotate(-8)" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"><circle cx="30" cy="-14" r="9"/><circle cx="30" cy="14" r="9"/><line x1="22" y1="-10" x2="-30" y2="8"/><line x1="22" y1="10" x2="-30" y2="-8"/></g></svg>`);
+// CTA
+piece({x:84,y:702,w:400,h:92,rot:-1,bg:'#111',color:'#EFE6D2',font:'Unbounded',weight:700,size:27,text:'Пробний урок →',z:4,ls:'-.01em'});
+const note=document.createElement('div');note.style.cssText="position:absolute;left:520px;top:726px;font:700 16px 'JetBrains Mono';letter-spacing:.1em;z-index:4;transform:rotate(1.5deg);background:#FFD21F;padding:8px 12px;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.25))";note.textContent='ЖИВІ УРОКИ · МАЛІ ГРУПИ';hero.appendChild(note);
+// phrase cards
+const cards=[['Привіт!','UA · УКРАЇНСЬКА',1032,150,-6],['Cześć!','PL · POLSKI',1100,230,3],['Hello!','EN · ENGLISH',1048,310,-4],['Hallo!','DE · DEUTSCH',1112,390,5],['Ahoj!','CS · ČEŠTINA',1040,470,-3],['Привет!','RU · РУССКИЙ',1100,550,2]];
+cards.forEach((c,i)=>{const d=document.createElement('div');d.className='card';d.style.cssText=`left:${c[2]}px;top:${c[3]}px;transform:rotate(${c[4]}deg);z-index:${3+i}`;
+ d.innerHTML=`<b>${c[0]}</b><i>${c[1]}</i>`;hero.appendChild(d)});
+// UA card highlight: marker underline + label
+hero.insertAdjacentHTML('beforeend',`<svg style="position:absolute;left:1078px;top:212px;z-index:12;transform:rotate(-6deg)" width="300" height="30"><path d="M4 14 Q 40 2 80 14 T 160 14 T 240 12 T 292 14" stroke="#E4322B" stroke-width="6" fill="none" stroke-linecap="round"/></svg><div style="position:absolute;left:1372px;top:92px;z-index:12;font:700 30px 'Caveat';transform:rotate(7deg);color:#E4322B;width:130px;line-height:1">твоя мова<br>тицяй ↙</div>`);
+// sticker
+hero.insertAdjacentHTML('beforeend',`<svg style="position:absolute;left:846px;top:608px;z-index:9;transform:rotate(12deg);filter:drop-shadow(2px 3px 0 rgba(0,0,0,.25)) drop-shadow(0 10px 12px rgba(0,0,0,.2))" width="196" height="196" viewBox="0 0 196 196"><circle cx="98" cy="98" r="96" fill="#FFD21F"/><circle cx="98" cy="98" r="62" fill="none" stroke="#111" stroke-width="2"/><defs><path id="cp" d="M98 98 m-80 0 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0"/></defs><text font-family="Unbounded" font-weight="700" font-size="16" letter-spacing="3.2" fill="#111"><textPath href="#cp">6 МОВ САЙТУ · 6 МОВ САЙТУ · 6 МОВ САЙТУ ·</textPath></text><text x="98" y="118" text-anchor="middle" font-family="Playfair Display" font-style="italic" font-weight="900" font-size="72" fill="#E4322B">6</text></svg>`);
+// tapes
+[[40,92,-32],[236,66,18],[1180,128,-12],[1260,640,22],[120,710,-18],[460,712,14]].forEach(t=>{const d=document.createElement('div');d.className='tape';d.style.cssText+=`;left:${t[0]}px;top:${t[1]}px;transform:rotate(${t[2]}deg)`;hero.appendChild(d)});
+weatherStrip(document.getElementById('strip'),{bg:'#EFE6D2',card:'#fff',fg:'#111',accent:'#E4322B',accent2:'#FFD21F',font:'Playfair Display',btnfg:'#fff',sig:k=>`<div style="position:absolute;left:${k==='kids'?'38%':k==='teens'?'62%':'66%'};top:${k==='teens'?'-4px':'2px'};width:96px;height:28px;background:rgba(255,226,120,.85);transform:rotate(${k==='teens'?5:-4}deg);z-index:3"></div>`});
+</script></body></html>

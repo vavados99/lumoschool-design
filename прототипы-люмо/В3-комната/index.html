@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMOSCHOOL · Кімната уроку</title>
+<meta name="theme-color" content="#1E1424">
+<link rel="stylesheet" href="fonts.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="room" id="room" data-emo="listen" data-tab="board">
+  <div class="light" id="light" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="brand" href="#" aria-label="LUMOSCHOOL"><img class="logo" src="assets/lumoschool-logo.svg" alt="LUMOSCHOOL" width="222" height="40"></a>
+    <p class="lesson" id="lessonTitle" data-i="lesson">Урок · Present Simple</p>
+    <div class="top-r">
+      <p class="rec" role="status"><span class="rec-dot" aria-hidden="true"></span><span data-i="recOff">Запис вимкнено</span></p>
+      <div class="langs" role="group" aria-label="Мова інтерфейсу">
+        <button type="button" data-lang="uk" aria-pressed="true">UA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="sos" id="sos"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M8 3H4v14h4M8 10h9M13.5 6.5L17 10l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="sos">Вийти / покликати власника</span></button>
+    </div>
+  </header>
+
+  <!-- Люмо: лампа кімнати -->
+  <aside class="lamp" id="lamp">
+    <button type="button" class="lumo-btn" id="lumoBtn" aria-haspopup="true" aria-expanded="false" data-i-aria="lumoAria" aria-label="Люмо. Натисни, щоб змінити стан (демо)">
+      <svg class="lumo" id="lumo" viewBox="0 0 200 250" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E5625E"/><stop offset=".35" stop-color="#F5767C"/><stop offset=".6" stop-color="#D9558F"/><stop offset="1" stop-color="#6A3F7E"/></linearGradient>
+          <radialGradient id="core" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF1D6"/><stop offset=".35" stop-color="#FFD39B"/><stop offset=".7" stop-color="#FFA97E" stop-opacity=".55"/><stop offset="1" stop-color="#F5767C" stop-opacity="0"/></radialGradient>
+          <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5767C"/><stop offset=".4" stop-color="#FF9A8E"/><stop offset=".75" stop-color="#E56FA3"/><stop offset="1" stop-color="#B04E87"/></linearGradient>
+          <clipPath id="clip"><path id="bodyP" d="M111 11C119 21 131 49 148 75C169 109 179 146 173 180C167 215 141 239 100 239C59 239 33 215 27 180C21 146 31 109 52 77C70 50 92 33 102 19C105 14 108 10 111 11Z"/></clipPath>
+        </defs>
+        <g class="fin fin-l"><path d="M0 -9C15 -9 16 31 0 43C-16 31 -15 -9 0 -9Z" fill="#B04E87" stroke="#FFB48A" stroke-opacity=".7"/></g>
+        <g class="fin fin-r"><path d="M0 -9C15 -9 16 31 0 43C-16 31 -15 -9 0 -9Z" fill="#B04E87" stroke="#FFB48A" stroke-opacity=".7"/></g>
+        <g class="body">
+          <path d="M111 11C119 21 131 49 148 75C169 109 179 146 173 180C167 215 141 239 100 239C59 239 33 215 27 180C21 146 31 109 52 77C70 50 92 33 102 19C105 14 108 10 111 11Z" fill="url(#bg)"/>
+          <g clip-path="url(#clip)">
+            <circle class="core" cx="103" cy="78" r="62" fill="url(#core)"/>
+            <path d="M111 11C119 21 131 49 148 75C169 109 179 146 173 180C167 215 141 239 100 239C59 239 33 215 27 180C21 146 31 109 52 77C70 50 92 33 102 19C105 14 108 10 111 11Z" fill="none" stroke="url(#rim)" stroke-width="4" opacity=".55"/>
+          </g>
+          <g class="face">
+            <g class="eyes">
+              <g class="eye eye-l"><ellipse cx="78" cy="148" rx="14" ry="18" fill="#FFF4E0"/><circle class="pupil" cx="78" cy="150" r="8.5" fill="#3A1A45"/><circle class="pupil-hi" cx="81" cy="146" r="2.6" fill="#fff"/></g>
+              <g class="eye eye-r"><ellipse cx="122" cy="148" rx="14" ry="18" fill="#FFF4E0"/><circle class="pupil" cx="122" cy="150" r="8.5" fill="#3A1A45"/><circle class="pupil-hi" cx="125" cy="146" r="2.6" fill="#fff"/></g>
+              
+            </g>
+            <g class="joyeyes"><path d="M64 152Q78 132 92 152M108 152Q122 132 136 152" fill="none" stroke="#3A1A45" stroke-width="6" stroke-linecap="round"/></g>
+            <g class="mouths">
+              <path class="m m-listen" d="M88 190Q100 198 112 190" fill="none" stroke="#3A1A45" stroke-width="5" stroke-linecap="round"/>
+              <path class="m m-think" d="M92 193H110" fill="none" stroke="#3A1A45" stroke-width="5" stroke-linecap="round"/>
+              <path class="m m-joy" d="M80 184Q100 214 120 184Z" fill="#3A1A45" stroke="#3A1A45" stroke-width="4" stroke-linejoin="round"/>
+              <path class="m m-rest" d="M89 190Q100 197 111 190" fill="none" stroke="#3A1A45" stroke-width="4.5" stroke-linecap="round"/>
+            </g>
+            <g class="cheeks"><circle cx="58" cy="176" r="9" fill="#FF8A66" opacity=".55"/><circle cx="142" cy="176" r="9" fill="#FF8A66" opacity=".55"/></g>
+          </g>
+        </g>
+        <g class="dots"><circle cx="146" cy="38" r="3.5"/><circle cx="156" cy="26" r="5"/><g class="cloud"><path d="M158 8a12 12 0 0 1 8-12a15 15 0 0 1 26-3a13 13 0 0 1 8 16a10 10 0 0 1-8 10H168a11 11 0 0 1-10-11z"/><circle class="th" cx="170" cy="4" r="3"/><circle class="th" cx="181" cy="4" r="3"/><circle class="th" cx="192" cy="4" r="3"/></g></g>
+      </svg>
+    </button>
+    <div class="lamp-say" aria-live="polite">
+      <p class="lamp-state" id="lampState">Люмо слухає</p>
+      <p class="lamp-sub" id="lampSub">Говорить Олена. Люмо мовчить і світить.</p>
+    </div>
+    <div class="demo" id="demo" role="group" aria-label="Стан Люмо (демо)" hidden>
+      <button type="button" data-emo="listen" aria-pressed="true" data-i="eListen">Слухає</button>
+      <button type="button" data-emo="think" aria-pressed="false" data-i="eThink">Думає</button>
+      <button type="button" data-emo="joy" aria-pressed="false" data-i="eJoy">Радіє</button>
+      <button type="button" data-emo="rest" aria-pressed="false" data-i="eRest">Чекає</button>
+    </div>
+    <p class="clock"><span data-i="elapsed">Іде</span> <time id="clock">00:23</time></p>
+  </aside>
+
+  <!-- Учасники: арки -->
+  <section class="people" aria-label="Учасники уроку" id="people">
+    <figure class="arch arch-t speaking" data-who="t"><div class="arch-in"><span class="ini">ОК</span><span class="cam" data-i="camOff">Камера вимкнена</span></div><figcaption><b>Олена К.</b><span data-i="teacher">викладачка</span></figcaption></figure>
+    <figure class="arch arch-s1" data-who="s1"><div class="arch-in"><span class="ini">МЛ</span></div><figcaption><b>Марко Л.</b><span class="mic" data-i="muted">мікрофон вимкнено</span></figcaption></figure>
+    <figure class="arch arch-s2" data-who="s2"><div class="arch-in"><span class="ini">СР</span></div><figcaption><b>Софія Р.</b><span class="mic" data-i="muted">мікрофон вимкнено</span></figcaption></figure>
+  </section>
+
+  <!-- Дошка -->
+  <main class="board" id="board" aria-label="Дошка">
+    <div class="board-head">
+      <h2 data-i="boardH">Дошка</h2>
+      <p class="hint" data-i="boardHint">Завдання від викладачки · демо</p>
+    </div>
+    <div class="ex-wrap">
+      <section class="ex" id="ex1" aria-labelledby="ex1h">
+        <p class="ex-n" id="ex1h"><span>1</span><i data-i="ex1t">Вибери слово</i></p>
+        <p class="ex-q">She <span class="gap" id="gap1" aria-live="polite">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> to school every day.</p>
+        <div class="opts" id="opts1" role="group" aria-label="Варіанти">
+          <button type="button" data-v="go">go</button>
+          <button type="button" data-v="goes">goes</button>
+          <button type="button" data-v="going">going</button>
+        </div>
+        <p class="fb" id="fb1" role="status"></p>
+      </section>
+      <section class="ex" id="ex2" aria-labelledby="ex2h">
+        <p class="ex-n" id="ex2h"><span>2</span><i data-i="ex2t">Склади речення</i></p>
+        <p class="built" id="built" aria-live="polite"></p>
+        <div class="opts" id="pool" role="group" aria-label="Слова"></div>
+        <div class="ex-act">
+          <button type="button" class="btn-main" id="check" data-i="check">Перевірити</button>
+          <button type="button" class="btn-ghost" id="reset" data-i="reset">Спочатку</button>
+        </div>
+        <p class="fb" id="fb2" role="status"></p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Чат -->
+  <section class="chat" id="chat" aria-label="Чат уроку">
+    <h2 class="chat-h"><span data-i="chatH">Чат уроку</span><small data-i="chatNote">лише в цій кімнаті</small></h2>
+    <ol class="msgs" id="msgs" tabindex="0" aria-live="polite"></ol>
+    <form class="send" id="sendForm" autocomplete="off">
+      <label class="sr" for="msgIn" data-i="msgLabel">Повідомлення</label>
+      <input id="msgIn" type="text" maxlength="200" data-i-ph="msgPh" placeholder="Повідомлення…" enterkeyhint="send">
+      <button type="submit" class="btn-main" data-i="send">Надіслати</button>
+    </form>
+  </section>
+
+  <nav class="tabs" aria-label="Розділи">
+    <button type="button" data-tab="board" aria-pressed="true" data-i="tabBoard">Дошка</button>
+    <button type="button" data-tab="chat" aria-pressed="false"><span data-i="tabChat">Чат</span><b class="badge" id="badge" hidden>0</b></button>
+  </nav>
+
+  <dialog class="sheet" id="sosDlg" aria-labelledby="sosH" data-step="choose">
+    <!-- екран А: вибір -->
+    <section class="sos-step" id="sosA">
+      <h2 id="sosH" data-i="sosH">Що трапилось?</h2>
+      <p class="sheet-p" data-i="sosP">Урок для інших триватиме. Дорослий почує тебе одразу.</p>
+      <div class="reasons" id="reasons" role="group" aria-label="Що трапилось?" data-i-aria="sosReasonsAria">
+        <button type="button" aria-pressed="false" data-r="tech" data-i="sosR1">Щось не працює</button>
+        <button type="button" aria-pressed="false" data-r="feel" data-i="sosR2">Мені незручно чи страшно</button>
+        <button type="button" aria-pressed="false" data-r="other" data-i="sosR3">Інше</button>
+      </div>
+      <button type="button" class="btn-sos" id="sosOwner" data-i="sosOwner">Покликати дорослого</button>
+      <div class="sheet-exit">
+        <button type="button" class="btn-line" id="sosLeave" data-i="sosLeave">Вийти з уроку</button>
+        <button type="button" class="btn-ghost" id="sosStay" data-i="sosStay">Залишитись</button>
+      </div>
+    </section>
+    <!-- екран Б: після виклику -->
+    <section class="sos-step" id="sosB" hidden>
+      <h2 id="sosH2" data-i="sosH2">Тебе почули, дорослий іде</h2>
+      <p class="sheet-p" data-i="sosP2">Лишайся на місці. Урок для інших триває.</p>
+      <button type="button" class="btn-line sos-ok" id="sosOk" data-i="sosOk">Добре</button>
+    </section>
+    <p class="sr" id="sosRes" role="status"></p>
+  </dialog>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

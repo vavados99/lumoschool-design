@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUMOSCHOOL · Кабінет батьків</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page" id="page" data-emo="rest">
+  <div class="light" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="#top" aria-label="LUMOSCHOOL"><img class="logo" src="assets/lumoschool-logo.svg" alt="LUMOSCHOOL" width="222" height="40"></a>
+    <div class="tz" id="tz"></div>
+    <div class="seg" role="group" aria-label="Language / Мова">
+      <button type="button" data-lang="uk" aria-pressed="true">UK</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <aside class="rail" id="rail">
+    <div class="lumo-card" id="lumoCard">
+      <div class="lumo-box" id="lumoBox">
+      <svg class="lumo" id="lumo" viewBox="-6 -6 112 112" aria-hidden="true" focusable="false">
+        <g class="tilt">
+          <g class="f-full">
+            <path d="M64.54 6C60.71 14.03 54.97 20.92 56.12 31.25C57.27 40.82 72.19 48.47 74.49 69.51C76.02 85.97 67.22 94 50 94C32.78 94 23.98 85.97 25.51 69.51C26.28 59.95 27.43 52.68 28.19 45.79C28.96 41.2 27.43 35.08 34.31 25.9C35.08 33.93 38.9 38.14 44.64 40.43C43.11 28.57 52.68 18.63 59.57 12.12C61.48 10.21 63.39 8.3 64.54 6Z" fill="#DF5520"/>
+            <path class="core" d="M54.48 35.39C52.48 41.38 59.8 44.71 60.13 53.36C60.47 59.35 56.47 63.01 51.15 63.01C45.82 63.01 42.5 59.68 42.5 54.69C42.5 50.36 46.49 49.03 48.15 46.04C49.82 43.04 48.49 40.71 50.82 38.38C51.81 37.05 53.81 36.72 54.48 35.39Z" fill="#FBEFDF"/>
+            <g class="eyes"><ellipse class="eye eye-l" cx="37.95" cy="68.75" rx="7.27" ry="9.37" fill="#4A1A0E"/><ellipse class="eye eye-r" cx="62.05" cy="68.75" rx="7.27" ry="9.37" fill="#4A1A0E"/><circle class="pupil-hi" cx="40.27" cy="65.37" r="1.45" fill="#FBEFDF"/><circle class="pupil-hi" cx="64.38" cy="65.37" r="1.45" fill="#FBEFDF"/></g>
+          </g>
+          <g class="f-simple">
+            <path d="M64.54 6C60.71 14.03 54.97 20.92 56.12 31.25C57.27 40.82 72.19 48.47 74.49 69.51C76.02 85.97 67.22 94 50 94C32.78 94 23.98 85.97 25.51 69.51C26.28 59.95 27.43 52.68 28.19 45.79C29.34 36.23 38.52 31.25 48.09 23.98C52.68 20.16 56.89 15.95 59.57 12.12C61.48 10.21 63.39 8.3 64.54 6Z" fill="#FF7A45"/>
+            <g class="eyes"><ellipse class="eye eye-l" cx="37.95" cy="68.75" rx="7.27" ry="9.37" fill="#4A1A0E"/><ellipse class="eye eye-r" cx="62.05" cy="68.75" rx="7.27" ry="9.37" fill="#4A1A0E"/></g>
+          </g>
+          <g class="joyeyes"><path d="M30.2 73Q37.95 59 45.7 73M54.3 73Q62.05 59 69.8 73" fill="none" stroke="#4A1A0E" stroke-width="4.2" stroke-linecap="round"/></g>
+        </g>
+        <g class="dots"><circle cx="82" cy="16" r="3.4"/><circle cx="91" cy="6" r="2.8"/><circle cx="97" cy="-2" r="2.2"/></g>
+      </svg>
+      </div>
+      <div class="say" id="say" role="status" aria-live="polite"><b class="say-h" id="sayH"></b><span class="say-t" id="sayT"></span></div>
+    </div>
+    <nav class="nav" id="nav" aria-label="Sections"></nav>
+  </aside>
+
+  <main class="main" id="main" tabindex="-1"></main>
+
+  <div class="scrim" id="scrim" hidden>
+    <div class="dlg" id="dlg" role="alertdialog" aria-modal="true" aria-labelledby="dlgT" aria-describedby="dlgB">
+      <div class="dlg-head"><div class="dlg-lumo" id="dlgLumo" aria-hidden="true"></div><h2 id="dlgT"></h2></div>
+      <p id="dlgB"></p>
+      <ul id="dlgL"></ul>
+      <div class="dlg-act">
+        <button type="button" class="btn-eq" id="dlgKeep"></button>
+        <button type="button" class="btn-eq" id="dlgGo"></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

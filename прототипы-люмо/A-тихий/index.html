@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMOSCHOOL — Люмо проведе</title>
+<meta name="description" content="Англійська без поспіху. Люмо — тихий провідник: дивиться, куди дивишся ти.">
+<meta name="theme-color" content="#EFEAE0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/lumo-layer-body.webp" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500;1,600&family=Onest:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EFEAE0; --paper-hi:#F8F5EE; --ink:#1D1A24; --ink-2:#4F4958; --hair:rgba(29,26,36,.2);
+  /* единственный цвет страницы — цвет Люмо, неизменный */
+  --lumo-cyan:#4FD8FF; --lumo-magenta:#C86BFF;
+  --serif:"Cormorant","Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --pad:clamp(20px,6vw,88px);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--sans);overflow-x:hidden;min-height:100vh}
+/* бумажное зерно — одна лёгкая SVG-текстура */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.07;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1  0 0 0 0 .1  0 0 0 0 .13  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+main,header{position:relative;z-index:1}
+
+/* ——— шапка ——— */
+.top{display:flex;align-items:center;justify-content:space-between;padding:18px var(--pad) 0;gap:12px}
+.mark{font:600 24px/1 var(--serif);letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.langs{display:flex;list-style:none;padding:0}
+.langs button{font:500 16px/1 var(--sans);letter-spacing:.04em;color:var(--ink-2);background:none;border:0;cursor:pointer;
+  padding:15px 7px;min-height:44px;position:relative}
+.langs button[aria-pressed="true"]{color:var(--ink)}
+.langs button[aria-pressed="true"]::after{content:"";position:absolute;left:7px;right:7px;bottom:10px;height:1.5px;background:var(--ink)}
+.langs button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+
+/* ——— первый экран ——— */
+.hero{min-height:calc(100svh - 62px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;
+  padding:0 var(--pad) 40px;gap:2vw}
+.hero-text{padding-top:2vh}
+h1{font:500 clamp(46px,7.6vw,128px)/.94 var(--serif);letter-spacing:-.015em;text-wrap:balance}
+h1 em{font-style:italic;font-weight:500;position:relative;white-space:nowrap}
+h1 em svg{position:absolute;left:0;bottom:-.12em;width:100%;height:.28em;overflow:visible}
+h1 em path{fill:none;stroke:url(#lg);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset 1.3s cubic-bezier(.6,.05,.2,1)}
+h1 em.drawn path{stroke-dashoffset:0}
+.sub{text-wrap:pretty;margin-top:clamp(22px,3.5vh,40px);max-width:30em;color:var(--ink-2);font-size:clamp(18px,1.5vw,21px)}
+.next{display:inline-flex;gap:.6em;align-items:center;margin-top:28px;color:var(--ink);text-decoration:none;font-weight:500;
+  border-bottom:1.5px solid var(--ink);padding-bottom:3px}
+.next i{font-style:normal;display:inline-block;animation:nudgeY 3.2s ease-in-out infinite}
+@keyframes nudgeY{0%,70%,100%{transform:translateY(0)}85%{transform:translateY(4px)}}
+/* место под Люмо в потоке: сам Люмо живёт в fixed-слое и плывёт по странице */
+.anchor{--a:min(40vh,31vw);width:var(--a);height:calc(var(--a)*1.1);margin:0 auto 92px;justify-self:center;pointer-events:none}
+
+/* ——— урок ——— */
+.lesson{padding:clamp(80px,14vh,160px) var(--pad) clamp(140px,22vh,260px);display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:2vw;border-top:1px solid var(--hair);margin:0 var(--pad);padding-inline:0}
+.lesson h2{grid-column:2;font:500 clamp(36px,4.6vw,72px)/1 var(--serif);letter-spacing:-.01em;margin-bottom:clamp(36px,7vh,80px)}
+.steps{grid-column:2;list-style:none;padding:0 0 0 clamp(28px,3vw,48px);position:relative;--prog:0}
+.steps::before,.steps::after{content:"";position:absolute;left:0;top:6px;width:1.5px;bottom:6px;background:var(--hair)}
+.steps::after{background:linear-gradient(var(--lumo-cyan),var(--lumo-magenta));transform-origin:top;transform:scaleY(var(--prog))}
+.steps li{padding:0 0 clamp(48px,9vh,96px);position:relative;color:var(--ink-2);transition:color .6s}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:calc(clamp(28px,3vw,48px)*-1 - 5px);top:.55em;width:11px;height:11px;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--ink-2);transition:all .5s}
+.steps li.on{color:var(--ink)}
+.steps li.on::before{background:var(--ink);border-color:var(--ink);transform:scale(1.25)}
+.steps h3{font:500 clamp(30px,3.4vw,52px)/1.05 var(--serif);margin-bottom:10px}
+.steps h3 span{font-style:italic;margin-right:.5em;color:var(--ink-2);font-size:.7em}
+.steps p{max-width:27em;font-size:clamp(18px,1.4vw,20px)}
+
+/* ——— Люмо ——— */
+#glow,#guide{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none}
+#glow{z-index:0}#guide{z-index:30}
+#glow i{position:absolute;width:calc(var(--w)*2.6);height:calc(var(--w)*2.6);left:calc(var(--w)*-1.3);top:calc(var(--w)*-1.3);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(79,216,255,.30),rgba(200,107,255,.13) 52%,rgba(200,107,255,0) 100%);
+  animation:glow 6.5s ease-in-out infinite}
+@keyframes glow{0%,100%{transform:scale(.94);opacity:.8}50%{transform:scale(1.04);opacity:1}}
+.lumo{position:absolute;width:var(--w);height:calc(var(--w)*1.1);left:calc(var(--w)*-.5);top:calc(var(--w)*-.55);pointer-events:auto;touch-action:manipulation;
+  transform-origin:50% 88%;animation:sway 9s ease-in-out infinite;rotate:var(--tilt,0deg);transition:rotate .9s cubic-bezier(.3,.8,.3,1);-webkit-tap-highlight-color:transparent}
+@keyframes sway{0%,100%{transform:rotate(-.9deg)}50%{transform:rotate(1.2deg)}}
+.body{position:absolute;inset:0;animation:float 5.2s ease-in-out infinite,breathe 4.4s ease-in-out infinite;
+  translate:calc(var(--px,0px)*1) calc(var(--py,0px)*1);transition:translate .35s ease-out}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--w)*-.028))}}
+@keyframes breathe{0%,100%{scale:1 1}50%{scale:1.022 .985}}
+.body img{position:absolute;display:block;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.body .b{inset:0;width:100%;height:100%;filter:drop-shadow(0 calc(var(--w)*.06) calc(var(--w)*.09) rgba(95,60,140,.22))}
+.eye{width:16.5%;height:22%;top:34.5%;translate:calc(var(--ex,0px)) calc(var(--ey,0px));transition:translate .14s ease-out,transform .09s ease-out,opacity .12s;transform:scaleY(1)}
+.eye.l{left:29%}.eye.r{left:54.5%}
+.lumo.blink .eye{transform:scaleY(.1)}
+.lumo.wink .eye.r{transform:scaleY(.1)}
+.smile{width:30%;height:15%;left:35%;top:59.5%;translate:calc(var(--ex,0px)*.8) calc(var(--ey,0px)*.8);transition:translate .14s ease-out,transform .4s cubic-bezier(.3,1.6,.5,1)}
+/* радость: глаза-дуги вместо глаз, улыбка шире */
+.arc{position:absolute;top:37.5%;width:16.5%;height:10%;border-radius:50% 50% 0 0;border:solid #10203a;border-width:calc(var(--w)*.024) calc(var(--w)*.024) 0;
+  border-bottom:0;opacity:0;translate:calc(var(--ex,0px)) calc(var(--ey,0px));transition:opacity .12s;box-shadow:0 0 calc(var(--w)*.03) rgba(217,240,255,.6)}
+.arc.l{left:29%}.arc.r{left:54.5%}
+.lumo.joy .eye{opacity:0}.lumo.joy .arc{opacity:1}
+.lumo.joy .smile{transform:scale(1.35,1.5) translateY(6%)}
+.lumo.speak .smile{transform:scale(1.12,1.2)}
+.lumo.hop .body{animation:hop .9s cubic-bezier(.22,1,.36,1) 1}
+@keyframes hop{0%{transform:translateY(0) scale(1)}28%{transform:translateY(calc(var(--w)*-.09)) scale(1.04,1.07)}52%{transform:translateY(calc(var(--w)*-.01)) scale(1.03,.95)}74%{transform:translateY(calc(var(--w)*-.035))}100%{transform:translateY(0) scale(1)}}
+.lumo.nudge .body{animation:nudge .5s cubic-bezier(.34,1.56,.64,1) 1}
+@keyframes nudge{0%{transform:scale(1)}45%{transform:scale(1.05)}100%{transform:scale(1)}}
+.lumo.swoosh .body{animation:swoosh .26s ease-out 1}
+@keyframes swoosh{50%{transform:translateY(2px) scale(.95,1.05)}}
+/* тихая рябь света — вместо искр и звёзд */
+.ripple{position:absolute;left:10%;top:6%;width:80%;height:84%;border-radius:50%;border:1.5px solid rgba(79,216,255,.7);box-shadow:0 0 0 1px rgba(200,107,255,.25);opacity:0;pointer-events:none}
+.lumo.joy .ripple{animation:ripple 1.6s ease-out 1}
+@keyframes ripple{0%{transform:scale(.7);opacity:.7}100%{transform:scale(1.75);opacity:0}}
+
+.bubble{position:absolute;top:calc(var(--w)*.55 + 16px);left:50%;transform:translateX(-50%);width:max-content;max-width:min(300px,calc(100vw - 40px));
+  background:var(--paper-hi);color:var(--ink);padding:13px 18px 14px;border-radius:18px;border:1px solid var(--hair);
+  box-shadow:0 14px 30px -18px rgba(60,30,100,.35);font-size:18px;line-height:1.4;font-weight:500;text-align:left}
+.bubble::before{content:"";position:absolute;top:-7px;left:calc(50% - 6px);width:12px;height:12px;background:var(--paper-hi);
+  border-left:1px solid var(--hair);border-top:1px solid var(--hair);transform:rotate(45deg);border-radius:3px 0 0 0}
+.bubble span{display:block;transition:opacity .35s,transform .35s,filter .35s}
+.bubble.swap span{opacity:0;transform:translateY(5px);filter:blur(3px)}
+/* мобильный «док»: Люмо уходит в левый нижний угол, реплика — справа от него */
+#guide.dock-m .bubble{left:calc(var(--w)*.5 + 12px);top:calc(var(--w)*-.5);transform:none;max-width:calc(100vw - var(--w) - 56px);padding:11px 15px 12px}
+#guide.dock-m .bubble::before{top:calc(var(--w)*.5 - 6px);left:-7px;transform:rotate(-45deg)}
+
+@media (max-width:759px){
+  body{font-size:18px}
+  .hero{grid-template-columns:1fr;min-height:0;padding-top:4px;padding-bottom:40px;gap:0;align-items:start}
+  .anchor{--a:min(46vw,200px);order:-1;margin:6px auto 96px}
+  h1{font-size:clamp(42px,12.4vw,60px);line-height:.98}
+  .hero-text{padding-top:0}
+  .sub{font-size:18px;margin-top:20px}
+  .lesson{grid-template-columns:1fr;padding-top:70px}
+  .lesson h2,.steps{grid-column:1}
+  .steps{padding-left:30px}
+  .steps li::before{left:-35px}
+  .lesson{padding-bottom:150px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  h1 em path{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#4FD8FF"/><stop offset="1" stop-color="#C86BFF"/></linearGradient></defs></svg>
+
+<header class="top">
+  <a class="mark" href="#" aria-label="LUMOSCHOOL">lumoschool</a>
+  <ul class="langs" role="group" aria-label="Мова / Language">
+    <li><button data-lang="uk" aria-pressed="true">UK</button></li>
+    <li><button data-lang="pl" aria-pressed="false">PL</button></li>
+    <li><button data-lang="en" aria-pressed="false">EN</button></li>
+    <li><button data-lang="de" aria-pressed="false">DE</button></li>
+    <li><button data-lang="cs" aria-pressed="false">CS</button></li>
+    <li><button data-lang="ru" aria-pressed="false">RU</button></li>
+  </ul>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <h1 id="h1"></h1>
+      <p class="sub" data-t="sub"></p>
+      <a class="next" href="#lesson"><span data-t="next"></span><i aria-hidden="true">↓</i></a>
+    </div>
+    <div class="anchor" id="anchor"></div>
+  </section>
+
+  <section class="lesson" id="lesson" aria-labelledby="lh">
+    <h2 id="lh" data-t="lh"></h2>
+    <ol class="steps" id="steps">
+      <li data-step="0"><h3><span>1</span><b data-t="s0h" style="font-weight:inherit"></b></h3><p data-t="s0p"></p></li>
+      <li data-step="1"><h3><span>2</span><b data-t="s1h" style="font-weight:inherit"></b></h3><p data-t="s1p"></p></li>
+      <li data-step="2"><h3><span>3</span><b data-t="s2h" style="font-weight:inherit"></b></h3><p data-t="s2p"></p></li>
+    </ol>
+  </section>
+</main>
+
+<div id="glow"><i></i></div>
+<div id="guide">
+  <div class="lumo" id="lumo" aria-hidden="true">
+    <div class="body">
+      <img class="b" src="assets/lumo-layer-body.webp" alt="" width="465" height="499" fetchpriority="high" decoding="async">
+      <img class="eye l" src="assets/lumo-layer-eye.webp" alt="" width="233" height="239">
+      <img class="eye r" src="assets/lumo-layer-eye.webp" alt="" width="233" height="239">
+      <i class="arc l"></i><i class="arc r"></i>
+      <img class="smile" src="assets/lumo-layer-smile.webp" alt="" width="359" height="98">
+      <span class="ripple"></span>
+    </div>
+  </div>
+  <div class="bubble" id="bubble" role="status" aria-live="off"><span id="say"></span></div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const T = {
+ uk:{ h1:['Заходь. Я\u00a0покажу, куди ','дивитись','.'],
+  sub:'Англійська для дітей, підлітків і\u00a0дорослих. Спокійно, уголос і\u00a0без\u00a0поспіху.', next:'Як проходить урок',
+  lh:'Один урок — три\u00a0тихі\u00a0кроки', s0h:'Слухаєш', s0p:'Невеликий уривок живої мови. Нічого не треба доводити — просто вслухайся.',
+  s1h:'Кажеш', s1p:'Повторюєш уголос у своєму темпі. Навіть пошепки.', s2h:'Забираєш слово', s2p:'Наприкінці — одне слово чи фраза, з якими можна вийти в справжню розмову.',
+  say:{ hello:['Привіт. Я Люмо.','Не поспішай. Я нікуди не втечу.','Дивись, куди дивлюсь я.','Можна просто посидіти тут. Це теж початок.','Торкнись мене, якщо хочеш.'],
+   look:'Ось. Тут усе й починається.', hover:['О, ти мене помітив.','Привіт ще раз.'], tap:['Мені приємно.','Ха, і я підморгну.','Це тепло. Дякую.'],
+   steps:['Спершу просто слухай. Я поруч.','А тепер уголос. Хоч пошепки\u00a0— я почую.','Одне слово — і на сьогодні досить.'] } },
+ pl:{ h1:['Wejdź. Pokażę ci, gdzie ','patrzeć','.'],
+  sub:'Angielski dla dzieci, nastolatków i dorosłych. Spokojnie, na głos i bez pośpiechu.', next:'Jak wygląda lekcja',
+  lh:'Jedna lekcja — trzy ciche kroki', s0h:'Słuchasz', s0p:'Krótki fragment żywego języka. Niczego nie musisz udowadniać — po prostu wsłuchaj się.',
+  s1h:'Mówisz', s1p:'Powtarzasz na głos, we własnym tempie. Nawet szeptem.', s2h:'Zabierasz słowo', s2p:'Na koniec — jedno słowo lub zdanie, z którym możesz wejść w prawdziwą rozmowę.',
+  say:{ hello:['Cześć. Jestem Lumo.','Nie spiesz się. Nigdzie nie ucieknę.','Patrz tam, gdzie ja patrzę.','Można po prostu tu posiedzieć. To też początek.','Dotknij mnie, jeśli chcesz.'],
+   look:'O, tutaj. Tu wszystko się zaczyna.', hover:['O, zauważyłeś mnie.','Cześć jeszcze raz.'], tap:['Miło mi.','Ha, ja też mrugnę.','To ciepłe. Dziękuję.'],
+   steps:['Najpierw po prostu słuchaj. Jestem obok.','Teraz na głos. Nawet szeptem\u00a0— usłyszę.','Jedno słowo — i na dziś wystarczy.'] } },
+ en:{ h1:['Come in. I’ll show you where to ','look','.'],
+  sub:'English for children, teenagers and adults. Calm, out loud, and in no hurry.', next:'How a lesson goes',
+  lh:'One lesson, three quiet steps', s0h:'Listen', s0p:'A short piece of living language. Nothing to prove — just tune in.',
+  s1h:'Say it', s1p:'Repeat out loud at your own pace. Even in a whisper.', s2h:'Keep a word', s2p:'At the end — one word or phrase you can carry into a real conversation.',
+  say:{ hello:['Hi. I’m Lumo.','No rush. I’m not going anywhere.','Look where I’m looking.','You can just sit here for a bit. That counts too.','Touch me, if you like.'],
+   look:'There. That’s where it starts.', hover:['Oh, you noticed me.','Hello again.'], tap:['That’s nice.','Ha — I’ll wink back.','That’s warm. Thank you.'],
+   steps:['First, just listen. I’m right here.','Now out loud. Even a whisper\u00a0— I’ll hear it.','One word — and that’s enough for today.'] } }
+};
+let lang='uk', L=T.uk;
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)), lerp=(a,b,t)=>a+(b-a)*t, ease=t=>t*t*(3-2*t);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+/* ——— тексты и язык ——— */
+function applyLang(code){
+  lang=code; L=T[code]||T.uk;                       // de/cs/ru: заглушка — показываем uk
+  document.documentElement.lang = T[code]?code:'uk';
+  document.querySelectorAll('.langs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===code));
+  document.querySelectorAll('[data-t]').forEach(n=>n.textContent=L[n.dataset.t]);
+  const h=$('#h1'); h.innerHTML='';
+  h.append(L.h1[0]);
+  const em=document.createElement('em'); em.textContent=L.h1[1];
+  em.insertAdjacentHTML('beforeend','<svg aria-hidden="true"><path pathLength="1"/></svg>');
+  if(drawn||RM) em.classList.add('drawn');
+  h.append(em, L.h1[2]);
+  try{localStorage.setItem('lumo-lang',code)}catch(e){}
+  ctxSay(true);
+  requestAnimationFrame(layout);
+}
+let drawn=false;
+document.querySelector('.langs').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) applyLang(b.dataset.lang)});
+
+/* ——— реплика-пузырь ——— */
+const say$=$('#say'), bubble=$('#bubble'), lumo=$('#lumo'), guide=$('#guide'), glow=$('#glow');
+let ctx='hello', ctxIdx=0, lock=0, swapT;
+function show(text){
+  if(say$.textContent===text) return;
+  if(RM){ say$.textContent=text; return; }
+  bubble.classList.add('swap'); clearTimeout(swapT);
+  swapT=setTimeout(()=>{say$.textContent=text; bubble.classList.remove('swap')},260);
+}
+function ctxText(){
+  if(ctx==='hello') return L.say.hello[ctxIdx % L.say.hello.length];
+  if(ctx==='look') return L.say.look;
+  if(ctx.startsWith('step')) return L.say.steps[+ctx.slice(4)];
+}
+function ctxSay(immediate){ if(Date.now()<lock && !immediate) return; const t=ctxText(); if(immediate){say$.textContent=t;} else show(t); }
+function setCtx(c){ ctx=c; ctxIdx=0; ctxSay(); }
+function speakNow(t,hold){ lock=Date.now()+hold; show(t); setTimeout(()=>ctxSay(),hold+50); }
+// по времени: в первом экране реплики сменяют друг друга, если гость молчит
+setInterval(()=>{ if(ctx==='hello' && Date.now()>=lock && !document.hidden){ ctxIdx++; if(L.say.hello[ctxIdx % L.say.hello.length]===L.say.hello[2]) glanceAt('h1'); ctxSay(); }},6800);
+
+/* ——— взгляд ——— */
+let gaze=null, lastPtr=0, pointer={x:0,y:0};
+const targets={ h1:()=>{const r=$('#h1 em').getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}},
+  next:()=>{const r=$('.next').getBoundingClientRect();return {x:r.left+20,y:r.top+r.height/2}},
+  step:()=>{const el=document.querySelector('.steps li.on h3')||$('#steps');const r=el.getBoundingClientRect();return {x:r.left+60,y:r.top+r.height/2}} };
+function glanceAt(k){ gazeFn=targets[k]; applyGaze(); }
+let gazeFn=null;
+function applyGaze(){
+  if(RM) return;
+  const p = (Date.now()-lastPtr<3200) ? pointer : (gazeFn?gazeFn():null);
+  if(!p){ lumo.style.setProperty('--ex','0px');lumo.style.setProperty('--ey','0px');lumo.style.setProperty('--px','0px');lumo.style.setProperty('--py','0px'); return; }
+  const r=lumo.getBoundingClientRect(), w=r.width, cx=r.left+w/2, cy=r.top+r.height*.42;
+  const dx=p.x-cx, dy=p.y-cy, d=Math.hypot(dx,dy)||1, reach=Math.min(1,d/(w*.9)), ux=dx/d, uy=dy/d;
+  lumo.style.setProperty('--ex',(ux*w*.034*reach).toFixed(2)+'px');
+  lumo.style.setProperty('--ey',(uy*w*.026*reach).toFixed(2)+'px');
+  lumo.style.setProperty('--px',(ux*w*.014*reach).toFixed(2)+'px');
+  lumo.style.setProperty('--py',(uy*w*.010*reach).toFixed(2)+'px');
+}
+addEventListener('pointermove',e=>{pointer={x:e.clientX,y:e.clientY};lastPtr=Date.now();applyGaze()},{passive:true});
+addEventListener('pointerdown',e=>{pointer={x:e.clientX,y:e.clientY};lastPtr=Date.now();applyGaze()},{passive:true});
+// в простое взгляд сам идёт к тому, что стоит прочесть
+setInterval(()=>{ if(Date.now()-lastPtr>=3200) applyGaze(); },700);
+
+/* ——— моргание: 4–6 с, иногда двойное ——— */
+if(!RM){
+  const close=d=>{setTimeout(()=>lumo.classList.add('blink'),d);setTimeout(()=>lumo.classList.remove('blink'),d+150)};
+  const blink=()=>{close(0); if(Math.random()<.2) close(230); setTimeout(blink,4000+Math.random()*2000)};
+  setTimeout(blink,2200);
+}
+
+/* ——— касание: подмигнул / обрадовался ——— */
+const flag=(c,ms)=>{lumo.classList.add(c);setTimeout(()=>lumo.classList.remove(c),ms)};
+let hovCool=0;
+lumo.addEventListener('pointerenter',e=>{
+  if(RM||Date.now()<hovCool) return; hovCool=Date.now()+2500;
+  flag('wink',900); flag('nudge',500); speakNow(pick(L.say.hover),3800);
+});
+lumo.addEventListener('pointerdown',()=>{
+  hovCool=Date.now()+2500; lumo.classList.remove('wink');
+  flag('joy',1900); if(!RM){ lumo.classList.remove('hop'); void lumo.offsetWidth; flag('hop',900); }
+  speakNow(pick(L.say.tap),4200);
+});
+
+/* ——— положение по странице: Люмо плывёт из героя в «док» ——— */
+let swooshT=0, lastY=scrollY, lastT=performance.now();
+function drawUnderline(){
+  const sv=document.querySelector('#h1 em svg'); if(!sv) return;
+  const W=sv.clientWidth||100, H=sv.clientHeight||20;
+  sv.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  sv.firstChild.setAttribute('d',`M2 ${H*.62} C ${W*.2} ${H*.1}, ${W*.34} ${H*.98}, ${W*.54} ${H*.5} S ${W*.88} ${H*.15}, ${W-2} ${H*.52}`);
+}
+function layout(){
+  drawUnderline();
+  const vw=innerWidth, vh=innerHeight, mob=vw<760;
+  const a=$('#anchor').getBoundingClientRect();
+  const p = ease(clamp(scrollY/(vh*.7),0,1));
+  const padX=Math.max(20,vw*.06);
+  const dock = mob ? {s:62,x:16+31,y:vh-26-34} : {s:vw>1100?150:128, x:padX+Math.min(vw,1400)*.11, y:vh*.4};
+  const s=lerp(a.width,dock.s,p), x=lerp(a.left+a.width/2,dock.x,p), y=lerp(a.top+a.height*.5,dock.y,p);
+  const tr=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
+  guide.style.transform=glow.style.transform=tr;
+  guide.style.setProperty('--w',s.toFixed(1)+'px'); glow.style.setProperty('--w',s.toFixed(1)+'px');
+  guide.classList.toggle('dock-m', mob && p>.85);
+  glow.style.opacity = mob&&p>.85 ? .5 : 1;
+  // тонкая нить прогресса урока
+  const st=$('#steps').getBoundingClientRect();
+  $('#steps').style.setProperty('--prog',clamp((vh*.55-st.top)/st.height,0,1).toFixed(3));
+  applyGaze();
+}
+addEventListener('scroll',()=>{
+  const now=performance.now(), v=Math.abs(scrollY-lastY)/Math.max(1,now-lastT); lastY=scrollY; lastT=now;
+  if(!RM && v>1.8 && now>swooshT){swooshT=now+300;flag('swoosh',260)}
+  requestAnimationFrame(layout);
+},{passive:true});
+addEventListener('resize',()=>requestAnimationFrame(layout));
+
+/* ——— шаги урока: Люмо смотрит на тот, что сейчас в центре ——— */
+const lis=[...document.querySelectorAll('.steps li')];
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    lis.forEach(l=>l.classList.toggle('on',l===e.target));
+    const i=+e.target.dataset.step; gazeFn=targets.step;
+    lumo.style.setProperty('--tilt',['-3deg','1.5deg','0deg'][i]);
+    lumo.classList.toggle('speak',i===1);
+    setCtx('step'+i); applyGaze();
+  }});
+},{rootMargin:'-42% 0px -42% 0px'});
+lis.forEach(l=>io.observe(l));
+// возврат в первый экран
+new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting && ctx.startsWith('step')){ lis.forEach(l=>l.classList.remove('on')); lumo.style.setProperty('--tilt','0deg'); lumo.classList.remove('speak'); gazeFn=targets.next; setCtx('hello'); }})},{rootMargin:'0px 0px -55% 0px'}).observe($('.hero-text'));
+
+/* ——— старт: поздоровался, посмотрел на заголовок, подчеркнул слово ——— */
+let saved='uk'; try{saved=localStorage.getItem('lumo-lang')||new URLSearchParams(location.search).get('lang')||'uk'}catch(e){}
+if(!['uk','pl','en','de','cs','ru'].includes(saved)) saved='uk';
+applyLang(saved);
+setTimeout(()=>{ gazeFn=targets.h1; applyGaze(); drawn=true; const em=$('#h1 em'); em&&em.classList.add('drawn'); },RM?0:1500);
+setTimeout(()=>{ if(ctx==='hello'&&!RM) gazeFn=targets.next; },9000);
+(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>requestAnimationFrame(layout));
+layout();
+window.__lumo={layout};
+})();
+</script>
+</body>
+</html>

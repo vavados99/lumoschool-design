@@ -1,0 +1,5 @@
+Ты арт-директор школы LUMOSCHOOL. Враждебный отбор круга 10 (после твоего разбора .tmp/opus_P5b.txt). Смотри кадры (корень /root/projects/english-school/):
+В6: прототипы-люмо/В6-преподаватель/shots/r10-desktop-uk-4-live-view.png, r10-desktop-uk-1-rest-view.png, r10-desktop-uk-9-swap-view.png, r10-desktop-uk-6-notes-error-view.png, r10-phone-uk-4-live-view.png, r10-phone-uk-6-notes-error-view.png, r10-phone-uk-9-swap-view.png.
+В7: прототипы-люмо/В7-владелец/shots/r10-desktop-uk-1-first.png, r10-desktop-uk-3-uah-money.png, r10-desktop-uk-4-signal-open.png, r10-phone-uk-1-first.png, r10-phone-uk-4-signal-open.png.
+Эталоны: визуалы/референсы/09-whyzero-a.png и 11-westbourne-a.png. Замеры: прототипы-люмо/замеры-круг10.txt.
+Для В6 и В7 отдельно: оценка /10 (было В6 7.5, В7 6.5); чем проигрываем эталонам (5-7 пунктов с привязкой к кадру); что оставить; вердикт «показывать Владу» или «переделывать» (какие кадры можно показать); топ-5 правок. Честно, без лести. Коротко (до 60 строк). Файлы не пиши, ответ выводи текстом.

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUMOSCHOOL · Дашборд власника</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page" id="page">
+  <div class="light" id="light" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <a class="skip" href="#main" id="skip"></a>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="#overview" aria-label="LUMOSCHOOL"><img class="logo logo-w" src="assets/lumo-v5r6-wordmark.svg" alt="LUMOSCHOOL" width="222" height="43"><img class="logo logo-m" src="assets/lumo-v5r6-mark.svg" alt="" width="40" height="40"></a>
+    <p class="who" id="who"></p>
+    <div class="seg" role="group" id="curSeg"></div>
+    <div class="seg" role="group" aria-label="Language / Мова">
+      <button type="button" data-lang="uk" aria-pressed="true">UK</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <div class="sbar" id="bar">
+    <nav class="nav" id="nav" aria-label="Sections"></nav>
+    <div class="seg" role="group" id="perSeg"></div>
+  </div>
+
+  <main class="main" id="main" tabindex="-1">
+    <section id="overview" class="hero" aria-labelledby="h-overview"></section>
+    <section id="attendance" class="sec" aria-labelledby="h-attendance"></section>
+    <section id="retention" class="sec" aria-labelledby="h-retention"></section>
+    <section id="money" class="sec" aria-labelledby="h-money"></section>
+    <section id="quality" class="sec" aria-labelledby="h-quality"></section>
+    <section id="manage" class="sec" aria-labelledby="h-manage"></section>
+    <section id="journal" class="sec" aria-labelledby="h-journal"></section>
+    <footer class="foot" id="foot"></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

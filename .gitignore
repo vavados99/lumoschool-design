@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.spend.lock
+.DS_Store
+.env
+.env.*
+*.db
+*.db-*
+*.sqlite
+*.pem
+*.key
+node_modules/

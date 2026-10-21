@@ -1,0 +1,8 @@
+2:import { Tektur, Golos_Text, Handjet } from "next/font/google";
+10:// сайта набран Golos, заголовки Tektur, цифры Handjet. Пять семейств вместо
+13:const tektur = Tektur({
+15:  variable: "--font-display",
+21:const golos = Golos_Text({
+23:  variable: "--font-text",
+27:const handjet = Handjet({
+29:  variable: "--font-digits",

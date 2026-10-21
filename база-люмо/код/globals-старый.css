@@ -1,0 +1,2686 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* «Золотая середина» (2026-07-08) — светлая палитра, сменившая тёмный «Стеклянный город».
+     Причина смены: тёмная гамма читалась взрослым киберпанком, а не школой для детей —
+     дети реагируют на сочное, тёплое, контрастное. Имена переменных сохранены (их держат
+     30+ файлов), сменился ТОЛЬКО смысл значений. Спека: docs/design/золотая-середина.md */
+  --ink: #FBFCFE;        /* фон страницы: тёплый воздушный, был глубокий сине-чёрный */
+  --glass: #FFE3EA;      /* поверхность-стекло: тёплый блик, был ледяной голубой */
+  --text: #14183D;       /* основной текст: тёмно-синие чернила, был холодный белый */
+  --muted: #5E6796;      /* приглушённый текст: мягкий сине-серый, был бледно-голубой */
+  --cyan: #FF3D68;       /* акцент 1: энергия/действие — коралл, был ледяной циан */
+  --amber: #FFB800;      /* акцент 2: награды/статус — солнечное золото */
+  --magenta: #B15CFF;    /* акцент 3: редкий, магия/уровни — фиолет (остался близко к Люмо) */
+  --teal: #00C9A7;       /* акцент 4 (новый): доверие/спокойствие — бирюза */
+  --edge: rgba(20, 24, 61, 0.12); /* тонкая тёплая кромка карточек, была светящаяся на тёмном */
+
+  /* Люмо — СВОЙ фиксированный паспорт цвета, не следует за интерфейсными
+     акцентами (--cyan/--amber/--magenta сменили смысл на коралл/золото/фиолет
+     для КНОПОК И ИНТЕРФЕЙСА). Люмо был циан→маджента и остаётся циан→маджента
+     при любом фоне — это его лицо, трогать нельзя. */
+  --lumo-cyan: #4FD8FF;
+  --lumo-magenta: #C86BFF;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     СЕМАНТИЧЕСКИЙ СЛОЙ (2026-08-19, перестройка витрины)
+
+     ЗАЧЕМ. Имена выше врут о своём содержимом: --cyan сейчас коралловый,
+     --magenta фиолетовый. Значения меняли, имена оставляли — и каждый, кто
+     открывает компонент, читает «cyan» и ждёт голубой. Плюс в компонентах
+     витрины накопилось 36 произвольных сиреневых значений мимо всяких токенов.
+
+     Переименовывать старые нельзя: их держат 30+ файлов. Поэтому здесь —
+     второй слой, где имя говорит о НАЗНАЧЕНИИ, а не о цвете. Новый код берёт
+     только эти имена; старые постепенно уходят сами.
+     ───────────────────────────────────────────────────────────────────────── */
+
+  /* Действие. Одно на весь сайт: главная кнопка, ссылка-призыв, фокус.
+     Если цвет действия встречается на экране трижды — два из них не действия. */
+  --action: var(--cyan);
+  /* Тёмные чернила на коралле: белый давал контраст 3.43 при норме 4.5 —
+     замерено скептиком на живой кнопке, не прикинуто на глаз. */
+  --action-ink: #2A0710;
+
+  /* Награда. Звёзды, победы, находки. Только про радость — не про статус. */
+  --reward: var(--amber);
+
+  /* Спокойствие. Всё, что говорит с родителем про деньги, безопасность и
+     доверие. Намеренно НЕ цвет действия: родителю нужна ясность, а не азарт. */
+  --calm: var(--teal);
+
+  /* Бренд. Паспорт Люмо, его лицо. Не используется как акцент интерфейса —
+     иначе персонаж растворится в кнопках. */
+  --brand-from: var(--lumo-cyan);
+  --brand-to: var(--lumo-magenta);
+
+  /* ── ДВЕ ПОВЕРХНОСТИ ВМЕСТО ОДНОЙ ──────────────────────────────────────
+     Главная визуальная идея перестройки: сайт говорит с двумя разными людьми,
+     и это должно быть видно, а не только написано.
+
+     Детская половина — плотнее по цвету, живее, с бликом.
+     Родительская — тише, воздушнее, почти без декора: там про деньги и
+     безопасность, и любой лишний блик читается как «нам есть что скрывать». */
+  --surface-play: color-mix(in oklab, var(--glass) 100%, transparent);
+  --surface-play-edge: color-mix(in oklab, var(--action) 22%, var(--edge));
+  --surface-parent: color-mix(in oklab, var(--ink) 92%, var(--text) 8%);
+  --surface-parent-edge: var(--edge);
+
+  /* ── РАДИУСЫ ЛЕСТНИЦЕЙ ─────────────────────────────────────────────────
+     Один радиус на всё делает интерфейс плоским по смыслу: кнопка и целый
+     раздел выглядят предметами одного порядка. Чем крупнее объект — тем мягче. */
+  --r-pill: 999px;   /* плашки, чипы, счётчики */
+  --r-control: 14px; /* кнопки, поля ввода */
+  --r-card: 20px;    /* карточки */
+  --r-panel: 28px;   /* крупные панели и сцены */
+
+  /* ── ТЕНИ ПО НАЗНАЧЕНИЮ ────────────────────────────────────────────────
+     Не «большая и маленькая», а «что этот объект делает». */
+  --shadow-rest: 0 1px 2px rgba(5, 5, 10, 0.06), 0 6px 20px rgba(5, 5, 10, 0.05);
+  --shadow-lift: 0 2px 4px rgba(5, 5, 10, 0.08), 0 14px 34px rgba(5, 5, 10, 0.10);
+  --shadow-reward: 0 0 0 1px color-mix(in oklab, var(--reward) 40%, transparent),
+                   0 8px 26px color-mix(in oklab, var(--reward) 22%, transparent);
+
+  /* ── ДВИЖЕНИЕ ──────────────────────────────────────────────────────────
+     Длительности заданы так, что ни одна не выходит за предел, на котором
+     анимация начинает ощущаться задержкой ответа интерфейса. */
+  --t-tap: 120ms;    /* отклик на нажатие */
+  --t-appear: 220ms; /* появление элемента */
+  --t-move: 320ms;   /* перемещение, смена состояния */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Классы по умолчанию ведут на наши же шрифты: отдельные семейства под них
+     грузились впустую. */
+  --font-sans: var(--font-text);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-text), sans-serif;
+}
+
+/* «Золотая середина» — переиспользуемые утилиты материала стекла на светлом фоне */
+
+/* Кромка-стекло — непрозрачная белая поверхность + тонкая чернильная линия
+   var(--edge) + мягкая тень без черноты, вместо старой светящейся кромки на
+   тёмном (рецепт из раздела 2 спеки «золотая-середина.md»). */
+.glass-edge {
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid var(--edge);
+  background: #ffffff;
+  box-shadow: 0 20px 40px -18px rgba(20, 24, 61, 0.16);
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .glass-edge {
+    backdrop-filter: blur(18px) saturate(1.3);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  }
+}
+
+.glass-card {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(20, 24, 61, 0.05),
+    0 8px 24px rgba(20, 24, 61, 0.12);
+}
+
+/* Стеклянная кнопка вторичная — рецепт из раздела 3.4, светлая версия */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--edge);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 6px 16px rgba(20, 24, 61, 0.1);
+  transition:
+    transform 120ms ease-out,
+    background 120ms ease-out;
+}
+@supports (backdrop-filter: blur(1px)) {
+  .btn-glass {
+    backdrop-filter: blur(8px);
+  }
+}
+.btn-glass:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* Кнопка первичная — конус-энергия, рецепт №5 (коралловое семейство --cyan,
+   белый текст — коралл насыщенный, тёмный текст не проходит по контрасту). */
+.btn-primary {
+  position: relative;
+  background: conic-gradient(
+    from 200deg at 30% 20%,
+    var(--cyan) 0%,
+    #ff7a9b 15%,
+    var(--cyan) 30%,
+    #d6265a 55%,
+    var(--cyan) 75%,
+    #ff7a9b 100%
+  );
+  box-shadow:
+    0 14px 30px -10px rgba(255, 61, 104, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  transition: transform 120ms ease-out;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* Навигация — прилипающая шапка, БЕЗ анимации высоты (урок из сока: не дёргать) */
+.nav-glass {
+  background: rgba(255, 255, 255, 0.78);
+  border-bottom: 1px solid var(--edge);
+}
+@supports (backdrop-filter: blur(1px)) {
+  .nav-glass {
+    backdrop-filter: blur(16px);
+  }
+}
+
+/* Герой — резервный класс, нигде не используется в JSX (проверено grep),
+   обновлён на светлый рецепт «Золотой середины» для консистентности. */
+.hero-scene {
+  background: linear-gradient(165deg, #fff9f7 0%, #fbfcfe 45%, #f4f8ff 78%, #fbfcfe 100%);
+}
+@media (min-width: 768px) {
+  .hero-scene {
+    background:
+      radial-gradient(
+        120% 80% at 50% 0%,
+        rgba(255, 61, 104, 0.1) 0%,
+        rgba(0, 201, 167, 0.08) 38%,
+        rgba(251, 252, 254, 0) 70%
+      ),
+      #fbfcfe;
+  }
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+/* ============================================================
+   ВИТРИНА 3.0 — ГЕРОЙ «ЗОЛОТАЯ СЕРЕДИНА»
+   Сменил «Фонарик в тёмном классе» (свет за курсором — приём для
+   тёмной сцены, см. историю в git) вместе со сменой палитры на
+   светлую (docs/design/золотая-середина.md, раздел 5). Курсор
+   больше ничего не носит: ноль JS-слежения за мышью, один слой
+   текста в полном читаемом контрасте, тёплая сцена с мягкими
+   цветными пятнами дрейфует сама по себе (или стоит неподвижно
+   при reduced-motion).
+   ============================================================ */
+.hero-gs {
+  position: relative;
+  background: var(--ink);
+}
+
+.hero-gs-scene {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 26px;
+}
+
+/* Перф-фикс (2026-07-15, волна 0 п.0.6): тот же вход «фейд+сдвиг вверх»,
+   что раньше давал framer-motion (`motion.div initial/animate`), но чистым
+   CSS — не ждёт JS-гидратацию. Заголовок героя — LCP-элемент витрины, а
+   framer-motion держал его на `opacity:0` до момента, пока не догрузится и
+   не выполнится клиентский бандл — под мобильным троттлингом это стоило
+   ~2.8 с «Render Delay» (см. platform/docs-perf-budget.md). CSS-анимация
+   стартует сразу на отрисовке, без ожидания React. */
+.hero-gs-scene--in {
+  animation: hero-gs-scene-in 0.6s cubic-bezier(0, 0, 0.2, 1) both;
+}
+@keyframes hero-gs-scene-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-gs-scene--in {
+    animation: none;
+  }
+}
+
+/* дышащие цветные пятна фона — только transform/opacity, очень медленный дрейф */
+.hero-gs-blobs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-gs-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: hero-gs-drift 18s ease-in-out infinite;
+  will-change: transform;
+}
+/* тёплая базовая подсветка сверху — рецепт «тёплая сцена, стекло на солнце» */
+.hero-gs-blob--warm {
+  top: -22%;
+  left: 12%;
+  width: 60vw;
+  height: 42vw;
+  max-width: 640px;
+  max-height: 440px;
+  background: radial-gradient(circle, rgba(255, 227, 234, 0.55), transparent 70%);
+  opacity: 0.9;
+  animation-duration: 22s;
+}
+/* коралловое пятно сверху справа */
+.hero-gs-blob--pink {
+  top: -10%;
+  right: -10%;
+  width: 42vw;
+  height: 42vw;
+  max-width: 480px;
+  max-height: 480px;
+  background: radial-gradient(circle, rgba(255, 61, 104, 0.22), transparent 70%);
+  opacity: 0.7;
+}
+/* мятное пятно снизу слева */
+.hero-gs-blob--mint {
+  bottom: -16%;
+  left: -10%;
+  width: 38vw;
+  height: 38vw;
+  max-width: 440px;
+  max-height: 440px;
+  background: radial-gradient(circle, rgba(0, 201, 167, 0.2), transparent 70%);
+  opacity: 0.7;
+  animation-delay: -9s;
+}
+@keyframes hero-gs-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-2%, 3%, 0) scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-gs-blob {
+    animation: none;
+  }
+}
+
+/* единственный слой текста — обычный хороший контраст, ничего не маскируется */
+.hero-gs-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 46rem;
+}
+.hero-gs-h {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.16;
+  max-width: 20ch;
+  font-size: clamp(26px, 3.6vw, 46px);
+  color: var(--text);
+}
+/* акцентное (последнее) слово заголовка — единственный коралловый штрих */
+.hero-gs-accent {
+  color: var(--cyan);
+}
+.hero-gs-sub {
+  font-size: clamp(14px, 1.35vw, 18px);
+  font-weight: 600;
+  line-height: 1.5;
+  max-width: 56ch;
+  color: var(--muted);
+}
+
+.hero-gs-cta-block {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* чипы-факты — бейдж доверия, бирюзовый тон рамки/подложки (раздел 5 спеки) */
+.hero-gs-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.hero-gs-chip {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 201, 167, 0.35);
+  background: rgba(0, 201, 167, 0.08);
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.hero-gs-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* обёртка кнопки — якорь для точечных искр рядом с CTA */
+.hero-gs-cta-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* светящаяся коралловая кнопка — рецепт «цветная тень вместо чёрной» (раздел 2 спеки) */
+.hero-gs-cta {
+  position: relative;
+  background: var(--cyan);
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 16px 40px -12px rgba(255, 61, 104, 0.4);
+  transition:
+    transform 120ms ease-out,
+    box-shadow 120ms ease-out;
+}
+.hero-gs-cta:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 20px 46px -10px rgba(255, 61, 104, 0.48);
+}
+.hero-gs-cta:active {
+  transform: scale(0.97);
+}
+
+/* точечные искры у кнопки — статичное появление один раз, без курсора */
+.hero-gs-spark {
+  position: absolute;
+  pointer-events: none;
+  animation: hero-gs-spark-in 520ms ease-out both;
+}
+.hero-gs-spark--a {
+  top: -12px;
+  left: -8px;
+  color: var(--teal);
+  animation-delay: 260ms;
+}
+.hero-gs-spark--b {
+  bottom: -10px;
+  right: -12px;
+  color: var(--amber);
+  animation-delay: 480ms;
+}
+@keyframes hero-gs-spark-in {
+  from { opacity: 0; transform: scale(0.4) rotate(-15deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-gs-spark {
+    animation: none;
+  }
+}
+
+/* печать-гарантия (переиспользуется в Pricing/Offer/Money — общий «золотой» бейдж) */
+.badge-guarantee {
+  display: inline-block;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 184, 0, 0.4);
+  background: rgba(255, 184, 0, 0.12);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 20px;
+}
+
+/* ============================================================
+   Витрина 2.0 — дух-проводник Люмо и живые сцены
+   Всё движение: только transform/opacity, ease-out, 60fps.
+   ============================================================ */
+
+/* --- Люмо: стеклянная капля с внутренним свечением циан→маджента --- */
+.lumo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lumo-body {
+  position: relative;
+  width: var(--lumo-w, 200px);
+  height: calc(var(--lumo-w, 200px) * 1.1);
+  border-radius: 50% 50% 47% 47% / 55% 55% 47% 47%;
+  background:
+    radial-gradient(58% 46% at 36% 24%, rgba(255, 255, 255, 0.95), rgba(224, 246, 255, 0.35) 38%, transparent 62%),
+    linear-gradient(158deg, #6fe0ff 0%, #67c6ff 40%, #b98bff 78%, #c86bff 100%);
+  box-shadow:
+    inset 0 -22px 36px rgba(200, 107, 255, 0.4),
+    inset 0 16px 28px rgba(255, 255, 255, 0.55),
+    inset 14px 0 26px rgba(120, 190, 255, 0.3),
+    0 0 60px rgba(79, 216, 255, 0.5),
+    0 24px 44px -12px rgba(20, 24, 61, 0.28);
+  animation: lumo-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Премиальный «мокрый» блик сверху — стилизует стеклянную каплю */
+.lumo-gloss {
+  position: absolute;
+  top: 6%;
+  left: 18%;
+  width: 46%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
+  filter: blur(2px);
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+
+/* Мягкие щёчки-румянец — добавляют «детскости» и живости */
+.lumo-cheek {
+  position: absolute;
+  top: 52%;
+  width: 13%;
+  height: 8%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 120, 170, 0.5), rgba(255, 120, 170, 0) 72%);
+  pointer-events: none;
+}
+.lumo-cheek.l { left: 21%; }
+.lumo-cheek.r { left: 66%; }
+
+/* дыхание внешнего контура — «аура» */
+.lumo-body::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--lumo-w, 200px) * -0.09);
+  border-radius: inherit;
+  border: 1px solid rgba(217, 240, 255, 0.25);
+  animation: lumo-breathe 3.5s ease-in-out infinite;
+}
+
+/* глаза — овалы тёмного стекла с белой искрой; следят за курсором через --ex/--ey */
+.lumo-eye {
+  position: absolute;
+  width: 16.5%;
+  height: 22%;
+  top: 33%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #ffffff 0%, #7fd4f2 18%, #1b3a5c 52%, #10203a 100%);
+  box-shadow: 0 0 9px rgba(217, 240, 255, 0.6), inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+  transform: translate(var(--ex, 0px), var(--ey, 0px)) scaleY(1);
+  transition: transform 120ms ease-out;
+}
+.lumo-eye::after {
+  content: '';
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  top: 12%;
+  left: 14%;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0.98;
+}
+.lumo-eye.l { left: 29%; }
+.lumo-eye.r { left: 54.5%; }
+
+.lumo-blink .lumo-eye {
+  transform: translate(var(--ex, 0px), var(--ey, 0px)) scaleY(0.12);
+  transition: transform 90ms ease-out;
+}
+
+.lumo-smile {
+  position: absolute;
+  width: 30%;
+  height: 15%;
+  left: 35%;
+  top: 58%;
+  border-bottom: 3.5px solid rgba(10, 15, 28, 0.6);
+  border-radius: 0 0 60% 60% / 0 0 100% 100%;
+}
+
+/* искры вокруг Люмо */
+.lumo-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lumo-cyan);
+  box-shadow: 0 0 10px 2px rgba(79, 216, 255, 0.8);
+  animation: lumo-spark 2.6s ease-in-out infinite;
+}
+
+/* ============================================================
+   Пилот «2.5D-слои» (2026-08-02): тело/глаза/улыбка — премиум PNG
+   вместо CSS-градиентов, но на тех же классах-крючках (.lumo-eye/
+   .lumo-smile), поэтому вся JS-анимация (--ex/--ey, blink/wink/
+   nudge/swoosh/cheer) продолжает работать без изменений. Новые
+   классы только гасят унаследованный фон/тени/бордер CSS-версии и
+   задают object-fit — позиция/размер по-прежнему приходят от
+   .lumo-eye/.lumo-smile/.lumo-body.
+   ============================================================ */
+/* Ревизия Кодекса (пилот 2026-08-02): .lumo-body несёт СВОЙ градиентный
+   фон+тени («капля» на чистом CSS) — без этого модификатора старый фон
+   и inset-тени проступали бы сквозь прозрачные края PNG-тела, давая
+   «двойное тело». Затрагивает ТОЛЬКО .lumo-body--premium, дефолтный
+   .lumo-body (без premiumLayers) не тронут. */
+.lumo-body--premium {
+  background: none;
+  box-shadow: none;
+}
+
+.lumo-body-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.lumo-eye-img {
+  background: none;
+  box-shadow: none;
+  object-fit: contain;
+  pointer-events: none;
+}
+/* Искра-блик уже нарисована внутри картинки глаза — гасим CSS-искру,
+   чтобы не дублировать её поверх готового арта (::after на <img> к
+   тому же не гарантированно рендерится браузерами — гасим явно). */
+.lumo-eye-img::after {
+  content: none;
+}
+
+.lumo-smile-img {
+  border-bottom: none;
+  border-radius: 0;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* слот под будущий арт из генераций */
+.lumo-art {
+  width: var(--lumo-w, 200px);
+  height: auto;
+  animation: lumo-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Люмо в герое: на телефоне компактнее, чтобы заголовок был виден сразу */
+@media (max-width: 1023px) {
+  .lumo--hero {
+    --lumo-w: 148px !important;
+  }
+}
+
+/* пузырь-реплика Люмо */
+.lumo-bubble {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 16px 16px 16px 4px;
+  background: #FFFFFF;
+  border: 1px solid var(--edge);
+  box-shadow: 0 8px 20px -8px rgba(20, 24, 61, 0.18);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  max-width: 34ch;
+}
+.lumo-bubble--in {
+  animation: bubble-in 240ms ease-out both;
+}
+/* пузырь «засыпает» через несколько секунд, чтобы не перекрывать контент;
+   animation: none — иначе удержание кадра bubble-in перебивает затухание */
+.lumo-bubble--sleep {
+  animation: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 280ms ease-out, transform 280ms ease-out;
+  pointer-events: none;
+}
+
+@keyframes lumo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes lumo-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+@keyframes lumo-spark {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Люмо — живое тело, доработка (2026-07-08). Всё новое — только
+   transform/opacity/filter, короткие one-shot анимации через смену
+   класса (не бесконечные), совместимо с уже существующими
+   lumo-float/lumo-breathe/lumo-blink на .lumo-body. Полностью
+   отключается в prefers-reduced-motion (см. общий блок ниже).
+   ============================================================ */
+
+/* Простой (idle): лёгкое любопытное покачивание корпуса — независимо
+   от дыхания/парения внутреннего тела, крутится сам .lumo-обёртка,
+   поэтому анимации не конфликтуют (разные элементы = разные transform). */
+.lumo {
+  animation: lumo-sway 8.5s ease-in-out infinite;
+  transform-origin: 50% 88%;
+}
+@keyframes lumo-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.3deg); }
+}
+
+/* Подмигивание правым глазом — реакция на наведение/тап по самому Люмо */
+.lumo-wink .lumo-eye.r {
+  transform: translate(var(--ex, 0px), var(--ey, 0px)) scaleY(0.12);
+  transition: transform 90ms ease-out;
+}
+
+/* Лёгкий «нырок навстречу» при наведении/тапе — Люмо заметил тебя.
+   Селектор точечно переопределяет animation на .lumo-body, поэтому на
+   время нырка временно замещает lumo-float/lumo-breathe, а не спорит с ними. */
+.lumo-nudge .lumo-body {
+  animation: lumo-nudge 260ms cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+@keyframes lumo-nudge {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.045); }
+  100% { transform: scale(1); }
+}
+
+/* Быстрая прокрутка — материал слегка «сносит», как ткань под ветром.
+   Тоже точечная подмена animation на время one-shot эффекта. */
+.lumo-swoosh .lumo-body {
+  animation: lumo-swoosh 220ms ease-out 1;
+}
+@keyframes lumo-swoosh {
+  0% { transform: translateY(0) scaleX(1) scaleY(1); }
+  50% { transform: translateY(2px) scaleX(0.94) scaleY(1.06); }
+  100% { transform: translateY(0) scaleX(1) scaleY(1); }
+}
+
+/* Ритуал успеха — праздничный «хоп» + широкая улыбка + искры-салют.
+   Редко и метко: включается ТОЛЬКО на крупных вехах (см. LumoSpirit.tsx),
+   не на каждый мелкий верный ответ — иначе обесценится. */
+.lumo-cheer .lumo-body {
+  animation: lumo-hop 620ms cubic-bezier(0.22, 1, 0.36, 1) 1;
+}
+@keyframes lumo-hop {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-20px) scale(1.06); }
+  55%  { transform: translateY(-4px) scale(0.97); }
+  78%  { transform: translateY(-9px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+.lumo-cheer .lumo-smile {
+  animation: lumo-smile-wide 620ms ease-out 1;
+}
+@keyframes lumo-smile-wide {
+  0%, 100% { transform: scaleX(1) scaleY(1); }
+  40% { transform: scaleX(1.25) scaleY(1.4); }
+}
+.lumo-cheer-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber, #FFB800);
+  box-shadow: 0 0 10px 2px rgba(255, 184, 0, 0.7);
+  animation: lumo-cheer-spark-fly 700ms ease-out both;
+  pointer-events: none;
+}
+@keyframes lumo-cheer-spark-fly {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--sx, 0px), var(--sy, -30px)) scale(1); }
+}
+
+/* --- Живые кромки стекла: блик пробегает по карточке при наведении --- */
+.glass-live {
+  overflow: hidden;
+}
+.glass-live::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 42%,
+    rgba(255, 227, 234, 0.65) 48%,
+    rgba(255, 61, 104, 0.22) 52%,
+    rgba(255, 227, 234, 0.65) 56%,
+    transparent 62%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+  opacity: 0;
+}
+@media (hover: hover) {
+  .glass-live:hover::after {
+    opacity: 1;
+    transform: translateX(120%);
+    transition: transform 480ms ease-out, opacity 200ms ease-out;
+  }
+}
+
+/* --- Сцена урока: доска, окошки-аватары, летящая звёздочка (светлый рецепт) --- */
+.scene-board {
+  background: linear-gradient(160deg, #ffffff 0%, #fff5f2 80%);
+  border: 1px solid var(--edge);
+  box-shadow: inset 0 2px 10px rgba(20, 24, 61, 0.08);
+}
+.scene-desk {
+  background: linear-gradient(180deg, rgba(255, 61, 104, 0.07), rgba(255, 255, 255, 0.92));
+  border: 1px solid var(--edge);
+}
+.scene-avatar {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 184, 0, 0.9), rgba(255, 184, 0, 0.25) 60%, transparent 80%);
+}
+.scene-avatar--teacher {
+  background: radial-gradient(circle at 35% 30%, rgba(255, 61, 104, 0.9), rgba(255, 61, 104, 0.25) 60%, transparent 80%);
+}
+.scene-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 1px solid rgba(20, 24, 61, 0.18);
+}
+.scene-ring--dashed {
+  inset: -26px;
+  border: 1px dashed rgba(255, 61, 104, 0.3);
+  animation: lumo-breathe 4s ease-in-out infinite;
+}
+.scene-star {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--amber);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  box-shadow: 0 0 10px 2px rgba(255, 184, 0, 0.55);
+  animation: star-fly 3s ease-in-out infinite;
+}
+@keyframes star-fly {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  15% { opacity: 1; }
+  60% { transform: translate(var(--fly-x, -110px), var(--fly-y, -8px)) scale(1.1); opacity: 1; }
+  85% { opacity: 0.5; }
+  100% { transform: translate(var(--fly-x, -110px), var(--fly-y, -8px)) scale(0.7); opacity: 0; }
+}
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: lumo-spark 2.5s ease-in-out infinite;
+}
+
+/* --- Карточка-акцент «витраж» (максимум одна на сетку) — рецепт №9, светлый --- */
+.glass-vitrage {
+  background:
+    linear-gradient(160deg, rgba(255, 61, 104, 0.08), transparent 40%),
+    linear-gradient(-20deg, rgba(177, 92, 255, 0.08), transparent 45%),
+    #ffffff;
+}
+
+/* --- Секция доверия: тёплая подложка с фиолетовым дыханием (гость на кромке, не заливка) --- */
+.trust-scene {
+  background:
+    radial-gradient(120% 90% at 70% 0%, rgba(177, 92, 255, 0.12) 0%, rgba(251, 252, 254, 0) 60%),
+    var(--ink);
+}
+
+/* --- Аккордеон вопросов: плавное раскрытие без скачков --- */
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 260ms ease-out;
+}
+.faq-panel[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+.faq-panel > div {
+  overflow: hidden;
+}
+.faq-chevron {
+  transition: transform 200ms ease-out;
+}
+[aria-expanded='true'] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Спутник-Люмо (следует по прокрутке), декоративный — клики сквозь него.
+   Живёт только на широких экранах: на телефоне реплики стоят прямо в секциях. --- */
+.lumo-companion {
+  display: none;
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 40;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 240ms ease-out, transform 240ms ease-out;
+}
+@media (min-width: 1024px) {
+  .lumo-companion {
+    display: flex;
+  }
+}
+/* Пузырь спутника плывёт над контентом — фон непрозрачный белый, чтобы текст читался чётко
+   поверх любой секции под ним (было плотное тёмное пятно — держалось на чёрной сцене) */
+.lumo-companion .lumo-bubble {
+  background: #FFFFFF;
+  border-color: var(--edge);
+  box-shadow: 0 14px 32px -10px rgba(20, 24, 61, 0.28);
+}
+/* Инлайн-реплика секции: на широких экранах её говорит спутник — прячем дубль */
+@media (min-width: 1024px) {
+  .lumo-bubble--inline {
+    display: none;
+  }
+}
+.lumo-companion--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Панорама города (связка «Город = живой прогресс», docs/research/прорывы-синтез.md
+   часть 4 п.1): силуэты зданий-«стекла» + окна-уроки. Анонимная витринная панорама
+   (CityProgress) убрана с главной страницы 2026-07-08 (план чистки витрины) — классы
+   остаются в деле в кабинете ребёнка (JourneyPath — личный мини-город). --- */
+.city-tower {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f0ff 100%);
+  border-top: 2px solid rgba(20, 24, 61, 0.2);
+  box-shadow:
+    0 1px 0 1px rgba(20, 24, 61, 0.06),
+    0 -2px 14px rgba(255, 61, 104, 0.08);
+  border-radius: 4px 4px 0 0;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+}
+.city-window {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: rgba(20, 24, 61, 0.06);
+  transition: background-color 300ms ease-out, box-shadow 300ms ease-out;
+}
+.city-window--lit {
+  background: var(--amber);
+  box-shadow: 0 0 8px 1px rgba(255, 184, 0, 0.55);
+  animation: city-window-glow 3.4s ease-in-out infinite;
+}
+@keyframes city-window-glow {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Портрет слова-жителя (Б2 «Недорисованный портрет», эффект Зейгарник,
+   docs/superpowers/specs/2026-07-12-platforma-nomer-1-design.md §3):
+   ВИЗУАЛЬНЫЙ слой над уже существующим прогрессом (child_chunk_progress) —
+   карандашный набросок → линии → краски → готовый глянцевый портрет.
+   Все 4 слоя лежат в SVG одновременно, [data-stage] на .word-portrait
+   переключает их видимость — смена стадии это только opacity (60fps).
+   ============================================================ */
+.word-portrait {
+  width: 100%;
+}
+.word-portrait__frame {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.2) 62%, transparent 78%);
+}
+.wp-plate {
+  fill: rgba(20, 24, 61, 0.03);
+  stroke: var(--edge);
+  stroke-width: 1;
+}
+.wp-layer {
+  opacity: 0;
+  transition: opacity 560ms ease-out;
+}
+/* Набросок: пунктирные направляющие карандаша — приглушённые, "ещё черновик" */
+.wp-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.6;
+}
+.wp-guide-line {
+  stroke: var(--muted);
+  stroke-width: 0.6;
+  stroke-dasharray: 2 3;
+  opacity: 0.45;
+}
+.wp-guide-dot {
+  fill: var(--muted);
+  opacity: 0.55;
+}
+/* Линии: уверенный контур чернилами, ещё без цвета */
+.wp-outline {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+  opacity: 0.85;
+}
+.wp-eye-outline {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+.wp-mouth-outline {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+/* Краски: заливка акцентным цветом жителя (currentColor — задаётся во WordPortrait.tsx) */
+.wp-fill {
+  fill: currentColor;
+  opacity: 0.22;
+}
+.wp-eye-fill {
+  fill: var(--text);
+}
+.wp-blush {
+  fill: currentColor;
+  opacity: 0.4;
+}
+/* Готово: глянцевая рамка-медальон + блик — премиальный финиш */
+.wp-ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+.wp-gloss {
+  fill: rgba(255, 255, 255, 0.6);
+}
+
+.word-portrait[data-stage='sketch'] .wp-layer--sketch {
+  opacity: 1;
+}
+
+.word-portrait[data-stage='lines'] .wp-layer--sketch {
+  opacity: 0.28;
+}
+.word-portrait[data-stage='lines'] .wp-layer--lines {
+  opacity: 1;
+}
+
+.word-portrait[data-stage='colors'] .wp-layer--lines {
+  opacity: 1;
+}
+.word-portrait[data-stage='colors'] .wp-layer--colors {
+  opacity: 1;
+}
+
+.word-portrait[data-stage='complete'] .wp-layer--lines {
+  opacity: 1;
+}
+.word-portrait[data-stage='complete'] .wp-layer--colors {
+  opacity: 1;
+}
+.word-portrait[data-stage='complete'] .wp-layer--complete {
+  opacity: 1;
+  animation: wp-complete-in 560ms ease-out both;
+}
+@keyframes wp-complete-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Точки-индикаторы ступени под каждым портретом (1..4) */
+.wp-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--edge);
+}
+.wp-dot--filled {
+  background: currentColor;
+}
+
+/* ============================================================
+   Плеер упражнений (О-01): 5 игровых типов, только transform/opacity.
+   ============================================================ */
+
+/* Праздник звёзд при верном ответе — один короткий всплеск, не цикл */
+.star-pop {
+  animation: star-pop-in 260ms ease-out both;
+}
+@keyframes star-pop-in {
+  from { opacity: 0; transform: scale(0.85) translateY(4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Плитка ответа (буква/слово/картинка/пара) — тап-цель ≥44px, живой отклик */
+.exercise-tile {
+  min-width: 44px;
+  min-height: 44px;
+  transition: transform 160ms ease-out, background-color 160ms ease-out, border-color 160ms ease-out;
+}
+.exercise-tile:active {
+  transform: scale(0.96);
+}
+.exercise-tile--selected {
+  border-color: var(--cyan);
+  background: rgba(255, 61, 104, 0.14);
+}
+.exercise-tile--correct {
+  border-color: var(--cyan);
+  background: rgba(255, 61, 104, 0.22);
+  box-shadow: 0 4px 14px rgba(255, 61, 104, 0.2);
+}
+.exercise-tile--wrong {
+  border-color: var(--magenta);
+  background: rgba(177, 92, 255, 0.16);
+  box-shadow: 0 4px 14px rgba(177, 92, 255, 0.18);
+}
+
+/* ============================================================
+   Кабинеты — премиум визуальный язык (арт-отдел, доработка №2).
+   Утилиты ниже переиспользуются в кабинете родителя и детском мире,
+   а ФАЗА 2 (учитель, владелец) обязана звать их теми же именами —
+   не изобретать новый визуальный язык для тех же смыслов.
+   ============================================================ */
+
+/* --- Панель-секция кабинета: стеклянный контейнер с ритмом воздуха и
+   мягким пятном света в углу (глубина без утяжеления палитры). Ставить
+   вместе с .glass-edge .glass-card — cabinet-panel только добавляет
+   отступы/акцент, материал стекла остаётся общим рецептом. --- */
+.cabinet-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 22px;
+}
+@media (min-width: 640px) {
+  .cabinet-panel {
+    padding: 36px 32px;
+  }
+}
+.cabinet-panel::before {
+  content: '';
+  position: absolute;
+  top: -70px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--panel-glow, rgba(79, 216, 255, 0.14)), transparent 72%);
+  pointer-events: none;
+}
+.cabinet-panel > * {
+  position: relative;
+}
+
+/* Заголовок панели: значок/иконка + Tektur-заголовок + опциональный CTA
+   справа, тонкий светящийся разделитель снизу отделяет от содержимого. */
+.cabinet-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid rgba(217, 240, 255, 0.1);
+}
+
+/* --- Карточка-статистика: крупная Handjet-цифра со свечением-акцентом.
+   data-accent = cyan | amber | magenta задаёт цвет свечения и подложки. --- */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.stat-card[data-accent='cyan'] { --stat-glow: rgba(255, 61, 104, 0.3); }
+.stat-card[data-accent='amber'] { --stat-glow: rgba(255, 184, 0, 0.3); }
+.stat-card[data-accent='magenta'] { --stat-glow: rgba(177, 92, 255, 0.3); }
+.stat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 140% at 0% 100%, var(--stat-glow, rgba(255, 61, 104, 0.22)), transparent 62%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.stat-number {
+  position: relative;
+  font-family: var(--font-digits);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 20px var(--stat-glow, rgba(255, 61, 104, 0.4));
+}
+/* Пульсация — только когда в значении реально ЕСТЬ что праздновать
+   (владелец просил "лёгкую пульсацию при наличии" именно для звёзд). */
+.stat-number--pulse {
+  animation: stat-pulse 2.8s ease-in-out infinite;
+}
+@keyframes stat-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.045); opacity: 0.9; }
+}
+
+/* --- Заглушка «скоро»: дышащее кольцо со значком вместо унылого серого
+   прямоугольника — обещание, а не пустота (урок из боя bakery24/школа). --- */
+.stub-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 36px 20px;
+  text-align: center;
+}
+.stub-soon__ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 227, 234, 0.9), rgba(255, 61, 104, 0.06) 60%, transparent 76%);
+  border: 1px solid var(--edge);
+  color: var(--cyan);
+}
+.stub-soon__ring::before {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 61, 104, 0.3);
+  animation: stub-breathe 3.6s ease-in-out infinite;
+}
+@keyframes stub-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* --- Появление секций при прокрутке: только opacity/translateY, ≤380ms,
+   ease-out. Использовать через клиентскую обёртку <Reveal> из
+   components/ui/Reveal.tsx (IntersectionObserver, не библиотека). --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 380ms ease-out, transform 380ms ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transform: none;
+    transition: opacity 220ms ease-out;
+  }
+}
+
+/* --- Мягкое свечение-акцент позади элемента (портал/аура) — для крупного
+   Люмо-приветствия, текущего узла дорожки, витрины звёзд и т.п.
+   --glow-color задаёт цвет, по умолчанию циан. --- */
+.glow-accent {
+  position: relative;
+  isolation: isolate;
+}
+.glow-accent::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(60% 60% at 50% 40%, var(--glow-color, rgba(255, 61, 104, 0.32)), transparent 72%);
+  filter: blur(16px);
+}
+
+/* --- Кликабельная карточка кабинета: лёгкий подъём + отклик на тап.
+   Сочетать с .glass-live для бегущего блика по кромке при наведении. --- */
+.cabinet-card--interactive {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+@media (hover: hover) {
+  .cabinet-card--interactive:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 34px rgba(20, 24, 61, 0.2);
+  }
+}
+.cabinet-card--interactive:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* --- Аватар-инициал ребёнка/пользователя: круг с тёплым/холодным
+   свечением по тону. data-tone = cyan | amber | magenta, чередовать по
+   индексу в списке для живой палитры без хаоса. --- */
+.avatar-glow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  color: #05131c;
+}
+.avatar-glow[data-tone='cyan'] {
+  background: radial-gradient(circle at 32% 26%, #ffd8e0, #ff3d68 55%, #b8123f 100%);
+  box-shadow: 0 0 20px rgba(255, 61, 104, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.avatar-glow[data-tone='amber'] {
+  background: radial-gradient(circle at 32% 26%, #ffefc2, #ffb800 55%, #b37d00 100%);
+  box-shadow: 0 0 20px rgba(255, 184, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.avatar-glow[data-tone='magenta'] {
+  background: radial-gradient(circle at 32% 26%, #ecdcff, #b15cff 55%, #7a2fc0 100%);
+  box-shadow: 0 0 20px rgba(177, 92, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* --- Полоса прогресса: минималистичный трек + залив-акцент (домашки,
+   сравнение звёзд между детьми). Ширина ставится инлайн-стилем один раз
+   при рендере на сервере — это разовый расчёт, НЕ transition свойства
+   width, поэтому правило "только transform/opacity" не нарушается. --- */
+.progress-track {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(20, 24, 61, 0.06);
+  border: 1px solid var(--edge);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  transform-origin: left center;
+}
+.progress-fill[data-accent='cyan'] {
+  background: linear-gradient(90deg, #c41f45, var(--cyan));
+  box-shadow: 0 0 12px rgba(255, 61, 104, 0.5);
+}
+.progress-fill[data-accent='amber'] {
+  background: linear-gradient(90deg, #cc7a20, var(--amber));
+  box-shadow: 0 0 12px rgba(255, 184, 0, 0.5);
+}
+/* Ещё 2 акцента — полоски навыков (А3.3-хвост, 4 ступени освоения чанка).
+   color-mix уже используется в этом файле (lumo-play-btn) — держим тот же приём,
+   чтобы не хардкодить тёмный оттенок под каждую тему отдельно. */
+.progress-fill[data-accent='teal'] {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 55%, black), var(--teal));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--teal) 50%, transparent);
+}
+.progress-fill[data-accent='magenta'] {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--magenta) 55%, black), var(--magenta));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--magenta) 50%, transparent);
+}
+
+/* --- Карточка-задание («квест»): цветной акцент слева по типу заданию,
+   приглашающий вид вместо голой строки текста. data-tone = cyan | amber |
+   magenta. --- */
+.quest-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.quest-card[data-tone='cyan'] { --quest-color: var(--cyan); }
+.quest-card[data-tone='amber'] { --quest-color: var(--amber); }
+.quest-card[data-tone='magenta'] { --quest-color: var(--magenta); }
+.quest-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--quest-color, var(--cyan));
+  box-shadow: 0 0 12px var(--quest-color, var(--cyan));
+}
+
+/* ============================================================
+   Дорожка-приключение ребёнка (детский мир, kid-специфично): игровая
+   карта вместо списка — круглые узлы-станции на пунктирной линии пути.
+   Текущий узел крупнее и дышит кольцом, пройденный — янтарный с галочкой,
+   впереди — приглушённое стекло. Никакого зигзага/лишних transform —
+   раскладка простая и безопасная на любой ширине (закон QA).
+   ============================================================ */
+.journey-track {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+@media (min-width: 640px) {
+  .journey-track {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 28px;
+    column-gap: 18px;
+  }
+}
+.journey-line {
+  display: none;
+}
+@media (min-width: 640px) {
+  .journey-line {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 22px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, rgba(20, 24, 61, 0.18) 0 8px, transparent 8px 16px);
+  }
+}
+.journey-stop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .journey-stop {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 112px;
+  }
+}
+.journey-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-family: var(--font-digits);
+  font-size: 18px;
+  border: 1px solid var(--edge);
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(20, 24, 61, 0.08);
+  color: var(--muted);
+  transition: transform 200ms ease-out;
+}
+.journey-node--done {
+  color: #241305;
+  background: radial-gradient(circle at 34% 28%, #ffefc2, var(--amber) 60%);
+  box-shadow: 0 0 16px rgba(255, 184, 0, 0.45);
+  border-color: transparent;
+}
+.journey-node--current {
+  width: 52px;
+  height: 52px;
+  color: #2b0512;
+  background: radial-gradient(circle at 34% 28%, #ffd8e0, var(--cyan) 62%);
+  box-shadow: 0 0 24px rgba(255, 61, 104, 0.45);
+  border-color: transparent;
+}
+.journey-node--current::before {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 61, 104, 0.4);
+  animation: lumo-breathe 4s ease-in-out infinite;
+}
+
+/* --- Уважение к «меньше движения» --- */
+@media (prefers-reduced-motion: reduce) {
+  .lumo-body,
+  .lumo-body::before,
+  .lumo-art,
+  .lumo-spark,
+  .scene-star,
+  .scene-ring--dashed,
+  .pulse-dot,
+  .city-window--lit,
+  .stat-number--pulse,
+  .stub-soon__ring::before,
+  .journey-node--current::before {
+    animation: none !important;
+  }
+  .lumo-eye {
+    transition: none;
+  }
+  .glass-live::after {
+    display: none;
+  }
+  .star-pop {
+    animation: none;
+  }
+  .wp-layer {
+    transition: none;
+  }
+  .word-portrait[data-stage='complete'] .wp-layer--complete {
+    animation: none;
+  }
+  .lumo,
+  .lumo-nudge .lumo-body,
+  .lumo-swoosh .lumo-body,
+  .lumo-cheer .lumo-body,
+  .lumo-cheer .lumo-smile,
+  .lumo-cheer-spark {
+    animation: none !important;
+  }
+  .lumo-wink .lumo-eye.r {
+    transition: none;
+  }
+  .exercise-tile,
+  .exercise-tile:active {
+    transition: none;
+    transform: none;
+  }
+  .cabinet-card--interactive,
+  .cabinet-card--interactive:hover,
+  .cabinet-card--interactive:active,
+  .journey-node {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   «Поиграй с Люмо» — тамагочи-площадка витрины (LumoPlayground).
+   Идея взаимодействий — из макета владельца (AntiGravity, 2026-07-10),
+   переведена в язык «Золотой середины»: светлое стекло, цвета из
+   паспорта токенов, только transform/opacity.
+   ============================================================ */
+
+/* Сон: глаза держатся закрытыми (тот же приём, что lumo-blink, но
+   постоянно), парение замедляется — Люмо «дышит во сне». */
+.lumo-doze .lumo-eye {
+  transform: translate(var(--ex, 0px), var(--ey, 0px)) scaleY(0.12);
+  transition: transform 200ms ease-out;
+}
+.lumo-doze .lumo-body {
+  animation-duration: 8s;
+}
+.lumo-doze.lumo {
+  animation-duration: 14s;
+}
+
+/* Летящие награды-реакции: сердечко/угощение/звёздочка/Z над Люмо. */
+.lumo-play-float {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  margin-left: -15px;
+  pointer-events: none;
+  animation: lumo-play-fly 1.5s ease-out both;
+}
+@keyframes lumo-play-fly {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.5) rotate(-12deg); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--fx, 0px), -130px) scale(1.5) rotate(10deg); }
+}
+.lumo-play-zzz {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--cyan);
+  text-shadow: 0 2px 10px rgba(20, 24, 61, 0.15);
+}
+
+/* Реплика-праздник над сценой — честная фраза персонажа, без выдуманных
+   очков: дофамин даёт живой Люмо, а не фейковый счётчик. */
+.lumo-play-toast {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--ink);
+  border: 1px solid var(--edge);
+  box-shadow: 0 10px 24px -10px rgba(20, 24, 61, 0.25);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: lumo-play-toast-in 240ms ease-out both;
+}
+@keyframes lumo-play-toast-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Круглые кнопки-действия: стеклянные, каждая со своим цветом реакции. */
+.lumo-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--edge);
+  background: var(--ink);
+  box-shadow: 0 8px 20px -10px rgba(20, 24, 61, 0.28);
+  cursor: pointer;
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+}
+.lumo-play-btn:hover { transform: translateY(-2px) scale(1.06); }
+.lumo-play-btn:active { transform: scale(0.94); }
+.lumo-play-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+.lumo-play-btn--pet { color: var(--magenta); }
+.lumo-play-btn--feed { color: var(--amber); }
+.lumo-play-btn--play { color: var(--teal); }
+.lumo-play-btn--sleep { color: var(--cyan); }
+.lumo-play-btn--pet:hover { box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--magenta) 45%, transparent); }
+.lumo-play-btn--feed:hover { box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--amber) 45%, transparent); }
+.lumo-play-btn--play:hover { box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--teal) 45%, transparent); }
+.lumo-play-btn--sleep:hover { box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--cyan) 45%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-play-float { animation: none; opacity: 0; }
+  .lumo-play-toast { animation: none; }
+  .lumo-play-btn,
+  .lumo-play-btn:hover,
+  .lumo-play-btn:active { transform: none; transition: none; }
+}
+
+/* ============================================================
+   «КОСМОС ЛЮМО» — тёмная неоновая тема витрины по макету владельца
+   (AntiGravity, 2026-07-10). Скоуп .cosmos переопределяет смысл
+   переменных ТОЛЬКО на витрине — кабинеты/класс остаются в
+   «Золотой середине». Имена переменных те же, что держат 30+ файлов.
+   ============================================================ */
+
+.cosmos {
+  --ink: #05050A;                      /* фон: глубокий космос */
+  --glass: rgba(56, 189, 248, 0.10);   /* поверхность: ледяное свечение */
+  --text: #F4F7FF;                     /* текст: почти белый */
+  --muted: rgba(199, 210, 254, 0.68);  /* приглушённый: лунная дымка */
+  --cyan: #22D3EE;                     /* акцент 1: неоновый циан */
+  --amber: #FBBF24;                    /* акцент 2: золото наград */
+  --magenta: #C084FC;                  /* акцент 3: магия/уровни */
+  --teal: #34D399;                     /* акцент 4: изумруд */
+  --edge: rgba(255, 255, 255, 0.12);   /* кромка: белое стекло */
+
+  /* ── СЕМАНТИЧЕСКИЙ СЛОЙ ДЛЯ ТЁМНОЙ ТЕМЫ ───────────────────────────────────
+     ⚠️ БЕЗ ЭТОГО БЛОКА ВЕСЬ СЛОЙ СМЫСЛОВЫХ ИМЁН МОЛЧА ЛОМАЕТСЯ, и это не
+     теоретический риск — так и случилось 2026-08-19, поймали скептики роя.
+
+     Причина тонкая и стоит того, чтобы её здесь записать. Значение вида
+     color-mix(... var(--glass) ...) вычисляется В МЕСТЕ ОБЪЯВЛЕНИЯ, а не в
+     месте использования. Объявили в корне — туда и запеклись КОРНЕВЫЕ цвета.
+     Тёмная тема ниже переопределяет --glass и --text, но --surface-play уже
+     посчитан со светлыми: детские карточки вышли бледно-розовыми на почти
+     чёрной странице, текст на них — контраст 1.12 к 1 при норме 4.5.
+     Глазами это «карточки пропали», а сборка и тесты молчат.
+
+     Поэтому КАЖДОЕ смысловое имя, которое опирается на другие цвета, обязано
+     быть переобъявлено в каждой теме. Заводите новое — добавляйте сюда же. */
+  --action: var(--cyan);
+  --action-ink: #04121A;
+  --reward: var(--amber);
+  --calm: var(--teal);
+  --brand-from: var(--lumo-cyan);
+  --brand-to: var(--lumo-magenta);
+  --surface-play: color-mix(in oklab, var(--text) 7%, transparent);
+  --surface-play-edge: color-mix(in oklab, var(--action) 26%, var(--edge));
+  --surface-parent: color-mix(in oklab, var(--text) 4%, transparent);
+  --surface-parent-edge: var(--edge);
+  /* Тени на почти чёрном фоне не видны вовсе — на тёмном отрыв от страницы
+     даёт не тень, а светлая кромка сверху. */
+  --shadow-rest: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lift: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 18px 44px rgba(0, 0, 0, 0.55);
+
+  /* Космос-«туманность» запечена в СТАТИЧНЫЙ фон страницы (2026-07-10,
+     оптимизация FPS): раньше это были 3 анимированных размытых слоя +
+     14 частиц, которые композились каждый кадр на весь скролл и роняли
+     Retina-макбук. Теперь — обычная заливка градиентами: рисуется один
+     раз, ноль работы на кадр, вид тот же. */
+  background:
+    radial-gradient(60% 48% at 12% 0%, rgba(56, 189, 248, 0.16), transparent 60%),
+    radial-gradient(55% 55% at 100% 26%, rgba(168, 85, 247, 0.16), transparent 60%),
+    radial-gradient(48% 40% at 62% 100%, rgba(59, 130, 246, 0.13), transparent 60%),
+    #05050A;
+  color: var(--text);
+}
+
+/* Стекло макета: тёмное, с двойной кромкой и внутренним бликом */
+.cosmos .glass-edge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+.cosmos .glass-card {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+.cosmos .btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+.cosmos .nav-glass {
+  background: rgba(5, 5, 10, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Первичная кнопка.
+   ⚠️ Здесь стоял зашитый градиент циан→синий→фиолет — последний остаток
+   «сиреневого месива», которое бриф запрещает прямо. Важнее вида другое: цвет
+   главной кнопки обязан совпадать с тем, что везде на сайте значит действие.
+   Пока их было два разных, человек не мог научиться, куда нажимать. */
+.cosmos .btn-primary,
+.cosmos .hero-gs-cta {
+  background: var(--action);
+  color: var(--action-ink);
+  border: 1px solid color-mix(in oklab, var(--action) 55%, transparent);
+  box-shadow: var(--shadow-rest);
+}
+.cosmos .btn-primary:hover,
+.cosmos .hero-gs-cta:hover {
+  box-shadow: var(--shadow-lift);
+}
+
+/* Герой на космосе: сцена прозрачная (фон рисует CosmosBackdrop),
+   пятна-туманности вместо тёплых пятен дня */
+.cosmos .hero-gs, .cosmos .hero-gs-scene { background: transparent; }
+.cosmos .hero-gs-blob--warm { background: radial-gradient(circle, rgba(56, 189, 248, 0.20), transparent 60%); }
+.cosmos .hero-gs-blob--pink { background: radial-gradient(circle, rgba(168, 85, 247, 0.20), transparent 60%); }
+.cosmos .hero-gs-blob--mint { background: radial-gradient(circle, rgba(59, 130, 246, 0.16), transparent 60%); }
+.cosmos .hero-gs-accent {
+  background: linear-gradient(90deg, #67e8f9, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cosmos .hero-gs-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+}
+.cosmos .badge-guarantee {
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.35);
+  color: #fde68a;
+}
+.cosmos .lumo-bubble {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+}
+.cosmos .journey-node {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--text);
+}
+
+/* Тост и кнопки тамагочи-площадки в космосе */
+.cosmos .lumo-play-toast {
+  background: rgba(10, 12, 24, 0.85);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--text);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.cosmos .lumo-play-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ---- Фирменные классы макета (глобальные, используются секциями) ---- */
+.lumo-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+.lumo-btn {
+  transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+.lumo-btn:active {
+  transform: scale(0.95);
+  box-shadow: none !important;
+}
+.animate-spin-slow { animation: cosmos-spin 3s linear infinite; }
+@keyframes cosmos-spin { to { transform: rotate(360deg); } }
+.animate-gradient-x {
+  background-size: 200% auto;
+  animation: cosmos-gradient-x 3s ease-in-out infinite;
+}
+@keyframes cosmos-gradient-x {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+/* Звёздная пыль фона (CosmosBackdrop) — только transform/opacity */
+.cosmos-dust {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: cosmos-dust-drift linear infinite;
+  opacity: 0;
+}
+@keyframes cosmos-dust-drift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0); }
+  50% { opacity: 0.8; transform: translate(var(--dx, 30px), -110px) scale(1.4); }
+  100% { opacity: 0; transform: translate(calc(var(--dx, 30px) * 2), -220px) scale(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmos-dust { animation: none; opacity: 0; }
+  .animate-spin-slow, .animate-gradient-x { animation: none; }
+}
+
+/* Чипы статуса на мок-экране урока: на свету — белое стекло с чернилами,
+   в космосе — тёмное стекло с белым текстом (иначе белое-на-белом). */
+.scene-chip {
+  border: 1px solid var(--edge);
+  background: rgba(255, 255, 255, 0.82);
+  color: #14183d;
+}
+.cosmos .scene-chip {
+  background: rgba(10, 12, 24, 0.72);
+  color: #f4f7ff;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Экран-«планшет» демонстрации живого урока (LessonScene) — фиксированно
+   светлый (это экран продукта), одинаково читается на космосе и на свету. */
+.lesson-screen {
+  background: linear-gradient(180deg, #ffffff, #f4f2fb);
+  border: 1px solid rgba(20, 24, 61, 0.08);
+  box-shadow: 0 24px 60px -24px rgba(20, 24, 61, 0.4);
+}
+.scene-tile-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(20, 24, 61, 0.6);
+}
+.cosmos .scene-tile-tag {
+  color: rgba(244, 247, 255, 0.75);
+}
+
+/* ============================================================
+   Люмо в геройской секции: двухколоночная раскладка + пузырь-реплика,
+   жёстко ограниченный по ширине (реплики больше НЕ вылезают за границы).
+   ============================================================ */
+.hero-gs-grid {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: center;
+  justify-items: center;
+}
+.hero-gs-lumo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* компактный пузырь-реплика над Люмо — не шире 15rem, с хвостиком вниз */
+.lumo-say {
+  position: relative;
+  max-width: 15rem;
+  padding: 9px 15px;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #14183d;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.45);
+}
+.lumo-say::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-bottom: 0;
+  border-top-color: #ffffff;
+}
+
+@media (min-width: 1024px) {
+  .hero-gs-grid {
+    grid-template-columns: 1.02fr 0.98fr;
+    gap: 44px;
+    max-width: 72rem;
+  }
+  .hero-gs-grid .hero-gs-content {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hero-gs-grid .hero-gs-cta-block {
+    align-items: flex-start;
+  }
+  .hero-gs-grid .hero-gs-chips {
+    justify-content: flex-start;
+  }
+  .hero-gs-grid .hero-gs-cta-row {
+    justify-content: flex-start;
+  }
+  .hero-gs-h {
+    max-width: 15ch;
+  }
+}
+
+/* ============================================================
+   ОПТИМИЗАЦИЯ FPS «Космос» (2026-07-10)
+   Причина просадки: за стеклянными карточками дрейфует анимированный
+   фон, а backdrop-filter заставляет браузер ПЕРЕСЧИТЫВАТЬ размытие фона
+   на КАЖДОМ кадре под каждой карточкой (умножено на число карточек в
+   кадре). На тёмном космосе размытие фона визуально почти не читается —
+   заменяем его на полупрозрачную заливку. Экономит десятки % кадрового
+   бюджета без потери вида. Светлая тема (кабинеты) не тронута — там нет
+   движущегося фона, backdrop-filter там дёшев.
+   ============================================================ */
+.cosmos .glass-edge,
+.cosmos .glass-card,
+.cosmos .lumo-card,
+.cosmos .nav-glass {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.cosmos .glass-edge { background: rgba(255, 255, 255, 0.055); }
+.cosmos .lumo-card { background: rgba(255, 255, 255, 0.05); }
+.cosmos .nav-glass { background: rgba(5, 5, 10, 0.9); }
+
+/* Частицы пыли без box-shadow-свечения — тень красится попиксельно
+   каждый кадр × число частиц. Точки и так видны на тёмном фоне. */
+.cosmos-dust { box-shadow: none; }
+
+/* Статы игрока под Люмо в герое (перенос из угловой панели HUD) */
+.lumo-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+.lumo-stat--level { color: #93c5fd; border-color: rgba(59, 130, 246, 0.35); background: rgba(59, 130, 246, 0.14); }
+.lumo-stat--xp    { color: #d8b4fe; border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.14); }
+.lumo-stat--star  { color: #fcd34d; border-color: rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.14); }
+
+/* Узлы схемы «Второй пилот» — цветные иконки-кружки вместо голых цифр.
+   Появляются пружиной при въезде в кадр (one-shot), приподнимаются на
+   наведении. Ноль бесконечных анимаций (FPS). */
+.pilot-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 26px -12px rgba(20, 24, 61, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 160ms ease-out;
+}
+.pilot-node:hover { transform: translateY(-3px) scale(1.06); }
+.pilot-bullet-ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  background: rgba(0, 201, 167, 0.16);
+  color: var(--teal);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pilot-node, .pilot-node:hover { transform: none; transition: none; }
+}
+
+/* ============================================================
+   РИТМ ФОНОВ ВИТРИНЫ (2026-07-10, правка владельца «блоки в один
+   фон, резкие переходы»). Страница делится на «главы»:
+   тёмные полосы получают КАЖДАЯ свой цветовой оттенок-туманность
+   (radial с прозрачными краями — переходы мягкие сами по себе),
+   а две главы — «продукт» и «деньги» — СВЕТЛЫЕ скруглённые панели
+   с тенью (осознанный контраст, а не грубый обрез). Чистый CSS-фон,
+   ноль анимаций — FPS не тронут.
+   ============================================================ */
+
+/* Тёмные полосы с оттенком: индиго (квесты), маджента (боль),
+   циан (учителя/доверие), розовый (аркада), фиолет (финал).
+   Оттенок живёт на ::before с ВЕРТИКАЛЬНОЙ маской-растушёвкой:
+   цвет плавно нарастает из базовой черноты за 220px сверху и так же
+   плавно гаснет снизу — горизонтальных швов между главами нет физически
+   (правка владельца 2026-07-10: «резкие переходы между секциями»). */
+[class*='band-tint--'] {
+  position: relative;
+}
+[class*='band-tint--']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 220px,
+    #000 calc(100% - 220px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 220px,
+    #000 calc(100% - 220px),
+    transparent 100%
+  );
+}
+.band-tint--indigo::before {
+  background:
+    radial-gradient(90% 85% at 15% 18%, rgba(79, 70, 229, 0.2), transparent 62%),
+    radial-gradient(70% 60% at 90% 80%, rgba(59, 130, 246, 0.1), transparent 60%);
+}
+.band-tint--magenta::before {
+  background:
+    radial-gradient(85% 90% at 85% 25%, rgba(217, 70, 160, 0.16), transparent 62%),
+    radial-gradient(60% 55% at 10% 85%, rgba(124, 58, 237, 0.1), transparent 60%);
+}
+.band-tint--cyan::before {
+  background:
+    radial-gradient(90% 80% at 12% 25%, rgba(34, 211, 238, 0.13), transparent 62%),
+    radial-gradient(65% 55% at 88% 80%, rgba(52, 211, 153, 0.09), transparent 60%);
+}
+.band-tint--pink::before {
+  background:
+    radial-gradient(85% 85% at 82% 28%, rgba(236, 72, 153, 0.16), transparent 62%),
+    radial-gradient(60% 55% at 12% 80%, rgba(168, 85, 247, 0.1), transparent 60%);
+}
+.band-tint--violet::before {
+  background:
+    radial-gradient(110% 75% at 50% 90%, rgba(124, 58, 237, 0.2), transparent 66%),
+    radial-gradient(70% 55% at 15% 20%, rgba(99, 102, 241, 0.1), transparent 60%);
+}
+
+/* Светлая скруглённая панель-глава. Переключает токены на светлую
+   гамму — все var-зависимые компоненты внутри перекрашиваются сами. */
+.cosmos .band-light {
+  --ink: #F6F7FC;
+  --glass: #FFE3EA;
+  --text: #14183D;
+  --muted: #5E6796;
+  --cyan: #FF3D68;
+  --amber: #D97706;
+  --magenta: #9333EA;
+  --teal: #0D9488;
+  --edge: rgba(20, 24, 61, 0.12);
+  position: relative;
+  background: linear-gradient(180deg, #FDFDFF 0%, #F3F5FC 60%, #EEF1FA 100%);
+  border-radius: 40px;
+  margin: 10px 10px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 34px 90px -42px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+}
+@media (min-width: 1024px) {
+  .cosmos .band-light { border-radius: 56px; margin: 14px 22px; }
+}
+/* мягкое тёплое свечение в верхнем углу светлой панели — не однотонно */
+.cosmos .band-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 45% at 8% 0%, rgba(255, 227, 234, 0.55), transparent 65%),
+    radial-gradient(50% 40% at 95% 100%, rgba(214, 240, 255, 0.5), transparent 65%);
+}
+.cosmos .band-light > * { position: relative; }
+
+/* Возврат светлых рецептов материала внутри светлой панели */
+.cosmos .band-light .glass-edge {
+  background: #ffffff;
+  border: 1px solid var(--edge);
+  box-shadow: 0 20px 40px -18px rgba(20, 24, 61, 0.16);
+  border-radius: 20px;
+}
+.cosmos .band-light .glass-card {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(20, 24, 61, 0.05),
+    0 8px 24px rgba(20, 24, 61, 0.12);
+}
+.cosmos .band-light .btn-glass {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--edge);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 6px 16px rgba(20, 24, 61, 0.1);
+}
+.cosmos .band-light .journey-node {
+  background: #ffffff;
+  border-color: var(--edge);
+  color: var(--text);
+}
+.cosmos .band-light .lumo-bubble {
+  background: #ffffff;
+  border-color: var(--edge);
+  color: var(--text);
+}
+.cosmos .band-light .scene-tile-tag { color: rgba(20, 24, 61, 0.6); }
+.cosmos .band-light .badge-guarantee {
+  border: 1px solid rgba(217, 119, 6, 0.4);
+  background: rgba(255, 184, 0, 0.14);
+  color: var(--text);
+}
+
+/* ============================================================
+   ЕДИНАЯ СТИЛИСТИКА СЕКЦИЙ (2026-07-10): сквозной чип-ярлык над
+   заголовком каждой главы (цвет — через --chip), единый бренд-
+   градиент действий .btn-brand, единый радиус карточек 24px.
+   ============================================================ */
+.chip-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 15px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--chip, #67E8F9);
+  border: 1px solid color-mix(in srgb, var(--chip, #67E8F9) 45%, transparent);
+  background: color-mix(in srgb, var(--chip, #67E8F9) 13%, transparent);
+  /* Свечение снято: ярлык главы стоит в ШЕСТИ секциях, и подсвеченная надпись
+     в каждой перестаёт быть акцентом — становится фоном. Оставлена только
+     цветная кромка: она отделяет ярлык от фона и ничего не обещает. */
+  box-shadow: none;
+}
+
+/* Бренд-кнопка действия — тот же градиент, что у CTA шапки/героя */
+.btn-brand {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  /* ⚠️ Здесь стоял зашитый градиент циан→синий→фиолет. Бриф прямо запрещает
+     такие «сиреневые градиенты ради красоты», а главное — цвет главной кнопки
+     обязан быть ТЕМ ЖЕ, что везде значит действие. Иначе на странице два разных
+     «нажми меня»: один в шапке, другой в героe, и человек перестаёт им верить. */
+  background: var(--action);
+  color: var(--action-ink);
+  box-shadow: var(--shadow-rest);
+  transition: transform var(--t-tap) var(--ease-out), box-shadow var(--t-appear) var(--ease-out);
+}
+.btn-brand::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 55%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.4), transparent);
+  transform: skewX(-18deg);
+  transition: left .55s cubic-bezier(.22,1,.36,1);
+}
+.btn-brand:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(6,182,212,.5); }
+.btn-brand:hover::after { left: 130%; }
+.btn-brand:active { transform: scale(.97); }
+
+/* Единый радиус карточек в светлых панелях (был 20, у тёмных 24) */
+.cosmos .band-light .glass-edge { border-radius: 24px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-brand, .btn-brand:hover { transition: none; transform: none; }
+}
+
+/* На космосе фон секций рисует ТОЛЬКО система полос-глав — легаси-подложка
+   секции доверия гасится (она красила сплошной --ink поверх полосы и
+   создавала горизонтальные швы внутри главы). */
+.cosmos .trust-scene { background: transparent; }
+
+/* Популярный тариф — градиентная кромка циан→фиолет + цветной глоу вместо
+   чёрной тени (рецепт дизайн-директора). Работает внутри .band-light, где
+   --cyan=коралл, --magenta=фиолет. */
+.plan-popular {
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(160deg, rgba(255, 61, 104, 0.07), transparent 42%) padding-box,
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, var(--cyan), var(--magenta)) border-box;
+  box-shadow:
+    0 0 0 1px rgba(147, 51, 234, 0.12),
+    0 26px 50px -22px rgba(147, 51, 234, 0.34),
+    0 16px 30px -14px rgba(255, 61, 104, 0.18);
+}
+
+/* В светлых панелях .btn-primary — тёплый коралловый (базовый рецепт), а не
+   холодный космос-градиент из `.cosmos .btn-primary` (он там чужероден —
+   предупреждение дизайн-директора 2026-07-10). */
+.cosmos .band-light .btn-primary {
+  background: conic-gradient(
+    from 200deg at 30% 20%,
+    var(--cyan) 0%,
+    #ff7a9b 15%,
+    var(--cyan) 30%,
+    #d6265a 55%,
+    var(--cyan) 75%,
+    #ff7a9b 100%
+  );
+  box-shadow:
+    0 14px 30px -10px rgba(255, 61, 104, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* ==========================================================================
+   Игровая сцена — направление «Стеклянный остров» (выбор владельца 2026-08-11
+   по мокапу docs/design/2026-08-11-igrovaya-scena-4-napravleniya.html).
+   Только transform/opacity в keyframes (60fps). box-shadow/filter — статичные.
+   ========================================================================== */
+
+.scene-island {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 1rem 2.75rem;
+  /* Тройной градиент: золото сверху (amber), циан-Люмо снизу, тёплый купол */
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(255, 184, 0, 0.22), transparent 60%),
+    radial-gradient(90% 65% at 50% 118%, rgba(79, 216, 255, 0.28), transparent 70%),
+    linear-gradient(180deg, var(--ink) 0%, #fff6e8 52%, var(--glass) 100%);
+}
+
+.scene-island__glint {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.65), transparent 70%);
+  top: -90px;
+  left: -60px;
+  z-index: 1;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.scene-island__island {
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+  width: 120%;
+  height: 220px;
+  border-radius: 50% 50% 45% 45% / 65% 65% 25% 25%;
+  background: linear-gradient(180deg, rgba(255, 227, 234, 0.9), rgba(0, 201, 167, 0.35) 180%);
+  filter: blur(1px);
+  transform: translateX(-50%);
+  animation: scene-island-float 6s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes scene-island-float {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -8px); }
+}
+
+.scene-island__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* HUD — счётчик светлячков / раундов */
+.scene-hud {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 18px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px -12px rgba(20, 24, 61, 0.3);
+  border: 1px solid var(--edge);
+}
+
+.scene-hud__fw {
+  color: var(--amber);
+  font-family: var(--font-numbers), monospace;
+}
+
+/* Предмет сцены.
+   Короткое (эмодзи/буква) → компактный квадрат min 150/168.
+   Длинная фраза (listen_choose/pick_image на 11-13/14-17) → карточка
+   растёт по содержимому в пределах max-width, текст переносится внутри.
+   Анимации дыхания/захвата НЕ трогаем — только геометрия и типографика.
+   Плитки build_word/word_order задают size/padding инлайном — их не ломаем. */
+.scene-obj {
+  position: relative;
+  box-sizing: border-box;
+  width: auto;
+  min-width: 150px;
+  max-width: min(15.5rem, calc(100vw - 2.75rem));
+  min-height: 150px;
+  height: auto;
+  padding: 0.85rem 0.75rem;
+  border-radius: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid var(--edge);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 4px 10px rgba(20, 24, 61, 0.12),
+    0 22px 34px -14px rgba(20, 24, 61, 0.32);
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+@media (min-width: 1024px) {
+  .scene-obj {
+    min-width: 168px;
+    min-height: 168px;
+    max-width: min(17rem, 26vw);
+    padding: 1rem 0.85rem;
+  }
+}
+
+/* Внутренний блик — статичный псевдоэлемент */
+.scene-obj::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background: radial-gradient(120% 90% at 30% 15%, rgba(255, 255, 255, 0.55), transparent 55%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Лицо предмета: дыхание отдельно от drag-translate (иначе CSS transform
+   затирает dnd-kit translate каждый кадр). */
+.scene-obj__face {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0; /* flex: длинный текст сжимается и переносится, а не вылезает */
+}
+
+.scene-obj__face--breathe {
+  animation: scene-obj-breathe 3.4s ease-in-out infinite;
+}
+
+.scene-obj__face--n2 {
+  animation-delay: 0.5s;
+}
+
+.scene-obj__face--n3 {
+  animation-delay: 1s;
+}
+
+.scene-obj__face--grabbed {
+  transform: scale(1.18) rotate(-6deg);
+  animation: none;
+}
+
+@keyframes scene-obj-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+
+.scene-obj--selected {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 0 0 4px rgba(255, 61, 104, 0.35),
+    0 22px 34px -14px rgba(20, 24, 61, 0.32);
+}
+
+.scene-obj--grabbed {
+  z-index: 20;
+  border-color: rgba(255, 61, 104, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 10px rgba(20, 24, 61, 0.14),
+    0 34px 46px -14px rgba(20, 24, 61, 0.4);
+  cursor: grabbing;
+}
+
+/* 2.75rem (~44px): эмодзи в 150px-карточке всё ещё крупные;
+   фраза ~20–25 символов («Nice to meet you!») — 2–3 строки внутри max-width.
+   Плитки букв/слов перебивают font-size инлайном — им всё равно.
+   Без «умного» font-size от длины текста (нужен был бы класс на компоненте);
+   чисто-CSS компромисс: один размер, комфортный и короткому, и фразе. */
+.scene-obj__emoji {
+  display: block;
+  max-width: 100%;
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: manual;
+  filter: drop-shadow(0 6px 6px rgba(20, 24, 61, 0.18));
+  pointer-events: none;
+}
+
+.scene-obj__chip {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--text);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Цель-Люмо: 216px, статичное свечение + дешёвый scale-пульс на кольце */
+.scene-target {
+  position: relative;
+  width: 216px;
+  height: 216px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--edge);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 26px 44px -16px rgba(20, 24, 61, 0.35),
+    0 0 0 10px rgba(79, 216, 255, 0.1),
+    0 0 46px rgba(79, 216, 255, 0.35);
+  cursor: pointer;
+}
+
+/* Пульс — scale/opacity псевдокольца, НЕ анимация box-shadow */
+.scene-target__magnet {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 10px solid rgba(79, 216, 255, 0.14);
+  pointer-events: none;
+  animation: scene-target-magnet 2.1s ease-in-out infinite;
+  z-index: 0;
+}
+
+.scene-target--magnetized .scene-target__magnet {
+  border-color: rgba(79, 216, 255, 0.28);
+  border-width: 14px;
+  inset: -18px;
+  animation-duration: 1.15s;
+}
+
+@keyframes scene-target-magnet {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.scene-target--hot {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 26px 44px -16px rgba(20, 24, 61, 0.35),
+    0 0 0 12px rgba(79, 216, 255, 0.22),
+    0 0 54px rgba(79, 216, 255, 0.45);
+}
+
+.scene-target__hint {
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.scene-target > :not(.scene-target__magnet) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Звуковой камень (match_pairs) */
+.scene-stone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 72px;
+  min-width: 7.5rem;
+  background: #fff;
+  border: 1px solid var(--edge);
+  border-radius: 26px;
+  padding: 12px 20px 12px 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 4px 10px rgba(20, 24, 61, 0.1),
+    0 16px 26px -14px rgba(20, 24, 61, 0.28);
+  transition: transform 160ms ease-out;
+}
+
+.scene-stone--over {
+  transform: scale(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 4px rgba(0, 201, 167, 0.25),
+    0 18px 30px -14px rgba(20, 24, 61, 0.3);
+}
+
+.scene-stone--awaiting {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 4px rgba(255, 184, 0, 0.35),
+    0 16px 26px -14px rgba(20, 24, 61, 0.28);
+  cursor: pointer;
+}
+
+.scene-stone__spk {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 8px 16px -6px rgba(0, 201, 167, 0.6);
+  flex-shrink: 0;
+}
+
+.scene-stone__label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.scene-stone__filled {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-island__island,
+  .scene-obj__face--breathe,
+  .scene-target__magnet {
+    animation: none;
+  }
+  .scene-obj__face--grabbed {
+    transform: scale(1.08);
+  }
+  .scene-stone--over {
+    transform: none;
+  }
+}
+
+/* ── Возрастная развилка без клиентского кода ───────────────────────────────
+   Переключение вкладок целиком на браузере: скрытый переключатель + подписи +
+   правило «выбранный переключатель показывает свою панель». Ноль байт кода
+   посетителю, при этом клавиатура и читалка экрана работают сами — потому что
+   это родные элементы формы, а не нарисованные кнопки.
+
+   Порядок в разметке важен: четыре переключателя идут ПОДРЯД первыми, поэтому
+   номер выбранного однозначно указывает и на подпись, и на панель. Переставите
+   разметку — правила ниже придётся пересчитать, поэтому они и живут рядом. */
+.age-tracks {
+  position: relative;
+}
+.age-tracks__radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.age-tracks__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.age-tracks__tab {
+  cursor: pointer;
+  border: 1px solid var(--surface-parent-edge);
+  border-radius: var(--r-pill);
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface-parent);
+  transition: color var(--t-tap) var(--ease-out), border-color var(--t-tap) var(--ease-out);
+}
+.age-tracks__tab:hover {
+  color: var(--text);
+}
+.age-tracks__panels > .age-tracks__panel {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--surface-parent-edge);
+  border-radius: var(--r-card);
+  background: var(--surface-parent);
+  padding: 24px;
+  text-align: center;
+}
+/* Выбранная вкладка красится, её панель показывается. Четыре пары правил —
+   по одной на возраст; писать их циклом негде, это обычный CSS. */
+.age-tracks__radio:nth-of-type(1):checked ~ .age-tracks__tabs > .age-tracks__tab:nth-child(1),
+.age-tracks__radio:nth-of-type(2):checked ~ .age-tracks__tabs > .age-tracks__tab:nth-child(2),
+.age-tracks__radio:nth-of-type(3):checked ~ .age-tracks__tabs > .age-tracks__tab:nth-child(3),
+.age-tracks__radio:nth-of-type(4):checked ~ .age-tracks__tabs > .age-tracks__tab:nth-child(4) {
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--action) 55%, transparent);
+  background: color-mix(in oklab, var(--action) 10%, var(--surface-parent));
+}
+.age-tracks__radio:nth-of-type(1):checked ~ .age-tracks__panels > .age-tracks__panel:nth-child(1),
+.age-tracks__radio:nth-of-type(2):checked ~ .age-tracks__panels > .age-tracks__panel:nth-child(2),
+.age-tracks__radio:nth-of-type(3):checked ~ .age-tracks__panels > .age-tracks__panel:nth-child(3),
+.age-tracks__radio:nth-of-type(4):checked ~ .age-tracks__panels > .age-tracks__panel:nth-child(4) {
+  display: flex;
+}
+/* Клавиатура: переключатель невидим, поэтому обводку рисуем на его подписи —
+   иначе человек, идущий по странице табуляцией, теряет место совсем. */
+.age-tracks__radio:focus-visible ~ .age-tracks__tabs > .age-tracks__tab {
+  outline: 2px solid var(--action);
+  outline-offset: 2px;
+}

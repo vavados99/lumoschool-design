@@ -1,0 +1,10 @@
+Ты арт-директор и враждебный приёмщик дизайна школы английского LUMOSCHOOL (дети и взрослые, Польша/Украина). Работай по-русски, коротко.
+Смотри кадры живых прототипов (круг 9, тёмная сцена, свет от персонажа-пламени, планка — сайты дня Awwwards):
+- В6 кабинет преподавателя, ноутбук: /root/projects/english-school/прототипы-люмо/В6-преподаватель/shots/r9-desktop-uk-1-rest-view.png, r9-desktop-uk-4-live-view.png, r9-desktop-uk-6-notes-error-view.png, r9-desktop-uk-9-swap-view.png
+- В6 телефон: тот же каталог, r9-phone-uk-1-rest-view.png, r9-phone-uk-4-live-view.png, r9-phone-uk-6-notes-error-view.png, r9-phone-uk-9-swap-view.png
+- В7 дашборд владельца: /root/projects/english-school/прототипы-люмо/В7-владелец/shots/ (key-desktop/key-phone и desktop-en-*.png; открой самые показательные 3-4)
+- В8 публичные экраны (программы + запись на пробный урок): /root/projects/english-school/прототипы-люмо/В8-публичные/shots/ (открой 3-4: desktop-uk-01-start, desktop-uk-03-step1-adult, phone-uk-01-start, phone-uk-08-consent-under16 — реальные имена файлов сверь через поиск по каталогу)
+- Эталоны: /root/projects/english-school/визуалы/референсы/09-whyzero-a.png и 11-westbourne-a.png
+Замеры: /root/projects/english-school/прототипы-люмо/замеры-круг9.txt и замеры-В8-часть1.txt
+Прошлая оценка Опуса: /root/projects/english-school/.tmp/opus_P4.txt (В6 была 7/10 ПЕРЕДЕЛЫВАТЬ).
+Дай: по каждому из В6, В7, В8 — оценка из 10, чем проигрываем эталонам (5–7 пунктов с привязкой к кадру), что оставить, вердикт «показывать или переделывать», топ-5 правок. Отдельно: можно ли показывать Владу В6 сейчас. Радиальная карта В7 искажает площади — оцени.
